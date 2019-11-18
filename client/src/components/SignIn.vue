@@ -150,7 +150,8 @@ export default {
 
   methods: {
    Login(event){
-        if(this.user.type === 'Doctor'){
+        if(this.user.type === 'Doctor')
+        {
           this.$http.post("http://localhost:8000/api/doctorLogin",this.doctor)
         .then(function(response) {   
           if(response.status === 200){
@@ -159,7 +160,8 @@ export default {
             this.$router.push('DoctorProfile')
           }  
         })
-        }else if(this.user.type === 'Patient'){
+        }else if(this.user.type === 'Patient')
+        {
           this.$http.post("http://localhost:8000/api/patientLogin",this.patient)
         .then(function(response) {   
           if(response.status === 200){
@@ -167,29 +169,31 @@ export default {
             this.$router.push('PatientProfile')
           }  
         })
-          console.log(this.user.type)
-        }
-    },
+        }else if(this.user.type === 'Admin')
+        {
+          this.$http.post("http://localhost:8000/api/adminLogin",this.admin)
+        .then(function(response) {   
+          if(response.status === 200){
+            this.$session.start();
+            this.$router.push('AdminDashboard')
+          }
+        })
+    }else{
+      this.$http.post("http://localhost:8000/api/adminLogin",this.admin)
+        .then(function(response) {   
+          if(response.status === 200){
+            this.$session.start();
+            this.$router.push('AdminDashboard')
+          }
+        })
+    }
+   },
 
     clear(event){
       console.log(this.user.type)
     }
+
   }
 }
-
-
- 
-   
-
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.error {
-  color: red;
-}
-
-.toolbar {
-  color: royalblue;
-}
-</style>

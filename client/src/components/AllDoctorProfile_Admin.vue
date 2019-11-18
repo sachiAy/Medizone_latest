@@ -2,7 +2,7 @@
   <section class="our-webcoderskull padding-lg">
     <div class="container">
       <div class="row heading heading-icon">
-        <h2>Patients</h2>
+        <h2>Doctors(Admin View)</h2>
       </div>
       <div>
         <ul class="row">
@@ -16,10 +16,16 @@
                 />
               </figure>
               <h3>{{ item.first_name }} {{ item.last_name }}</h3>
-              <p>I am a Patient</p>
+              <p>Nawaloka Hospital Colombo</p>
               <ul class="follow-us clearfix"></ul>
               <button class="btn btn-lg btn-primary">
                 <router-link to="/DoctorProfile"> View Profile</router-link>
+              </button>
+              <button class="btn btn-lg btn-primary">
+                <router-link to="/DeleteDoctor"> Delete</router-link>
+              </button>
+              <button class="btn btn-lg btn-primary">
+                <router-link to="/UpdateDoctor"> Update</router-link>
               </button>
             </div>
           </li>
@@ -204,11 +210,11 @@ export default {
 
   created() {
     this.$http
-      .get("http://localhost:8000/api/getPatients")
+      .get("http://localhost:8000/api/getDoctors")
       .then(function(response) {
         //console.log(response);
 
-        this.items = response.body.allpatients;
+        this.items = response.body.alldoctors;
       });
   }
 };

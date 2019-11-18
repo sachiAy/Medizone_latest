@@ -16,21 +16,11 @@ use Validator;
 
 class AuthController extends Controller {
   public $successStatus = 200;
+
+  //Doctor Controller
+
   //Doctor Registration
     public function addDoctor(Request $request){
-        // $validator = Validator::make($request->all(), [
-        //     'username' => 'required',
-        //     'reg_no' => 'required',
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'NIC' => 'required',
-        //     'birthday' => 'required',
-        //     'specialty' => 'required',
-        //     'contact_no' => 'required',
-        //     'email' => 'required|email|unique:doctors',
-        //     'password' => 'required',
-
-        // ]);
          $validatedData = $this->validate(request(), [
            'user_type'=>'doctor',
           'username' => 'required',
@@ -50,28 +40,6 @@ class AuthController extends Controller {
          return response(['message'=>$doctor],200);
     }
 
-  //       if ($validator->fails()) {
-  //         return response()->json(['error'=>$validator->errors()], 401);                        }
-  //   $input = $request->all();
-  //   $input['password'] = bcrypt($input['password']);
-  //   $doctor = doctors::create($input);
-  //   $success['token'] =  $doctor->createToken('AppName')->accessToken;
-  //   return response()->json(['doctor'=>$doctor,'success'=>$success], $this->successStatus);
-  //  }
-
-
-
-    //login
-    // public function login(){
-    //   if(Auth::guard('doctors')->check(['reg_no' => request('reg_no'), 'password' => request('password')])){
-    //      $doctor = Auth::doctors();
-    //      $success['token'] =  $doctor->createToken('AppName')-> accessToken;
-    //       return response()->json(['success' => $success], $this-> successStatus);
-    //     } else{
-    //      return response()->json(['error'=>'Unauthorised'], 401);
-    //      }
-    //   }
-
   //Doctor Login
   public function loginDoctor(Request $request) {
 
@@ -84,6 +52,16 @@ class AuthController extends Controller {
     return response()->json($doctor,200);
 
   }
+    //get doctors
+    public function getDoctor(){
+      $alldoctors =doctors::all();
+      return response()->json(['alldoctors'=>$alldoctors],200);
+  }
+
+  //delete doctor
+  //update doctor details
+
+  //Patient Controller
 
     //Patient Registration
     public function addPatient(Request $request){
@@ -119,6 +97,13 @@ class AuthController extends Controller {
       return response()->json($patient,200);
 
     }
+      //get patients
+  public function getPatient(){
+    $allpatients =patients::all();
+    return response()->json(['allpatients'=>$allpatients],200);
+}
+
+    //Admin Controller
 
     //admin register
     public function addAdmin(Request $request){
@@ -150,6 +135,8 @@ class AuthController extends Controller {
 
     }
 
+    //Appointment Controller
+
     //Add appointment
     public function postAppointments(Request $request){
       $this->validate(request(), [
@@ -175,45 +162,8 @@ class AuthController extends Controller {
       return response()->json(['message'=>$appointment],201);
   }
 
-  //get doctors
-  public function getDoctor(){
-    $alldoctors =doctors::all();
-    return response()->json(['alldoctors'=>$alldoctors],200);
-}
-
-//test
-  public function register(Request $request){
-    $this->validate(request(), [
-      
-      'username' => 'required',
-      'email' => 'required|email',
-      'password' => 'required',
-
-  ]);
-
-  $test = test::create(request(['username','email','password']));
-  $accessToken=$test->createToken('authToken')->accessToken;
-  return response()->json(['message'=>$test, 'token'=>$accessToken],201);
-  }
 
 
-    public function login(){
-        if(Auth::guard('web')->attempt(['email'=>request('email'), 'password'=>request('password')])){
-            $test=Auth::test();
-            // $success['token']=$test->createToken('AppName')->accessToken;
-            $accessToken=$test->createToken('authToken')->accessToken;
-            return response()->json(['success'=>$accessToken], 200);
 
-        }else{
-            return response()->json(['error'=>'unauthorised'], 401);
-        }
-    }
-
-    public function getUser(){
-        $user = Auth::test();
-        return response()->json(['success'=>$user], $this->successStatus);
-    }
-
-   
 
 }

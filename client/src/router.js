@@ -14,6 +14,7 @@ import DoctorProfile from "./components/DoctorProfile";
 import PatientProfile from "./components/PatientProfile";
 import Appoinment from "./components/Appoinment";
 import AllDoctorProfile from "./components/AllDoctorProfile";
+import AllDoctorProfile_Admin from "./components/AllDoctorProfile_Admin";
 import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
@@ -100,8 +101,13 @@ export default new Router({
       path: "/AllDoctorProfile",
       name: "AllDoctorProfile",
       component: AllDoctorProfile
-      
-
+  
+    },
+    {
+      path: "/AllDoctorProfile_Admin",
+      name: "AllDoctorProfile_Admin",
+      component: AllDoctorProfile_Admin
+  
     },
     {
       path: "/appoinmentH",

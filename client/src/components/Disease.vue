@@ -1,16 +1,12 @@
 <template>
   <div>
-    <v-parallax
-      height="600"
-      src="https://image.freepik.com/free-vector/health-care-icon-pattern-medical-innovation-concept-background-design_115579-303.jpg"
-    >
+    <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height='100%'>
       <v-hover>
         <template v-slot="{ hover }">
           <div class="mx-auto">
-            <div class="mx-auto bg-info" style="width: 700px;">
-              
-              <v-card :elevation="hover ? 24 : 6"  class="container" color="indigo lighten-2">
-                <v-card-title class="headline indigo lighten-1">Search for Doctor</v-card-title>
+            <div class="mx-auto bg-info" style="width: 600px; height: 450px">
+              <v-card :elevation="hover ? 24 : 6"  class="container" color="indigo lighten-4" style="width: 600px; height: 450px">
+                <v-card-title class="headline blue lighten-3">Search for Doctor</v-card-title>
                 <v-card-text>
                   <v-expand-transition>
                     <v-row>
