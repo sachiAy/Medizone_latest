@@ -71,7 +71,7 @@ export default {
       ],
       headerLinks: [
         { text: "My bookings", route: "Terms" },
-        { text: "Medical history", route: "Terms" },
+        { text: "Medical history", route: "history" },
         { text: "SignIn", route: "SignIn" },
 
       ]
