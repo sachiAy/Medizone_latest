@@ -37,5 +37,9 @@ Route::get('/getDoctors',[
     'uses'=>'Api\AuthController@getDoctor'
 ]);
 
+Route::get('/getPatients',[
+    'uses'=>'Api\AuthController@getPatient'
+]);
+
 
 

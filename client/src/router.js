@@ -16,7 +16,7 @@ import Appoinment from "./components/Appoinment";
 import AllDoctorProfile from "./components/AllDoctorProfile";
 import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
-
+import AllPatientProfile from "./components/AllPatientProfile";
 
 
 Vue.use(Router);
@@ -95,13 +95,11 @@ export default new Router({
       path: "/Appoinment",
       name: "Appoinment",
       component: Appoinment,
-      
-
     },
     {
       path: "/AllDoctorProfile",
       name: "AllDoctorProfile",
-      component: AllDoctorProfile,
+      component: AllDoctorProfile
       
 
     },
@@ -118,6 +116,12 @@ export default new Router({
       component: history,
       
 
+    },{
+      path: "/AllPatientProfile",
+      name: "AllPatientProfile",
+      component: AllPatientProfile,
+
     }
+
   ]
 });
