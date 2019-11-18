@@ -8,10 +8,9 @@
         <template v-slot="{ hover }">
           <div class="mx-auto">
             <div class="mx-auto bg-info" style="width: 700px;">
-              <v-card :elevation="hover ? 24 : 6" color="indigo lighten-2" dark>
-                <v-card-title class="headline indigo lighten-1"
-                  >Search for Doctor</v-card-title
-                >
+              
+              <v-card :elevation="hover ? 24 : 6"  class="container" color="indigo lighten-2">
+                <v-card-title class="headline indigo lighten-1">Search for Doctor</v-card-title>
                 <v-card-text>
                   <v-expand-transition>
                     <v-row>
@@ -73,7 +72,7 @@
                     <v-icon right>mdi-magnify</v-icon>
                   </v-btn>
                 </v-card-actions>
-              </v-card>
+                </v-card>
             </div>
           </div>
         </template>

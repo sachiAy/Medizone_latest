@@ -13,6 +13,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import DoctorProfile from "./components/DoctorProfile";
 import PatientProfile from "./components/PatientProfile";
 import Appoinment from "./components/Appoinment";
+import AllDoctorProfile from "./components/AllDoctorProfile";
 
 
 
@@ -92,6 +93,13 @@ export default new Router({
       path: "/Appoinment",
       name: "Appoinment",
       component: Appoinment,
+      
+
+    },
+    {
+      path: "/AllDoctorProfile",
+      name: "AllDoctorProfile",
+      component: AllDoctorProfile,
       
 
     }

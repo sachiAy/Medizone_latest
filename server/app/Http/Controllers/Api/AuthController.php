@@ -175,6 +175,12 @@ class AuthController extends Controller {
       return response()->json(['message'=>$appointment],201);
   }
 
+  //get doctors
+  public function getDoctor(){
+    $alldoctors =doctors::all();
+    return response()->json(['alldoctors'=>$alldoctors],200);
+}
+
 //test
   public function register(Request $request){
     $this->validate(request(), [

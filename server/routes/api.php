@@ -33,4 +33,9 @@ Route::post('/adminRegister','Api\AuthController@addAdmin');
 Route::post('/adminLogin','Api\AuthController@loginAdmin');
 Route::post('/getAppointment','Api\AuthController@postAppointments');
 
+Route::get('/getDoctors',[
+    'uses'=>'Api\AuthController@getDoctor'
+]);
+
+
 
