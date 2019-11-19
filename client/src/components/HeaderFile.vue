@@ -24,7 +24,10 @@
           <v-spacer></v-spacer>
           {{ username }}
       <v-btn icon>
-        <v-icon>mdi-account</v-icon>
+        <router-link to="PatientProfile">
+          <v-icon>mdi-account</v-icon>
+        </router-link>
+        
       </v-btn>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" absolute temporary>

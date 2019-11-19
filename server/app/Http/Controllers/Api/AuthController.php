@@ -183,11 +183,7 @@ class AuthController extends Controller {
         'email' => 'required',
 
     ]);
-
-    $appointment = appointments::create(request(['admin_no','first_name','last_name','contact_no','username','email','password']));
-
-    return response()->json(['message'=>$admin],201);
-
+    
       $appointment = new Appointments();
 
       $appointment->name = $request->input('name');

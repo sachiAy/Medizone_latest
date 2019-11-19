@@ -121,21 +121,17 @@ export default {
     },
 
     submitAppointment() {
-       console.log('gtghh=========jjjjjjhhjhjjh');
        console.log(this.name);
        console.log(this.tel);
        console.log(this.nicValue);
        console.log( this.email);
 
       
-         this.$http.post("http://localhost:8000/api/addAppointment",{name:this.name,telephone:this.tel,nic:this.nicValue,email:this.email})
+         this.$http.post("http://localhost:8000/api/getAppointment",{name:this.name,telephone:this.tel,nic:this.nicValue,email:this.email})
           .then(function (response){
             console.log(response)
+            
           })
-
-          
-          
-          
     }
   },
   name: "app",

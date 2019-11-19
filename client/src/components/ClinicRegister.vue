@@ -1,7 +1,11 @@
 <template>
   <div  class="registration">
-  <br>
-    <h2 class="text-center">Clinic Registration</h2>
+     <v-parallax src="../assets/image1.jpg" max-height="1000" height='100%'>
+    <v-card class="container">
+      <v-card-title>
+        <h2 class="text-center">Clinic Registration</h2>
+      </v-card-title>
+       
     <form>
        <br><br>
       <div class="form-group">
@@ -42,6 +46,9 @@
       <br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </v-card>
+     </v-parallax>
+   
   </div>
 </template>
 
