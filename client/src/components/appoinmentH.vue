@@ -1,7 +1,7 @@
 <template>
     <div>
     
-      <v-card>
+      <v-card class="container" elevation="12" max-width="100%" max-height="100%" outlined>
          <h1>Appoinment History</h1>
     <b-table table-variant="info"
         
@@ -31,7 +31,8 @@ export default {
       return {
         fields: ['appointment_date', 'doctor_name', 'treatments','special notes'],
         items: [
-          { appointment_date: 2018/2/4, doctor_name: 'Dickerson', treatments: 'acne',special_notes: '' },
+          { appointment_date: 2018/2/4, doctor_name: 'Dickerson', treatments: 'acne',special_notes: 'hgjh' },
+          {appointment_date: 2018/2/4, doctor_name: 'Dickerson', treatments: 'acne',special_notes: 'kjhuyuf' },
           
         ]
         
