@@ -61,7 +61,7 @@ export default {
 
       links: [
         { icon: "mdi-home", text: "HOME", route: "/" },
-        { icon: "mdi-needle", text: "DOCTOR", route: "Doctor" },
+        { icon: "mdi-needle", text: "DOCTOR", route: "AllDoctorProfile" },
         { icon: "mdi-needle", text: "CLINICS", route: "Clinic" },
         { icon: "mdi-needle", text: "ABOUTUS", route: "AboutUs" },
         { icon: "mdi-needle", text: "HELP", route: "Doctor" },
@@ -70,7 +70,7 @@ export default {
 
       ],
       headerLinks: [
-        { text: "My bookings", route: "Terms" },
+        { text: "My bookings", route: "appoinmentH" },
         { text: "Medical history", route: "history" },
         { text: "SignIn", route: "SignIn" },
 

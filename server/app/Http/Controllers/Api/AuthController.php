@@ -7,6 +7,7 @@ use App\patients;
 use App\admins;
 use App\Appointments;
 use App\test;
+use App\clinic_admins;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +58,11 @@ class AuthController extends Controller {
       $alldoctors =doctors::all();
       return response()->json(['alldoctors'=>$alldoctors],200);
   }
+
+//   public function getaDoctor(){
+//     $doctor =doctors::all();
+//     return response()->json(['alldoctors'=>$alldoctors],200);
+// }
 
   //delete doctor
   //update doctor details
@@ -134,6 +140,37 @@ class AuthController extends Controller {
       return response()->json($admin,200);
 
     }
+
+    //clinic admin controller
+    //clinic_admin register
+    public function addC_Admin(Request $request){
+      $this->validate(request(), [
+        'c_admin_no'=>'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'contact_no' => 'required',
+        'username' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+
+    ]);
+
+    $c_admin = clinic_admins::create(request(['c_admin_no','first_name','last_name','contact_no','username','email','password']));
+
+    return response()->json(['message'=>$c_admin],201);
+    }
+    //clinic admin login
+    public function loginC_Admin(Request $request) {
+
+      if(Auth::guard('clinic_admins')->attempt(request(['c_admin_no','password'])) == false) {
+        return response()->json(['message'=>'invalid credentials'],400);
+      }
+
+      $c_admin = DB::table('clinic_admins')->where('c_admin_no', request('c_admin_no'))->get();
+      return response()->json($c_admin,200);
+
+    }
+
 
     //Appointment Controller
 

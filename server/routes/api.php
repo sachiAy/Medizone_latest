@@ -43,6 +43,10 @@ Route::get('/getPatients',[
 Route::post('/adminRegister','Api\AuthController@addAdmin');
 Route::post('/adminLogin','Api\AuthController@loginAdmin');
 
+//Clinic Admin Api
+Route::post('/c_adminRegister','Api\AuthController@addC_Admin');
+Route::post('/c_adminLogin','Api\AuthController@loginC_Admin');
+
 //Appointment Api
 Route::post('/getAppointment','Api\AuthController@postAppointments');
 

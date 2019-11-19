@@ -3,6 +3,7 @@ import Router from "vue-router";
 //import Home from './views/Home.vue'
 import D_SignUp from "./components/D_SignUp";
 import P_SignUp from "./components/P_SignUp";
+import ClinicRegister from "./components/ClinicRegister";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import About from "./views/About";
@@ -41,6 +42,11 @@ export default new Router({
       path: "/D_SignUp",
       name: "D_SignUp",
       component: D_SignUp
+    },
+    {
+      path: "/P_SignUp",
+      name: "P_SignUp",
+      component: P_SignUp
     },
     {
       path: "/P_SignUp",
