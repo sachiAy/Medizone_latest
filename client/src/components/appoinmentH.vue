@@ -1,8 +1,8 @@
 <template>
     <div>
     
-      
-    <h1>Appoinment History</h1>
+      <v-card>
+         <h1>Appoinment History</h1>
     <b-table table-variant="info"
         
         :items="items"
@@ -12,6 +12,8 @@
     >
    
     </b-table>
+      </v-card>
+   
    
   </div>
 </template>

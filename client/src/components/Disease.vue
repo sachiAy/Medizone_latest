@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height='100%'>
+    <v-parallax src="../assets/image1.jpg" max-height="1000" height='100%'>
       <v-hover>
         <template v-slot="{ hover }">
           <div class="mx-auto">
