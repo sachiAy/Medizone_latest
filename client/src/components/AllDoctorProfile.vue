@@ -29,6 +29,34 @@
   </section>
 </template>
 
+
+
+<script>
+export default {
+  /*data() {
+    return {
+      items: []
+    };
+  }*/
+
+  data() {
+    return {
+      items: []
+    };
+  },
+
+  created() {
+    this.$http
+      .get("http://localhost:8000/api/getDoctors")
+      .then(function(response) {
+        //console.log(response);
+
+        this.items = response.body.alldoctors;
+      });
+  }
+};
+</script>
+
 <style>
 .row.heading h2 {
   color: #000;
@@ -187,29 +215,3 @@ body {
   color: #0e031a;
 }
 </style>
-
-<script>
-export default {
-  /*data() {
-    return {
-      items: []
-    };
-  }*/
-
-  data() {
-    return {
-      items: []
-    };
-  },
-
-  created() {
-    this.$http
-      .get("http://localhost:8000/api/getDoctors")
-      .then(function(response) {
-        //console.log(response);
-
-        this.items = response.body.alldoctors;
-      });
-  }
-};
-</script>

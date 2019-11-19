@@ -89,6 +89,7 @@
                                 small 
                                 @click="patientRegister"                               
                                 >submit</v-btn>
+                               
                             </v-col>
                             <v-col>
                                 <v-btn 

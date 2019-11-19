@@ -69,7 +69,7 @@
                      <!-- if user type is 'Clinic Admin' -->
                     <div v-if="user.type === 'Clinic Admin'">
                       <v-text-field
-                      v-model="c_admin.admin_no" 
+                      v-model="c_admin.c_admin_no" 
                       label="Admin Number"
                       required
                       ></v-text-field>
@@ -139,7 +139,7 @@ export default {
         },
 
         c_admin: {
-          admin_no:"",
+          c_admin_no:"",
           password:""
         },
 
@@ -178,12 +178,12 @@ export default {
             this.$router.push('AdminDashboard')
           }
         })
-    }else{
-      this.$http.post("http://localhost:8000/api/adminLogin",this.admin)
+    }else if(this.user.type === 'Clinic Admin'){
+      this.$http.post("http://localhost:8000/api/c_adminLogin",this.c_admin)
         .then(function(response) {   
           if(response.status === 200){
             this.$session.start();
-            this.$router.push('AdminDashboard')
+            this.$router.push('ClinicDashboard')
           }
         })
     }
