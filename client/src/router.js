@@ -18,7 +18,7 @@ import AllDoctorProfile_Admin from "./components/AllDoctorProfile_Admin";
 import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
-
+import Terms from "./components/Terms";
 
 Vue.use(Router);
 
@@ -33,7 +33,7 @@ export default new Router({
     },
     {
       path: "/about",
-      name: "about", 
+      name: "about",
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
@@ -95,39 +95,38 @@ export default new Router({
     {
       path: "/Appoinment",
       name: "Appoinment",
-      component: Appoinment,
+      component: Appoinment
     },
     {
       path: "/AllDoctorProfile",
       name: "AllDoctorProfile",
       component: AllDoctorProfile
-  
     },
     {
       path: "/AllDoctorProfile_Admin",
       name: "AllDoctorProfile_Admin",
       component: AllDoctorProfile_Admin
-  
     },
     {
       path: "/appoinmentH",
       name: "appoinmentH",
-      component: appoinmentH,
-      
-
+      component: appoinmentH
     },
     {
       path: "/history",
       name: "history",
-      component: history,
-      
+      component: history
+    },
 
-    },{
+    {
+      path: "/Terms",
+      name: "Terms",
+      component: Terms
+    },
+    {
       path: "/AllPatientProfile",
       name: "AllPatientProfile",
-      component: AllPatientProfile,
-
+      component: AllPatientProfile
     }
-
   ]
 });
