@@ -2,6 +2,7 @@
 
   <div>
     <NavBar />
+    <v-parallax src="../assets/image1.jpg" max-height="1000" height='100%'>
         <v-container>
             <v-card class="container" max-width="600" outlined>
                 <v-card-title>Doctor Register</v-card-title>
@@ -79,7 +80,7 @@
                                 >submit</v-btn>
                             </v-col>
                             <v-col>
-                                <v-btn small @click="clear">clear</v-btn>
+                                <v-btn small @click="reset()">clear</v-btn>
                             </v-col>
                         </v-row>
                             <v-row>
@@ -91,6 +92,7 @@
                 </v-form>
             </v-card>
         </v-container>
+    </v-parallax>
     </div>
 
 </template>
@@ -123,7 +125,9 @@ export default {
         show1: false,
     }
   },
-
+ reset() {
+      this.$refs.form.reset();
+    },
   methods: {
       doctorRegister(){
         this.$http.post("http://localhost:8000/api/doctorRegister",this.doctor)

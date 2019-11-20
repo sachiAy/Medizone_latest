@@ -2,6 +2,7 @@
 
   <div>
     <NavBar />
+    <v-parallax src="../assets/image1.jpg" max-height="1000" height='100%'>
         <v-container>
             <v-card class="container" max-width="600" outlined>
                 <v-card-title>Patient Register</v-card-title>
@@ -107,6 +108,7 @@
                 </v-form>
             </v-card>
         </v-container>
+    </v-parallax>
     </div>
 
 </template>

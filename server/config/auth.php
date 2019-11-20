@@ -57,9 +57,9 @@ return [
             'driver' => 'session',
             'provider' => 'clinic_admins',
         ],
-        'test'=>[
-            'driver'=>'session',
-            'provider'=>'test',
+        'appointments' => [
+            'driver' => 'session',
+            'provider' => 'appointments',
         ],
 
         'api' => [
@@ -106,6 +106,10 @@ return [
         'clinic_admins' => [
             'driver' => 'eloquent',
             'model' => App\clinic_admins::class,  
+        ],
+        'appointments' => [
+            'driver' => 'eloquent',
+            'model' => App\appointments::class,  
         ],
          
 

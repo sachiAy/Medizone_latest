@@ -7,7 +7,6 @@ import ClinicRegister from "./components/ClinicRegister";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import About from "./views/About";
-import SearchResult from "./components/SearchResult";
 import Channel from "./components/Channel";
 import ClinicDashboard from "./components/ClinicDashboard";
 import AdminDashboard from "./components/AdminDashboard";
@@ -50,9 +49,9 @@ export default new Router({
       component: P_SignUp
     },
     {
-      path: "/P_SignUp",
-      name: "P_SignUp",
-      component: P_SignUp
+      path: "/ClinicRegister",
+      name: "ClinicRegister",
+      component: ClinicRegister
     },
     {
       path: "/SignIn",
@@ -65,11 +64,7 @@ export default new Router({
       name: "about",
       component: About
     },
-    {
-      path: "/SearchResult",
-      name: "SearchResult",
-      component: SearchResult
-    },
+  
     {
       path: "/Channel",
       name: "Channel",

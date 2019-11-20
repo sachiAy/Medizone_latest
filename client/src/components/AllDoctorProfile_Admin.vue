@@ -1,9 +1,23 @@
 <template>
   <section class="our-webcoderskull padding-lg">
     <div class="container">
-      <div class="row heading heading-icon">
+        <ul class="row">
+          <div class="row heading heading-icon">
         <h2>Doctors(Admin View)</h2>
       </div>
+        </ul>
+      <ul class="row">
+           <li class="col">
+                  <v-btn rounded primary>
+                    <router-link to="/DeleteDoctor">Delete Doctors</router-link>
+                  </v-btn>
+                </li>
+                 <li class="col">
+                  <v-btn rounded primary>
+                    <router-link to="/UpdateDoctor">Update Doctor Details</router-link>
+                  </v-btn>
+                </li>
+      </ul>
       <div>
         <ul class="row">
           <li class="col-sm-4" v-for="item in items">
@@ -17,16 +31,13 @@
               </figure>
               <h3>{{ item.first_name }} {{ item.last_name }}</h3>
               <p>Nawaloka Hospital Colombo</p>
-              <ul class="follow-us clearfix"></ul>
-              <button class="btn btn-lg btn-primary">
-                <router-link to="/DoctorProfile"> View Profile</router-link>
-              </button>
-              <button class="btn btn-lg btn-primary">
-                <router-link to="/DeleteDoctor"> Delete</router-link>
-              </button>
-              <button class="btn btn-lg btn-primary">
-                <router-link to="/UpdateDoctor"> Update</router-link>
-              </button>
+              <ul class="follow-us clearfix">
+                <li class="col">
+                  <v-btn rounded primary>
+                    <router-link to="/DoctorProfile"> View Profile</router-link>
+                  </v-btn>
+                </li>
+              </ul>
             </div>
           </li>
         </ul>
