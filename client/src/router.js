@@ -20,6 +20,7 @@ import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
+import Aboutus from "./components/Aboutus";
 
 Vue.use(Router);
 
@@ -128,6 +129,12 @@ export default new Router({
       path: "/Terms",
       name: "Terms",
       component: Terms
+    },
+
+    {
+      path: "/Aboutus",
+      name: "Aboutus",
+      component: Aboutus
     },
     {
       path: "/AllPatientProfile",

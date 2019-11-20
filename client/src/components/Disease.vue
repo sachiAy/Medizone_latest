@@ -132,11 +132,15 @@ export default {
         "Arthritis",
         "Cardiologist හෘද රෝග වෛද්‍ය",
         "Chest Specialist පපු විශේෂඥ ",
-        "Children Dentist",
-        "Dental Surgeon",
-        "ENT and Neck",
-        "ENT Surgeon",
-        "Facial Surgeon රුපලාවන්‍ය චර්ම රෝග"
+        "Children Dentist ළමා දන්ත  වෛද්‍ය",
+        "Dental Surgeon දන්ත ශල්‍ය වෛද්‍ය",
+        "ENT and Neck උගුර කන නාසය හිස සහ බෙල්ල පිලිබඳ වෛද්‍ය",
+        "ENT Surgeon උගුර කන නාසය පිලිබඳ ශල්‍ය වෛද්‍ය",
+        "Facial Surgeon රුපලාවන්‍ය චර්ම රෝග",
+        "GENERAL PHYSICIAN",
+        "NEURO PHYSICIAN",
+        "NEURO SURGEON",
+        "PAEDIATRICIAN  ළමා වෛද්‍ය",
       ]
     };
   }
