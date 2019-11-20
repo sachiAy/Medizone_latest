@@ -1,6 +1,5 @@
 <template>
   <!-- Footer -->
-  
   <mdb-footer color="info-color-dark" class="page-footer font-small pt-0">
     <div style="backgroundColor: #659EC7">
       <mdb-container class="text-left">
@@ -30,7 +29,7 @@
         </mdb-row>
       </mdb-container>
     </div>
-     <div class="bg">
+     
 
     <mdb-container class="mt-5 mb-4 text-center text-md-left">
       <mdb-row class="mt-3">
@@ -64,23 +63,6 @@
             >
           </p>
         </mdb-col>
-        <!--mdb-col md="3" lg="2" xl="2" class="mb-4">
-          <h6 class="text-uppercase font-weight-bold">
-            <strong>Useful links</strong>
-          </h6>
-          <hr
-            class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
-            style="width: 60px"
-          />
-
-          <v-list-item
-            v-for="link in abouts"
-            :key="link.text"
-            router
-            :to="link.route"
-            ><p class="text-justify">{{ link.text }}</p></v-list-item
-          >
-        </mdb-col-->
         <mdb-col md="4" lg="3" xl="3" class="mb-4">
           <h6 class="text-uppercase font-weight-bold">
             <strong>Contact</strong>
@@ -98,12 +80,11 @@
     </mdb-container>
     <div class="footer-copyright text-center py-3">
       © Medizone Health Pvt Ltd.<br/>ALL RIGHTS RESERVED <br/>
-      <!--mdb-container fluid>
-        &copy; 2018 Copyright:-->
+    
         Developed by Team 4
-      </mdb-container>
+     
     </div>
-    </div>
+    
   </mdb-footer>
   <!-- Footer -->
 </template>
@@ -111,10 +92,8 @@
 <style>
 body, html {
   height: 100%;
-}
-.bg {
-  /* The image used */
-  background-image: url("https://americanplastination.com/images/slideshow/stethescope2.jpg");
+
+
 
   /* Half height */
   height: 50%;
