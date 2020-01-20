@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'doctors',
         'passwords' => 'users',
     ],
 
@@ -45,6 +45,11 @@ return [
              'provider' => 'doctors',
              
          ],
+         'doctors' => [
+            'driver' => 'token',
+            'provider' => 'doctors',
+            'hash'=>true,
+        ],
         'patients' => [
             'driver' => 'session',
             'provider' => 'patients',
@@ -63,7 +68,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
            
         ],

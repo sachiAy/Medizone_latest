@@ -18,8 +18,13 @@
           :key="link.text"
           router
           :to="link.route"
-          >{{ link.text }}</v-btn
-        >
+          >{{ link.text }}</v-btn>
+              <v-btn 
+                   rounded
+                  color="primary"
+                  dark
+                  @click="logout()"
+                  >logout</v-btn>
       </div>
       <v-spacer></v-spacer>
       {{ username }}
@@ -87,6 +92,21 @@ export default {
         { text: "SignIn", route: "SignIn" }
       ]
     };
-  }
+  },
+
+   methods: {
+
+        logout(){
+        if(!token) {
+				  return false;
+			  }
+			axios.get("http://localhost:8000/api/logout?api_token="+token)
+			.then(response => {
+				localStorage.removeItem('token');
+        //Event.$emit('logout');
+        this.$router.push('/SignIn');
+			});
+      }
+    },
 };
 </script>

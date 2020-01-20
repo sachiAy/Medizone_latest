@@ -15,7 +15,7 @@
                   alt=""
                 />
               </figure>
-              <h3>Doctor Name</h3>
+              <h3>{{username}}</h3>
               <p>Nawaloka Hospital Colombo</p>
             </div>
             <ul class="row">
@@ -30,14 +30,13 @@
               :to="link.route"
             >{{link.text}}</v-btn>
               </li>
-              <li class="col">
-                <v-btn 
+               <v-btn 
                    rounded
                   color="primary"
                   dark
-                  @click="logout"
+                  @click="hello"
                   >logout</v-btn>
-              </li>
+            
             </ul>
                 
       </div>
@@ -58,16 +57,16 @@ export default {
             ]
         }
     },
-    beforeCreate: function() {
-        if(!this.$session.exists()){
-            this.$router.push('SignIn')
-        }
+  
+   
+    mounted(){
+       if(!token) {
+				  this.$router.push('/SignIn');
+			  }
+     
+      
     },
-    methods: {
-        logout(){
-            this.$session.destroy()
-            this.$router.push('SignIn')
-        }
-    }
+    
+
 }
 </script>

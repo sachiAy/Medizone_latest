@@ -16,16 +16,16 @@ class doctors extends Model implements Authenticatable
     protected $guard = 'web';
     
     protected $fillable = [
-        'username','reg_no','first_name','last_name','NIC','birthday','specialty','contact_no','email','password'
+        'username','reg_no','first_name','last_name','NIC','birthday','specialty','contact_no','email','password','api_token'
     ];
 
     protected $hidden = [
         'password'
     ];
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
    
 }

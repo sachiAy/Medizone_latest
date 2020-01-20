@@ -26,11 +26,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     });
 
 //Doctor Api
-Route::post('/doctorRegister','Api\AuthController@addDoctor');
-Route::post('/doctorLogin','Api\AuthController@loginDoctor');
-Route::get('/getDoctors',[
-    'uses'=>'Api\AuthController@getDoctor'
-]);
+//Route::post('/doctorRegister','Api\AuthController@addDoctor');
+//Route::post('/doctorLogin','Api\AuthController@loginDoctor');
+//Route::get('/getDoctors',[
+ //   'uses'=>'Api\AuthController@getDoctor'
+//]);
 
 //Patient Api
 Route::post('/patientRegister','Api\AuthController@addPatient');
@@ -49,6 +49,15 @@ Route::post('/c_adminLogin','Api\AuthController@loginC_Admin');
 
 //Appointment Api
 Route::post('/getAppointment','Api\AuthController@postAppointments');
+
+//test
+Route::post('/DoctorRegister','DoctorController@addDoctor');
+Route::post('/login','AuthController@login')->name('login');
+Route::get('/logout','AuthController@logout');
+Route::get('/getDoctors/{reg_no}','AuthController@showD');
+Route::get('/getDoctors','AuthController@getD');
+
+
 
 
 
