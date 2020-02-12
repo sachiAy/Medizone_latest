@@ -153,13 +153,27 @@ export default {
   methods: {
 
     	logItIn(){
-				axios.post('http://localhost:8000/api/login',this.doctor)
+        
+        if(this.user.type=="Doctor"){
+          	axios.post('http://localhost:8000/api/login',this.doctor)
 				.then(response => {
           let Token=response.data.doctor.api_token;
           localStorage.setItem('token',Token);
-          console.log(Token);
+          
+          Event.$emit("login"); 
           this.$router.push('/DoctorProfile');
 				});
+        }else if(this.user.type=="Patient"){
+          	axios.post('http://localhost:8000/api/login',this.patient)
+				.then(response => {
+          let Token=response.data.patient.api_token;
+          localStorage.setItem('token',Token);
+          
+          Event.$emit("login"); 
+          this.$router.push('/PatientProfile');
+				});
+        }
+			
 			}
    },
 

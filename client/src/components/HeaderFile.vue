@@ -11,18 +11,23 @@
       <v-spacer></v-spacer>
       <div class="text-center">
         <v-btn
-          rounded
-          color="primary"
-          dark
+          class="ma-2" tile outlined color="success"
           v-for="link in headerLinks"
           :key="link.text"
           router
           :to="link.route"
           >{{ link.text }}</v-btn>
-              <v-btn 
-                   rounded
-                  color="primary"
-                  dark
+          <v-btn  
+            rounded
+            class="ma-2" tile outlined color="success"
+            v-if="!loggedIn"
+            >
+            <router-link to="SignIn">
+          SignIn
+        </router-link>
+           </v-btn>
+              <v-btn  v-if="loggedIn"
+             class="ma-2" tile outlined color="success"
                   @click="logout()"
                   >logout</v-btn>
       </div>
@@ -73,6 +78,7 @@ export default {
       bg: true,
       drawer: null,
       model: null,
+      loggedIn:false,
 
       links: [
         { icon: "mdi-home", text: "HOME", route: "/" },
@@ -89,19 +95,35 @@ export default {
       headerLinks: [
         { text: "My bookings", route: "appoinmentH" },
         { text: "Medical history", route: "history" },
-        { text: "SignIn", route: "SignIn" }
+     
       ]
     };
   },
 
-  mounted:{
-    logout(){
+  // mounted:{
+  //   logout(){
+  //      let token = localStorage.getItem('token');
+  //       axios.get("http://localhost:8000/api/logout?api_token="+token)
+  //       .then(response=>{
+  //         localStorage.removeItem('token');
+  //      })
+  //   }
+  // },
+
+  created(){
+
+    Event.$on('login', ()=>{
+      this.loggedIn=true;
+    });
+
+     Event.$on('logout', ()=>{
+      this.loggedIn=false;
+    });
+    
        let token = localStorage.getItem('token');
-        axios.get("http://localhost:8000/api/logout?api_token="+token)
-        .then(response=>{
-          localStorage.removeItem('token');
-       })
-    }
+      if(token){
+        this.loggedIn=true;
+      }
   }
 
     // mounted(){

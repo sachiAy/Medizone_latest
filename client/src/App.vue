@@ -14,12 +14,25 @@ import Footer from "./components/Footer.vue";
 import HeaderFile from "./components/HeaderFile.vue";
 
 export default {
-  
-
   components: {
     HeaderFile,
     Footer,
   },
+  data(){
+    return{
+      loggedIn:false,
+    }
+  },
+
+  created(){
+     Event.$on('login', ()=>{
+      this.loggedIn=true;
+    });
+
+    Event.$on('logout', ()=>{
+      this.loggedIn=false;
+    });
+  }
   
 };
 </script>

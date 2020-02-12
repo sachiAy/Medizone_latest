@@ -11,6 +11,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import axios from 'axios'
 
+window.Event=new Vue;
 window.token=localStorage.getItem('token');
 
 window.axios=axios
@@ -18,7 +19,6 @@ window.axios.defaults.baseURL='http://localhost:8000'
 window.axios.defaults.params={api_token:window.token}
 
 Vue.use(BootstrapVue);
-Vue.use(vueResource);
 Vue.use(VueSession)
 
 Vue.config.productionTip = false;

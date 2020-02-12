@@ -12,15 +12,15 @@ class patients extends Model implements Authenticatable
     protected $guard = 'patients';
 
     protected $fillable = [
-        'customer_type','first_name','last_name','NIC','birthday','blood_group','address','contact_no','username','email','password',
+        'first_name','last_name','nic','mobile_no','email','address','username','password','customer_type','api_token'
     ];
 
     protected $hidden = [
         'password',
     ];
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
 }

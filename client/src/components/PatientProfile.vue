@@ -1,10 +1,12 @@
 <template>
   <section class="our-webcoderskull padding-lg">
     <div class="container">
-      <div class="row heading heading-icon">
-        <h2>Profile</h2>
+      <div class="cnt-block equal-hight">
+        <h1>{{patients.patient_id}}</h1> 
       </div>
       <div>
+      
+         
             <div class="cnt-block equal-hight" style="height: 349px;">
               <figure>
                 <img
@@ -13,13 +15,27 @@
                   alt=""
                 />
               </figure>
-              <h3>Patient Name</h3>
-              <p>Address</p>
+             
+                <h2>{{patients.first_name}}</h2>
+         
+           
+             
+              <p>{{patients.username}}</p>
             </div>
-        <v-btn 
-            small 
-            @click="logout"
-            >logout</v-btn>
+            <ul class="row">
+              <li class="col">
+                 <v-btn
+              rounded
+              color="primary"
+              dark
+              v-for="link in headerLinks"
+              :key="link.text"
+              router
+              :to="link.route"
+            >{{link.text}}</v-btn>
+              </li>
+            </ul>
+                
       </div>
     </div>
   </section>
@@ -30,21 +46,25 @@
 export default {
     data(){
         return{
-            items: [
-                
+         
+           patients:"",
+            headerLinks: [
+                { text: "Channel", route: "Channel" },
             ]
         }
     },
-    beforeCreate: function() {
-        if(!this.$session.exists()){
-            this.$router.push('SignIn')
-        }
+  
+   
+    mounted(){
+       let token = localStorage.getItem('token');
+       axios.get("http://localhost:8000/api/showPatient/"+token)
+       .then(response=>{
+        this.patients=response.data.patients;
+       })
+   
+      
     },
-    methods: {
-        logout(){
-            this.$session.destroy()
-            this.$router.push('SignIn')
-        }
-    }
+    
+
 }
 </script>

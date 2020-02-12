@@ -63,9 +63,6 @@ export default {
    
     mounted(){
        let token = localStorage.getItem('token');
-          if(!token){
-        this.$router.push('/SignIn');
-      }
        axios.get("http://localhost:8000/api/showDoctor/"+token)
        .then(response=>{
         this.doctors=response.data.doctors;

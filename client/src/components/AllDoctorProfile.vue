@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       doctors:{
-        specialty:"a"
+        specialty:"b"
       }
       
     };
