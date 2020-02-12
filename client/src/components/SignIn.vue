@@ -151,69 +151,14 @@ export default {
   },
 
   methods: {
-  //  Login(event){
-  //       if(this.user.type === 'Doctor')
-  //       {
-  //         this.$http.post("http://localhost:8000/api/login",this.Login)
-  //       .then(function(response) {   
-  //         if(response.status === 200){  
-  //           let newToken=response.data.doctor.api_token;
-  //           window.token=newToken;
-  //           let doctor=response.data.doctor;
-  //           localStorage.setItem('token','newToken');
-  //           localStorage.setItem('doctor',JSON.stringify(doctor));
-  //           Vue.http.interceptors.push(function(request){
-  //             request.method='POST';
-
-  //             return function(response){
-  //               response.body=
-  //             }
-  //           })
-  //           console.log(localStorage.api_token) ;
-  //           this.$router.push('DoctorProfile');
-
-  //         }  
-  //       })
-  //       }else if(this.user.type === 'Patient')
-  //       {
-  //         this.$http.post("http://localhost:8000/api/patientLogin",this.patient)
-  //       .then(function(response) {   
-  //         if(response.status === 200){
-  //           this.$session.start();
-  //           this.$router.push('PatientProfile')
-  //         }  
-  //       })
-  //       }else if(this.user.type === 'Admin')
-  //       {
-  //         this.$http.post("http://localhost:8000/api/adminLogin",this.admin)
-  //       .then(function(response) {   
-  //         if(response.status === 200){
-  //           this.$session.start();
-  //           this.$router.push('AdminDashboard')
-  //         }
-  //       })
-  //   }else if(this.user.type === 'Clinic Admin'){
-  //     this.$http.post("http://localhost:8000/api/c_adminLogin",this.c_admin)
-  //       .then(function(response) {   
-  //         if(response.status === 200){
-  //           this.$session.start();
-  //           this.$router.push('ClinicDashboard')
-  //         }
-  //       })
-  //   }
 
     	logItIn(){
 				axios.post('http://localhost:8000/api/login',this.doctor)
 				.then(response => {
-					let newToken=response.data.doctor.api_token;
-					window.token=newToken;
-					let doctor=response.data.doctor;	
-					localStorage.setItem('token',newToken);
-					localStorage.setItem('doctor',JSON.stringify(doctor));
-          window.axios.defaults.params={api_token:newToken}
-          console.log(newToken);
-					//Event.$emit('login',doctor);
-					this.$router.push('/DoctorProfile');
+          let Token=response.data.doctor.api_token;
+          localStorage.setItem('token',Token);
+          console.log(Token);
+          this.$router.push('/DoctorProfile');
 				});
 			}
    },

@@ -6,7 +6,7 @@
       </div>
       <div>
         <ul class="row">
-          <li class="col-sm-4" v-for="item in items">
+          <li class="col-sm-4" v-for="items in doctors" :key="items.dr_id">
             <div class="cnt-block equal-hight" style="height: 349px;">
               <figure>
                 <img
@@ -15,10 +15,10 @@
                   alt=""
                 />
               </figure>
-              <h3>{{ item.first_name }} {{ item.last_name }}</h3>
-              <p>Nawaloka Hospital Colombo</p>
+              <h3>{{ items.first_name }} {{ items.last_name }}</h3>
+              <p>{{items.usernamezz}}</p>
               <ul class="follow-us clearfix"></ul>
-              <button class="btn btn-lg btn-primary">
+              <button class="ma-2" outlined color="indigo">
                 <router-link to="/DoctorProfile"> View Profile</router-link>
               </button>
             </div>
@@ -33,25 +33,22 @@
 
 <script>
 export default {
-  /*data() {
-    return {
-      items: []
-    };
-  }*/
 
   data() {
     return {
-      items: []
+      doctors:{
+        specialty:"a"
+      }
+      
     };
   },
 
-  created() {
-    this.$http
-      .get("http://localhost:8000/api/getDoctors")
-      .then(function(response) {
-        //console.log(response);
-
-        this.items = response.body.alldoctors;
+  mounted() {
+    
+      axios.get("http://localhost:8000/api/getDoctors/"+this.doctors.specialty)
+      .then(response=> {
+        console.log(response);
+        this.doctors = response.data.doctors;
       });
   }
 };

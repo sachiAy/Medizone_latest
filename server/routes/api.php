@@ -54,8 +54,10 @@ Route::post('/getAppointment','Api\AuthController@postAppointments');
 Route::post('/DoctorRegister','DoctorController@addDoctor');
 Route::post('/login','AuthController@login')->name('login');
 Route::get('/logout','AuthController@logout');
-Route::get('/getDoctors/{reg_no}','AuthController@showD');
-Route::get('/getDoctors','AuthController@getD');
+Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
+Route::get('/showDoctor/{api_token}','DoctorController@showD');
+// Route::post('/getDoctors','AuthController@getD');
+Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 
 
 

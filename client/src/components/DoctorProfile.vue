@@ -2,12 +2,15 @@
   <section class="our-webcoderskull padding-lg">
     <div class="container">
       <div class="row heading heading-icon">
-        <h2>Profile</h2>
+        <h1>{{$route.params.dr_id}}</h1> 
       </div>
       <div>
       
          
-            <div class="cnt-block equal-hight" style="height: 349px;">
+            <div class="cnt-block equal-hight" style="height: 349px;"
+             v-for="doctor in doctors"
+              :key="doctor.id"
+            >
               <figure>
                 <img
                   src="../assets/doctors.jpg"
@@ -15,7 +18,8 @@
                   alt=""
                 />
               </figure>
-              <h3>{{username}}</h3>
+           <h2>{{doctor.dr_id}}</h2>
+             
               <p>Nawaloka Hospital Colombo</p>
             </div>
             <ul class="row">
@@ -34,7 +38,6 @@
                    rounded
                   color="primary"
                   dark
-                  @click="hello"
                   >logout</v-btn>
             
             </ul>
@@ -49,9 +52,10 @@
 export default {
     data(){
         return{
-            items: [
-                
-            ],
+         
+           doctors:[
+            { id:"13"}
+           ],
             headerLinks: [
                 { text: "Channel", route: "Channel" },
             ]
@@ -60,10 +64,16 @@ export default {
   
    
     mounted(){
-       if(!token) {
-				  this.$router.push('/SignIn');
-			  }
-     
+       let token = localStorage.getItem('token');
+       //console.log(token);
+       axios.get("http://localhost:8000/api/showDoctor/"+token)
+       .then(response=>{
+        response.data.doctors.dr_id;
+        // console.log(response.data.doctors.dr_id);
+       })
+      if(!token){
+        this.$router.push('/SignIn');
+      }
       
     },
     

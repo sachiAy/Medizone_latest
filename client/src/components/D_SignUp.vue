@@ -76,7 +76,7 @@
                             <v-col >
                                 <v-btn 
                                 small 
-                                @click="doctorRegister"                               
+                                @click="addDoctor()"                               
                                 >submit</v-btn>
                             </v-col>
                             <v-col>
@@ -129,13 +129,12 @@ export default {
       this.$refs.form.reset();
     },
   methods: {
-      doctorRegister(){
-        this.$http.post("http://localhost:8000/api/doctorRegister",this.doctor)
-          .then(function(response) {
-            //this.$router.push('SignIn')
-            console.log(response.body.token)
-          })
-      },
+      addDoctor(){
+        axios.post('http://localhost:8000/api/DoctorRegister', this.doctor)
+        .then(response=>{
+           console.log(response);
+        })
+      }
       
     }
 

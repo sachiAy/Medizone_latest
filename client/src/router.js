@@ -5,6 +5,7 @@ import D_SignUp from "./components/D_SignUp";
 import P_SignUp from "./components/P_SignUp";
 import ClinicRegister from "./components/ClinicRegister";
 import SignIn from "./components/SignIn";
+import logout from "./components/logout";
 import Home from "./components/Home";
 import About from "./views/About";
 import Channel from "./components/Channel";
@@ -20,6 +21,8 @@ import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
 import Aboutus from "./components/Aboutus";
+
+
 
 Vue.use(Router);
 
@@ -130,6 +133,11 @@ export default new Router({
       path: "/Aboutus",
       name: "Aboutus",
       component: Aboutus
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: logout
     },
     {
       path: "/AllPatientProfile",
