@@ -14,45 +14,76 @@ use App\Http\Controllers\ApiTokenController;
 
 class DoctorController extends Controller
 {
+    protected function guard()
+    {
+        // return Auth::guard('doctors');
+    }
    
     public function __construct()
     {
-        $this->middleware('auth',['only'=>'getD']);
+        // $this->middleware('auth');
     }
+  
 
 
     public function addDoctor(Request $request)
     {
-        $doctor=doctors::create([
-            'user_type'=>$request->user_type,
-            'username' => $request->username,
-           'reg_no' =>$request->reg_no,
-           'first_name' => $request->first_name,
-           'last_name' => $request->last_name,
-           'NIC' => $request->NIC,
-           'birthday' => $request->birthday,
-           'specialty' => $request->specialty,
-           'contact_no' => $request->contact_no,
-           'email' => $request->email,
-           'password' =>Hash::make($request->password),
-           'api_token' => Str::random(50)
-        ]);
-
-        return response()->json(['status'=>'success','doctor'=>$doctor],200);
+        $value=DB::table('doctors')->where('reg_no', $request->reg_no)->get();
+        if($value->count()==0){
+            $doctor=doctors::create([
+                //'user_type'=>$request->user_type,
+                'username' => $request->username,
+               'reg_no' =>$request->reg_no,
+               'first_name' => $request->first_name,
+               'last_name' => $request->last_name,
+               'NIC' => $request->NIC,
+               'birthday' => $request->birthday,
+               'specialty' => $request->specialty,
+               'contact_no' => $request->contact_no,
+               'email' => $request->email,
+               'password' =>Hash::make($request->password),
+               'api_token' => Str::random(50)
+            ]);
+            return response()->json(['status'=>'success','doctor'=>$doctor],200);
+        }else{
+            return response()->json(['status'=>'error','message'=>'Doctor already exists'],400);
+        }
+   
         
     }
 
-    public function getD(){
-        dd(Auth::doctors()->reg_no);
-        return response()->json(['doctors'=>doctors::all()]);
+    public function getDoctor(Request $request){
+
+        $specialty = $request->specialty;
+
+        $doctor = DB::table('doctors')
+                    ->where('specialty', $specialty)
+                    ->orderBy('dr_id')
+                    ->get();
+
+        return response()->json(['doctors'=>$doctor]);
     }
 
     public function showD(Request $request){
-        $reg_no = $request->reg_no;
 
-            $doctor = DB::table('doctors')->where('reg_no', $reg_no)->first();
+        // $credential=$request->only('reg_no','api_token');
+        // if(Auth::guard('doctors')->attempt($credential)){
+        //     $doctor = DB::table('doctors')->where('reg_no', $reg_no)->first();
+        //     return response()->json(['doctors'=>$doctor]);
+        // }
+        $token = $request->api_token;
+        $doctor = DB::table('doctors')->where('api_token', $token)->first();
+        return response()->json(['doctors'=>$doctor]);
 
-            return response()->json(['doctors'=>$doctor]);
+        // if(Auth::doctors()->reg_no !== $request->reg_no){
+
+        //     return response()->json(['status'=>'error','message'=>'unauthorized'],401);
+
+        // }
+
+           
+
+            
 
     }
 }

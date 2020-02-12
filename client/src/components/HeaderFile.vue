@@ -27,7 +27,7 @@
                   >logout</v-btn>
       </div>
       <v-spacer></v-spacer>
-      {{ username }}
+    
       <v-btn icon>
         <router-link to="PatientProfile">
           <v-icon>mdi-account</v-icon>
@@ -94,19 +94,24 @@ export default {
     };
   },
 
-   methods: {
+  mounted:{
+    logout(){
+       let token = localStorage.getItem('token');
+        axios.get("http://localhost:8000/api/logout?api_token="+token)
+        .then(response=>{
+          localStorage.removeItem('token');
+       })
+    }
+  }
 
-        logout(){
-        if(!token) {
-				  return false;
-			  }
-			axios.get("http://localhost:8000/api/logout?api_token="+token)
-			.then(response => {
-				localStorage.removeItem('token');
-        //Event.$emit('logout');
-        this.$router.push('/SignIn');
-			});
-      }
-    },
+    // mounted(){
+    //    let token = localStorage.getItem('token');
+    //    axios.get("http://localhost:8000/api/logout?api_token="+token)
+    //    .then(response=>{
+    //      localStorage.removeItem('token');
+    //    })
+     
+      
+    // },
 };
 </script>

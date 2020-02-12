@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\doctors;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
+        
+        Auth::viaRequest('api_token', function ($request) {
+            return doctors::where('api_token', $request->api_token)->first();
+        });
        
 
         //
