@@ -52,10 +52,12 @@ Route::post('/getAppointment','Api\AuthController@postAppointments');
 
 //test
 Route::post('/DoctorRegister','DoctorController@addDoctor');
+Route::post('/PatientRegister','PatientController@addPatient');
 Route::post('/login','AuthController@login')->name('login');
 Route::get('/logout','AuthController@logout');
 Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
 Route::get('/showDoctor/{api_token}','DoctorController@showD');
+Route::get('/showPatient/{api_token}','PatientController@showP');
 // Route::post('/getDoctors','AuthController@getD');
 Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 

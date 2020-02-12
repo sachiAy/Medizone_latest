@@ -23,21 +23,31 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $doctor=  DB::table('doctors')->where('reg_no', $request->reg_no)->first(); 
+        $patient = DB::table('patients')->where('email', $request->email)->first();
 
-        if(!$doctor){
+        if(!$doctor && !$patient){
             return response()->json(['status'=>'error','message'=>'User not found'],404);
         }
 
-        if(Hash::check($request->password, $doctor->password)){
-
-            //$doctor=DB::table('doctors')->where('reg_no',$request->reg_no)->update(['api_token'=>Str::random(50)]);
+        if($doctor){
+            if(Hash::check($request->password, $doctor->password)){
           
-            return response()->json(['status'=>'success','doctor'=>$doctor],200);
+                return response()->json(['status'=>'success','doctor'=>$doctor],200);
+    
+    
+            }
+        }else if($patient){
+            if(Hash::check($request->password, $patient->password)){
 
+                return response()->json(['status'=>'success','patient'=>$patient],200);
+    
+        }
+           
+        }else{
+        
+            return response()->json(['status'=>'error','message'=>'Invalid credintials'],401);
 
         }
-
-        return response()->json(['status'=>'error','message'=>'Invalid credintials'],401);
 
     }
 
@@ -46,15 +56,21 @@ class AuthController extends Controller
             $api_token = $request->api_token;
 
             $doctor = DB::table('doctors')->where('api_token', $api_token)->first();
+            $patient = DB::table('patients')->where('api_token', $api_token)->first();
 
-            if(!$doctor){
+
+            if(!$doctor && !$patient){
                 return response()->json(['status'=>'error','message'=>'Not logged in'],401);
             }
 
-            $doctor->api_token=null;
+            if($doctor){
+                $doctor->api_token=null;
+                $doctor=DB::table('doctors')->where('api_token',$doctor->api_token)->first();
+            }else if($patient){
+                $patient->api_token=null;
+                $patient=DB::table('patients')->where('api_token',$patient->api_token)->first();
 
-            $doctor=DB::table('doctors')->where('api_token',$doctor->api_token)->first();
-
+            }
             return response()->json(['status'=>'success','message'=>'You are now logged out'],200);
 
     }

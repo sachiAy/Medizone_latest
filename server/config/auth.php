@@ -46,8 +46,9 @@ return [
             'hash'=>true,
         ],
         'patients' => [
-            'driver' => 'session',
+            'driver' => 'api_token',
             'provider' => 'patients',
+            'hash'=>true,
         ],
         'admins' => [
             'driver' => 'session',
