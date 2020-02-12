@@ -16,7 +16,7 @@
                 />
               </figure>
               <h3>{{ items.first_name }} {{ items.last_name }}</h3>
-              <p>{{items.username}}</p>
+              <p>{{ items.username }}</p>
               <ul class="follow-us clearfix"></ul>
               <button class="ma-2" outlined color="indigo">
                 <router-link to="/DoctorProfile"> View Profile</router-link>
@@ -29,24 +29,20 @@
   </section>
 </template>
 
-
-
 <script>
 export default {
-
   data() {
     return {
-      doctors:{
-        specialty:"b"
+      doctors: {
+        specialty: "NEURO SURGEON"
       }
-      
     };
   },
 
   mounted() {
-    
-      axios.get("http://localhost:8000/api/getDoctors/"+this.doctors.specialty)
-      .then(response=> {
+    axios
+      .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
+      .then(response => {
         console.log(response);
         this.doctors = response.data.doctors;
       });
