@@ -49,6 +49,7 @@ Route::post('/c_adminLogin','Api\AuthController@loginC_Admin');
 
 //Appointment Api
 Route::post('/getAppointment','Api\AuthController@postAppointments');
+Route::post('/addAppointment','AppointmentController@addAppointment');
 
 //test
 Route::post('/DoctorRegister','DoctorController@addDoctor');
@@ -60,6 +61,7 @@ Route::get('/showDoctor/{api_token}','DoctorController@showD');
 Route::get('/showPatient/{api_token}','PatientController@showP');
 // Route::post('/getDoctors','AuthController@getD');
 Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
+
 
 
 

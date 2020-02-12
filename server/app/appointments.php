@@ -16,9 +16,10 @@ class appointments extends Model implements Authenticatable
     protected $guard = 'appointments';
     
     protected $fillable = [
-        'name','telephone','nic','email'
+        'dr_id','patient_id','clinic_id','appointment_date','first_name','last_name','mobile_no','email','NIC',
     ];
 
+    //protected $primaryKey = 'appointment_id';
     
    
 }

@@ -66,24 +66,9 @@ class PatientController extends Controller
 
     public function showP(Request $request){
 
-        // $credential=$request->only('reg_no','api_token');
-        // if(Auth::guard('doctors')->attempt($credential)){
-        //     $doctor = DB::table('doctors')->where('reg_no', $reg_no)->first();
-        //     return response()->json(['doctors'=>$doctor]);
-        // }
         $token = $request->api_token;
         $patient = DB::table('patients')->where('api_token', $token)->first();
         return response()->json(['patients'=>$patient]);
-
-        // if(Auth::doctors()->reg_no !== $request->reg_no){
-
-        //     return response()->json(['status'=>'error','message'=>'unauthorized'],401);
-
-        // }
-
            
-
-            
-
     }
 }
