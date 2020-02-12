@@ -58,11 +58,9 @@ class AuthController extends Controller
             $doctor = DB::table('doctors')->where('api_token', $api_token)->first();
             $patient = DB::table('patients')->where('api_token', $api_token)->first();
 
-
             if(!$doctor && !$patient){
                 return response()->json(['status'=>'error','message'=>'Not logged in'],401);
             }
-
             if($doctor){
                 $doctor->api_token=null;
                 $doctor=DB::table('doctors')->where('api_token',$doctor->api_token)->first();
