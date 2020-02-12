@@ -77,6 +77,46 @@
   </div>
 </template>
 
+<script>
+//import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      //searchSet:[],
+      descriptionLimit: 60,
+      entries: [],
+
+      model: null,
+      search: null,
+
+      search: [
+        //"Allergy Specialist ඇලර්ජි (අසාත්මිකතා ) විශේෂඥ",
+        "Anaesthetists නිර්වින්දන විශේෂඥ",
+        "Arthritis",
+        "Cardiologist හෘද රෝග වෛද්‍ය",
+        "Chest Specialist පපු විශේෂඥ ",
+        "Children Dentist ළමා දන්ත  වෛද්‍ය",
+        "Dental Surgeon දන්ත ශල්‍ය වෛද්‍ය",
+        "ENT and Neck උගුර කන නාසය හිස සහ බෙල්ල පිලිබඳ වෛද්‍ය",
+        "ENT Surgeon උගුර කන නාසය පිලිබඳ ශල්‍ය වෛද්‍ය",
+        "Facial Surgeon රුපලාවන්‍ය චර්ම රෝග",
+        "GENERAL PHYSICIAN",
+        "NEURO PHYSICIAN",
+        "NEURO SURGEON",
+        "PAEDIATRICIAN  ළමා වෛද්‍ය",
+      ]
+    };
+  },
+
+  mounted(){
+    
+  }
+
+ 
+};
+</script>
+
 <style>
 .v-card__text {
   font-size: 0.875rem;
@@ -112,58 +152,3 @@
   padding-left: 30px;
 }
 </style>
-
-<script>
-//import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      //searchSet:[],
-      descriptionLimit: 60,
-      entries: [],
-
-      model: null,
-      search: null,
-
-      search: [
-        //"Allergy Specialist ඇලර්ජි (අසාත්මිකතා ) විශේෂඥ",
-        "Anaesthetists නිර්වින්දන විශේෂඥ",
-        "Arthritis",
-        "Cardiologist හෘද රෝග වෛද්‍ය",
-        "Chest Specialist පපු විශේෂඥ ",
-        "Children Dentist ළමා දන්ත  වෛද්‍ය",
-        "Dental Surgeon දන්ත ශල්‍ය වෛද්‍ය",
-        "ENT and Neck උගුර කන නාසය හිස සහ බෙල්ල පිලිබඳ වෛද්‍ය",
-        "ENT Surgeon උගුර කන නාසය පිලිබඳ ශල්‍ය වෛද්‍ය",
-        "Facial Surgeon රුපලාවන්‍ය චර්ම රෝග",
-        "GENERAL PHYSICIAN",
-        "NEURO PHYSICIAN",
-        "NEURO SURGEON",
-        "PAEDIATRICIAN  ළමා වෛද්‍ය",
-      ]
-    };
-  }
-
-  /* methods:{
-    search(){
-      var key = document.getElementById('Search').value;
-
-      axios.get("https://api.betterdoctor.com/2016-03-01/conditions?q="+key+"&fields=data%2Cname&limit=10&user_key=9203842f28dad80bbeb83418e860b019")
-      .then(response=>{
-        this.searchSet=response.data.data;
-        //console.log(response.data.data)
-        //his.key=response.data.data;
-
-
-      })
-      .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-
- // this.$emit('newDataset',this.searchSet)
-    }
-  },*/
-};
-</script>

@@ -16,7 +16,7 @@
                 />
               </figure>
               <h3>{{ items.first_name }} {{ items.last_name }}</h3>
-              <p>{{items.usernamezz}}</p>
+              <p>{{items.username}}</p>
               <ul class="follow-us clearfix"></ul>
               <button class="ma-2" outlined color="indigo">
                 <router-link to="/DoctorProfile"> View Profile</router-link>

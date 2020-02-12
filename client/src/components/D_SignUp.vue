@@ -80,7 +80,14 @@
                                 >submit</v-btn>
                             </v-col>
                             <v-col>
-                                <v-btn small @click="reset()">clear</v-btn>
+                                <v-btn
+                    :disabled="!model"
+                    color="grey darken-3"
+                    @click="model = null"
+                  >
+                    Clear
+                    <v-icon right>mdi-close-circle</v-icon>
+                  </v-btn>
                             </v-col>
                         </v-row>
                             <v-row>
@@ -106,7 +113,7 @@ export default {
   data() {
     return {
         valid: true,
-
+        model:null,
         doctor: {
           username:"",
           reg_no: "",

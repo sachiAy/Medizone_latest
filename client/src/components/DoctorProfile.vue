@@ -1,16 +1,13 @@
 <template>
   <section class="our-webcoderskull padding-lg">
     <div class="container">
-      <div class="row heading heading-icon">
-        <h1>{{$route.params.dr_id}}</h1> 
+      <div class="cnt-block equal-hight">
+        <h1>{{doctors.reg_no}}</h1> 
       </div>
       <div>
       
          
-            <div class="cnt-block equal-hight" style="height: 349px;"
-             v-for="doctor in doctors"
-              :key="doctor.id"
-            >
+            <div class="cnt-block equal-hight" style="height: 349px;">
               <figure>
                 <img
                   src="../assets/doctors.jpg"
@@ -18,9 +15,12 @@
                   alt=""
                 />
               </figure>
-           <h2>{{doctor.dr_id}}</h2>
              
-              <p>Nawaloka Hospital Colombo</p>
+                <h2>{{doctors.first_name}}</h2>
+         
+           
+             
+              <p>{{doctors.specialty}}</p>
             </div>
             <ul class="row">
               <li class="col">
@@ -53,9 +53,7 @@ export default {
     data(){
         return{
          
-           doctors:[
-            { id:"13"}
-           ],
+           doctors:"",
             headerLinks: [
                 { text: "Channel", route: "Channel" },
             ]
@@ -65,15 +63,14 @@ export default {
    
     mounted(){
        let token = localStorage.getItem('token');
-       //console.log(token);
-       axios.get("http://localhost:8000/api/showDoctor/"+token)
-       .then(response=>{
-        response.data.doctors.dr_id;
-        // console.log(response.data.doctors.dr_id);
-       })
-      if(!token){
+          if(!token){
         this.$router.push('/SignIn');
       }
+       axios.get("http://localhost:8000/api/showDoctor/"+token)
+       .then(response=>{
+        this.doctors=response.data.doctors;
+       })
+   
       
     },
     
