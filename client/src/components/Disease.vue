@@ -1,12 +1,19 @@
 <template>
   <div>
-    <v-parallax src="../assets/image1.jpg" max-height="1000" height='100%'>
+    <v-parallax src="../assets/image1.jpg" max-height="1000" height="100%">
       <v-hover>
         <template v-slot="{ hover }">
           <div class="mx-auto">
             <div class="mx-auto bg-info" style="width: 600px; height: 450px">
-              <v-card :elevation="hover ? 24 : 6"  class="container" color="indigo lighten-4" style="width: 600px; height: 450px">
-                <v-card-title class="headline blue lighten-3">Search for Doctor</v-card-title>
+              <v-card
+                :elevation="hover ? 24 : 6"
+                class="container"
+                color="indigo lighten-4"
+                style="width: 600px; height: 450px"
+              >
+                <v-card-title class="headline blue lighten-3"
+                  >Search for Doctor</v-card-title
+                >
                 <v-card-text>
                   <v-expand-transition>
                     <v-row>
@@ -68,7 +75,7 @@
                     <v-icon right>mdi-magnify</v-icon>
                   </v-btn>
                 </v-card-actions>
-                </v-card>
+              </v-card>
             </div>
           </div>
         </template>
@@ -104,16 +111,12 @@ export default {
         "GENERAL PHYSICIAN",
         "NEURO PHYSICIAN",
         "NEURO SURGEON",
-        "PAEDIATRICIAN  ළමා වෛද්‍ය",
+        "PAEDIATRICIAN  ළමා වෛද්‍ය"
       ]
     };
   },
 
-  mounted(){
-    
-  }
-
- 
+  mounted() {}
 };
 </script>
 
