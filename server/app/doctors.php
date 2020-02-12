@@ -13,7 +13,7 @@ class doctors extends Model implements Authenticatable
     use \Illuminate\Auth\Authenticatable;
      
 
-    protected $guard = 'web';
+    protected $guard = 'doctors';
     
     protected $fillable = [
         'username','reg_no','first_name','last_name','NIC','birthday','specialty','contact_no','email','password','api_token'
@@ -21,7 +21,9 @@ class doctors extends Model implements Authenticatable
 
     protected $hidden = [
         'password'
+        
     ];
+   
 
     // public function setPasswordAttribute($password)
     // {
