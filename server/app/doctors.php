@@ -21,7 +21,9 @@ class doctors extends Model implements Authenticatable
 
     protected $hidden = [
         'password'
+        
     ];
+   
 
     // public function setPasswordAttribute($password)
     // {
