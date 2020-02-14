@@ -25,44 +25,31 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //       });
 //     });
 
-//Doctor Api
-//Route::post('/doctorRegister','Api\AuthController@addDoctor');
-//Route::post('/doctorLogin','Api\AuthController@loginDoctor');
-//Route::get('/getDoctors',[
- //   'uses'=>'Api\AuthController@getDoctor'
-//]);
-
-//Patient Api
-Route::post('/patientRegister','Api\AuthController@addPatient');
-Route::post('/patientLogin','Api\AuthController@loginPatient');
-Route::get('/getPatients',[
-    'uses'=>'Api\AuthController@getPatient'
-]);
-
 //Admin Api
-Route::post('/adminRegister','Api\AuthController@addAdmin');
-Route::post('/adminLogin','Api\AuthController@loginAdmin');
+Route::post('/Main_adminRegister','Main_adminController@addMain_admin');
 
 //Clinic Admin Api
-Route::post('/c_adminRegister','Api\AuthController@addC_Admin');
-Route::post('/c_adminLogin','Api\AuthController@loginC_Admin');
+Route::post('/Clinic_adminRegister','Clinic_adminController@addClinic_Admin');
+
 
 //Appointment Api
 Route::post('/getAppointment','Api\AuthController@postAppointments');
 Route::post('/addAppointment','AppointmentController@addAppointment');
 
-//test
-Route::post('/DoctorRegister','DoctorController@addDoctor');
-Route::post('/PatientRegister','PatientController@addPatient');
+//Auth controller
 Route::post('/login','AuthController@login')->name('login');
 Route::get('/logout','AuthController@logout');
+
+//Doctor
+Route::post('/DoctorRegister','DoctorController@addDoctor');
 Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
 Route::get('/showDoctor/{api_token}','DoctorController@showD');
-Route::get('/showPatient/{api_token}','PatientController@showP');
 // Route::post('/getDoctors','AuthController@getD');
 Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 
-
+//Patient Api
+Route::get('/showPatient/{api_token}','PatientController@showP');
+Route::post('/PatientRegister','PatientController@addPatient');
 
 
 

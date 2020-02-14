@@ -50,13 +50,15 @@ return [
             'provider' => 'patients',
             'hash'=>true,
         ],
-        'admins' => [
-            'driver' => 'session',
-            'provider' => 'admins',
+        'main_admins' => [
+            'driver' => 'api_token',
+            'provider' => 'main_admins',
+            'hash'=>true,
         ],
         'clinic_admins' => [
-            'driver' => 'session',
+            'driver' => 'api_token',
             'provider' => 'clinic_admins',
+            'hash'=>true,
         ],
         'appointments' => [
             'driver' => 'session',
@@ -100,9 +102,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\patients::class,  
         ],
-        'admins' => [
+        'main_admins' => [
             'driver' => 'eloquent',
-            'model' => App\admins::class,  
+            'model' => App\main_admins::class,  
         ],
         'clinic_admins' => [
             'driver' => 'eloquent',

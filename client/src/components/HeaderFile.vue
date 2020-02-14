@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar fixed>
+    <v-toolbar fixed color="indigo lighten-5">
       <v-app-bar-nav-icon>
         <v-icon @click.stop="drawer = !drawer">mdi-menu</v-icon>
       </v-app-bar-nav-icon>
@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
       <div class="text-center">
         <v-btn
-          class="ma-2" tile outlined color="success"
+          class="ma-2" tile outlined color="blue darken-4"
           v-for="link in headerLinks"
           :key="link.text"
           router
@@ -19,7 +19,7 @@
           >{{ link.text }}</v-btn>
           <v-btn  
             rounded
-            class="ma-2" tile outlined color="success"
+            class="ma-2" tile outlined color="blue darken-4"
             v-if="!loggedIn"
             >
             <router-link to="SignIn">
@@ -27,9 +27,8 @@
         </router-link>
            </v-btn>
               <v-btn  v-if="loggedIn"
-             class="ma-2" tile outlined color="success"
-                  @click="logout()"
-                  >logout</v-btn>
+             class="ma-2" tile outlined color="blue darken-4"
+                  ><router-link to="logout">logout</router-link> </v-btn>
       </div>
       <v-spacer></v-spacer>
     

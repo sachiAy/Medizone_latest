@@ -1,5 +1,5 @@
 <template>
-    <h1>logged out</h1>
+  
 </template>
 
 <script>
@@ -19,7 +19,9 @@ export default {
         axios.get("http://localhost:8000/api/logout?api_token="+token)
         .then(response=>{
           localStorage.removeItem('token');
+          this.$router.push('/SignIn')
           Event.$emit('logout');
+          
        })
     
   }

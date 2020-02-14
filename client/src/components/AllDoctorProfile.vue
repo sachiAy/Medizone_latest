@@ -34,16 +34,19 @@ export default {
   data() {
     return {
       doctors: {
-        specialty: "NEURO SURGEON"
+        specialty: "GENERAL PHYSICIAN"
       }
     };
   },
 
   mounted() {
+    
     axios
       .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
       .then(response => {
         console.log(response);
+        let dData=response.data.doctors;
+         localStorage.setItem('Ddata',dData);
         this.doctors = response.data.doctors;
       });
   }

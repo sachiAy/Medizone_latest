@@ -62,11 +62,17 @@ export default {
   
    
     mounted(){
-       let token = localStorage.getItem('token');
+      let token = localStorage.getItem('token');
+      if(token){
        axios.get("http://localhost:8000/api/showDoctor/"+token)
        .then(response=>{
         this.doctors=response.data.doctors;
        })
+      }else{
+        let data=localStorage.getItem('Ddata');
+        this.doctors=data;
+      }
+       
    
       
     },

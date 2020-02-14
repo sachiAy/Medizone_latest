@@ -3,7 +3,7 @@
     <v-parallax src="../assets/image1.jpg" max-height="1000" height="100%">
       <v-hover>
         <template v-slot="{ hover }">
-          <div class="mx-auto">
+          <div class="mx-auto container">
             <div class="mx-auto bg-info" style="width: 600px; height: 450px">
               <v-card
                 :elevation="hover ? 24 : 6"

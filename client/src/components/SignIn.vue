@@ -54,8 +54,8 @@
                      <!-- if user type is 'Admin' -->
                     <div v-if="user.type === 'Admin'">
                       <v-text-field
-                      v-model="admin.admin_no" 
-                      label="Admin Number"
+                      v-model="admin.username" 
+                      label="Username"
                       required
                       ></v-text-field>
 
@@ -70,14 +70,14 @@
                      <!-- if user type is 'Clinic Admin' -->
                     <div v-if="user.type === 'Clinic Admin'">
                       <v-text-field
-                      v-model="c_admin.c_admin_no" 
-                      label="Admin Number"
+                      v-model="clinicadmin.username" 
+                      label="Username"
                       required
                       ></v-text-field>
 
                       <v-text-field 
                         :type="show1 ? 'text' : 'password'" 
-                        v-model="c_admin.password" 
+                        v-model="clinicadmin.password" 
                         label="Password" 
                         required
                       ></v-text-field>
@@ -121,27 +121,25 @@ export default {
         user: { 
           type: ""
           },
-        
         type:['Doctor','Patient','Admin','Clinic Admin'],
 
         doctor: {
-
           reg_no: "",
-          password: "",
-          
+          password: "",          
         },
+
         patient: {
           email:"",
           password:""
         },
 
         admin: {
-          admin_no:"",
+          username:"",
           password:""
         },
 
-        c_admin: {
-          c_admin_no:"",
+        clinicadmin: {
+          username:"",
           password:""
         },
 
@@ -154,21 +152,38 @@ export default {
 
     	logItIn(){
         
-        if(this.user.type=="Doctor"){
+        if(this.user.type=="Doctor"){           //doctor login
           	axios.post('http://localhost:8000/api/login',this.doctor)
 				.then(response => {
           let Token=response.data.doctor.api_token;
           localStorage.setItem('token',Token);
-          
+          //console.log(Token)
           Event.$emit("login"); 
           this.$router.push('/DoctorProfile');
 				});
-        }else if(this.user.type=="Patient"){
+        }else if(this.user.type=="Patient"){      //patient login
           	axios.post('http://localhost:8000/api/login',this.patient)
 				.then(response => {
           let Token=response.data.patient.api_token;
           localStorage.setItem('token',Token);
-          
+          Event.$emit("login"); 
+          this.$router.push('/PatientProfile');
+				});
+        }else if(this.user.type=="Admin"){    //main_admin login
+        	axios.post('http://localhost:8000/api/login',this.admin)
+				.then(response => {
+          console.log(response)
+          let Token=response.data.main_admin.api_token;
+          localStorage.setItem('token',Token);
+          Event.$emit("login"); 
+          this.$router.push('/PatientProfile');
+				});
+        }else{    //clinic_admin login
+          	axios.post('http://localhost:8000/api/login',this.clinicadmin)
+				.then(response => {
+          console.log(response)
+          let Token=response.data.clinic_admin.api_token;
+          localStorage.setItem('token',Token);
           Event.$emit("login"); 
           this.$router.push('/PatientProfile');
 				});
@@ -176,7 +191,6 @@ export default {
 			
 			}
    },
-
 
     clear(event){
       console.log(this.user.type)
