@@ -12,7 +12,6 @@
       <v-toolbar-title>MediZone</v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="text-center">
-          router
         <v-btn rounded class="ma-2" tile outlined color="blue darken-4" :disabled="isDisabled">
           <router-link to="/appoinmentH">MY BOOKINGS</router-link>
         </v-btn>
