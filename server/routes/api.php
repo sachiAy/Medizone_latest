@@ -27,8 +27,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Admin Api
 Route::post('/Main_adminRegister','Main_adminController@addMain_admin');
+Route::get('/isAdmin','Main_adminController@isAdmin');
+Route::get('/showAdmin/{api_token}','Main_AdminController@showAdmin');
+
 
 //Clinic Admin Api
+Route::get('/showCAdmin/{api_token}','Clinic_adminController@showClinic_Admin');
 Route::post('/Clinic_adminRegister','Clinic_adminController@addClinic_Admin');
 
 
@@ -52,6 +56,8 @@ Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDocto
 //Patient Api
 Route::get('/showPatient/{api_token}','PatientController@showP');
 Route::post('/PatientRegister','PatientController@addPatient');
+Route::get('/isPatient','PatientController@isPatient');
+
 
 
 

@@ -39,6 +39,7 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-title>Clinic's availability</v-card-title>
+    <v-btn v-if="isAdmin">Admin</v-btn>
 
     <v-card-text>
      schedule table
@@ -48,7 +49,6 @@
       <v-btn
         color="deep-purple lighten-2"
         text
-       
       >
         Channel
       </v-btn>
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       users:"",
-
+      isAdmin:false,
       loading: false,
       selection: 1,
     
@@ -70,9 +70,24 @@ export default {
     };
   },
   
-  // created(){
-  //   this.view()
-  // },
+   created(){
+     Event.$on("isAdmin", () => {
+      this.isAdmin = true;
+    });
+
+    let token = localStorage.getItem('token');
+    console.log(token)
+     if(token){
+    axios.get("http://localhost:8000/api/isAdmin?api_token="+token)
+     .then(response=> {
+       console.log(response.data.status)
+      if(response.data.status=="true"){
+        console.log("ok")
+         this.isAdmin=true;
+       }
+    })
+   }
+  },
 
   mounted(){
      axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)

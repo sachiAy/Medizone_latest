@@ -51,6 +51,17 @@ class PatientController extends Controller
         
     }
 
+    public function isPatient(Request $request){
+        $api_token=$request->api_token;
+
+        $patient = DB::table('patients')->where('api_token', $api_token)->first();
+        if($patient){
+            return response()->json(['status'=>'true']);
+        }else{
+            return response()->json(['status'=>'false']);
+        }
+    }
+
     public function getDoctor(Request $request){
 
         $specialty = $request->specialty;

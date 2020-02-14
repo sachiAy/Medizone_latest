@@ -47,6 +47,16 @@ class Main_adminController extends Controller
    
         
     }
+    public function isAdmin(Request $request){
+        $api_token=$request->api_token;
+
+        $main_admin = DB::table('main_admins')->where('api_token', $api_token)->first();
+        if($main_admin){
+            return response()->json(['status'=>'true']);
+        }else{
+            return response()->json(['status'=>'false']);
+        }
+    }
 
     public function getDoctor(Request $request){
 
@@ -60,11 +70,11 @@ class Main_adminController extends Controller
         return response()->json(['doctors'=>$doctor]);
     }
 
-    public function showP(Request $request){
+    public function showAdmin(Request $request){
 
         $token = $request->api_token;
-        $patient = DB::table('patients')->where('api_token', $token)->first();
-        return response()->json(['patients'=>$patient]);
+        $admin = DB::table('main_admins')->where('api_token', $token)->first();
+        return response()->json(['admins'=>$admin]);
            
     }
 }

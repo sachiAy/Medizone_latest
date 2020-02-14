@@ -100,7 +100,7 @@
                         </v-row>
                         <v-row>
                           <v-col v-if="user.type === 'Patient'">
-                            Didn't you Register?
+                            Didn't you Registered?
                             <v-btn text primary router-link to="P_SignUp">Sign Up</v-btn>
                           </v-col>
                         </v-row>
@@ -159,8 +159,8 @@ export default {
           localStorage.setItem('token',Token);
           //console.log(Token)
           Event.$emit("login"); 
+           //Event.$emit("isDoctor");
           this.$router.push('/DoctorProfile');
-          //this.$router.push({ name: this.doctor, params: {  }});
 
 				});
         }else if(this.user.type=="Patient"){      //patient login
@@ -169,25 +169,26 @@ export default {
           let Token=response.data.patient.api_token;
           localStorage.setItem('token',Token);
           Event.$emit("login"); 
+           Event.$emit("isPatient");
           this.$router.push('/PatientProfile');
 				});
         }else if(this.user.type=="Admin"){    //main_admin login
         	axios.post('http://localhost:8000/api/login',this.admin)
 				.then(response => {
-          console.log(response)
           let Token=response.data.main_admin.api_token;
           localStorage.setItem('token',Token);
           Event.$emit("login"); 
-          this.$router.push('/PatientProfile');
+          Event.$emit("isAdmin");
+          this.$router.push('/AdminDashboard');
 				});
         }else{    //clinic_admin login
           	axios.post('http://localhost:8000/api/login',this.clinicadmin)
 				.then(response => {
-          console.log(response)
           let Token=response.data.clinic_admin.api_token;
           localStorage.setItem('token',Token);
           Event.$emit("login"); 
-          this.$router.push('/PatientProfile');
+           //Event.$emit("isCAdmin");
+          this.$router.push('/Clinic_AdminDashboard');
 				});
         }
 			
