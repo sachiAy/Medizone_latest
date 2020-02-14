@@ -80,4 +80,11 @@ class DoctorController extends Controller
         
 
     }
+    public function viewDoctorDetails(Request $request){
+        $id = $request->id;
+        $doctor = DB::table('doctors')->where('dr_id', $id)->first();
+        return response()->json(['doctors'=>$doctor]);
+
+
+    }
 }

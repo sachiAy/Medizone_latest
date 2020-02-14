@@ -160,6 +160,8 @@ export default {
           //console.log(Token)
           Event.$emit("login"); 
           this.$router.push('/DoctorProfile');
+          //this.$router.push({ name: this.doctor, params: {  }});
+
 				});
         }else if(this.user.type=="Patient"){      //patient login
           	axios.post('http://localhost:8000/api/login',this.patient)

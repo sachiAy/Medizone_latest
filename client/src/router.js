@@ -21,8 +21,7 @@ import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
 import Aboutus from "./components/Aboutus";
-
-
+import DocProfile from "./components/DocProfile";
 
 Vue.use(Router);
 
@@ -106,6 +105,11 @@ export default new Router({
       path: "/AllDoctorProfile",
       name: "AllDoctorProfile",
       component: AllDoctorProfile
+    },
+    {
+      path: "/doctors/:id",
+      name: "DocProfile",
+      component: DocProfile
     },
     {
       path: "/AllDoctorProfile_Admin",

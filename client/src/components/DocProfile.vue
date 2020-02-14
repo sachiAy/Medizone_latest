@@ -1,46 +1,13 @@
 <template>
   <section class="our-webcoderskull padding-lg">
     <div class="container">
-        <ul class="row">
-          <div class="row heading heading-icon">
-        <h2>Doctors(Admin View)</h2>
+      <div class="row heading heading-icon">
+        <h2>{{$route.params.id}}</h2>
+        <h1> {{users.first_name}}</h1>
+        <v-btn @click="view()">hello</v-btn>
       </div>
-        </ul>
-      <ul class="row">
-           <li class="col">
-                  <v-btn rounded primary>
-                    <router-link to="/DeleteDoctor">Delete Doctors</router-link>
-                  </v-btn>
-                </li>
-                 <li class="col">
-                  <v-btn rounded primary>
-                    <router-link to="/UpdateDoctor">Update Doctor Details</router-link>
-                  </v-btn>
-                </li>
-      </ul>
       <div>
-        <ul class="row">
-          <li class="col-sm-4" v-for="item in items" :key="item.dr_id">
-            <div class="cnt-block equal-hight" style="height: 349px;">
-              <figure>
-                <img
-                  src="../assets/doctors.jpg"
-                  class="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>{{ item.first_name }} {{ item.last_name }}</h3>
-              <p>Nawaloka Hospital Colombo</p>
-              <ul class="follow-us clearfix">
-                <li class="col">
-                  <v-btn rounded primary>
-                    <router-link to="/DoctorProfile"> View Profile</router-link>
-                  </v-btn>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+       
       </div>
     </div>
   </section>
@@ -48,26 +15,44 @@
 
 <script>
 export default {
-  /*data() {
-    return {
-      items: []
-    };
-  }*/
-
   data() {
     return {
-      items: []
+      users:""
     };
   },
 
-  created() {
-    this.$http
-      .get("http://localhost:8000/api/getDoctors")
-      .then(function(response) {
-        //console.log(response);
+  mounted(){
+     axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
+      .then(response=> {
+        console.log(response);
+        this.users=response.data.doctors;
+      })
 
-        this.items = response.body.alldoctors;
-      });
+  },
+
+  methods:{
+    view(){
+      axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
+      .then(response=> {
+        
+        this.users=response;
+        console.log(users);
+      })
+    }
+  },
+
+  created(){
+
+  },
+
+  mounted() {
+    
+    // axios
+    //   .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
+    //   .then(response => {
+    //     console.log(response);
+    //     this.doctors = response.data.doctors;
+    //   });
   }
 };
 </script>

@@ -65,6 +65,43 @@ class AuthController extends Controller
 
     }
 
+    public function getUser(Request $request){
+        $api_token = $request->api_token;
+
+        $doctor = DB::table('doctors')->where('api_token', $api_token)->first();
+        $patient = DB::table('patients')->where('api_token', $api_token)->first();
+        $main_admin = DB::table('main_admins')->where('api_token', $api_token)->first();
+        $clinic_admin = DB::table('clinic_admins')->where('api_token', $api_token)->first();
+
+        if(!$doctor && !$patient && !$clinic_admin && !$main_admin){
+            return response()->json(['status'=>'error','message'=>'Invalid User'],401);
+        }
+        if($doctor){
+
+            $dDetails=DB::table('doctors')->where('api_token',$doctor->api_token)->first();
+            return response()->json(['status'=>'success','user'=>$dDetails],200);
+               
+        }else if($patient){
+
+            $patient=DB::table('patients')->where('api_token',$patient->api_token)->first();
+            return response()->json(['status'=>'success','user'=>$patient],200);
+
+
+        }else if($main_admin){
+
+            $main_admin=DB::table('main_admins')->where('api_token',$main_admin->api_token)->first();
+            return response()->json(['status'=>'success','user'=>$main_admin],200);
+
+
+        }else if($clinic_admin){
+            
+            $clinic_admin=DB::table('clinic_admins')->where('api_token',$clinic_admin->api_token)->first();
+            return response()->json(['status'=>'success','user'=>$clinic_admin],200);
+
+
+        }
+    }
+
     public function logout(Request $request)
     {
             $api_token = $request->api_token;

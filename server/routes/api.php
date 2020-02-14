@@ -38,12 +38,14 @@ Route::post('/addAppointment','AppointmentController@addAppointment');
 
 //Auth controller
 Route::post('/login','AuthController@login')->name('login');
+Route::get('/getUser','AuthController@getUser');
 Route::get('/logout','AuthController@logout');
 
 //Doctor
 Route::post('/DoctorRegister','DoctorController@addDoctor');
 Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
 Route::get('/showDoctor/{api_token}','DoctorController@showD');
+Route::get('/viewDoctorDetails/{id}','DoctorController@viewDoctorDetails');
 // Route::post('/getDoctors','AuthController@getD');
 Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 

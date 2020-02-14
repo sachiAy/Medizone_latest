@@ -22,18 +22,19 @@
             class="ma-2" tile outlined color="blue darken-4"
             v-if="!loggedIn"
             >
-            <router-link to="SignIn">
+            <router-link to="/SignIn">
           SignIn
         </router-link>
            </v-btn>
               <v-btn  v-if="loggedIn"
              class="ma-2" tile outlined color="blue darken-4"
-                  ><router-link to="logout">logout</router-link> </v-btn>
+                  ><router-link to="/logout">logout</router-link> </v-btn>
       </div>
       <v-spacer></v-spacer>
+      <v-btn v-if="loggedIn">{{users.first_name}}</v-btn>
     
       <v-btn icon>
-        <router-link to="PatientProfile">
+        <router-link to="/PatientProfile">
           <v-icon>mdi-account</v-icon>
         </router-link>
         
@@ -78,36 +79,28 @@ export default {
       drawer: null,
       model: null,
       loggedIn:false,
+      users:"",
 
       links: [
         { icon: "mdi-home", text: "HOME", route: "/" },
         {
           icon: "mdi-account-multiple",
           text: "DOCTOR",
-          route: "AllDoctorProfile"
+          route: "/AllDoctorProfile"
         },
-        { icon: "mdi-account-multiple", text: "CLINICS", route: "Clinic" },
-        { icon: "mdi-account-search", text: "ABOUTUS", route: "AboutUs" },
-        { icon: "mdi-help-circle-outline", text: "HELP", route: "Doctor" },
-        { icon: "mdi-key", text: "TERMS & CONDITIONS", route: "Terms" }
+        { icon: "mdi-account-multiple", text: "CLINICS", route: "/Clinic" },
+        { icon: "mdi-account-search", text: "ABOUTUS", route: "/AboutUs" },
+        { icon: "mdi-help-circle-outline", text: "HELP", route: "/Doctor" },
+        { icon: "mdi-key", text: "TERMS & CONDITIONS", route: "/Terms" }
       ],
       headerLinks: [
-        { text: "My bookings", route: "appoinmentH" },
-        { text: "Medical history", route: "history" },
+        { text: "My bookings", route: "/appoinmentH" },
+        { text: "Medical history", route: "/history" },
      
       ]
     };
   },
-
-  // mounted:{
-  //   logout(){
-  //      let token = localStorage.getItem('token');
-  //       axios.get("http://localhost:8000/api/logout?api_token="+token)
-  //       .then(response=>{
-  //         localStorage.removeItem('token');
-  //      })
-  //   }
-  // },
+  
 
   created(){
 
@@ -118,21 +111,28 @@ export default {
      Event.$on('logout', ()=>{
       this.loggedIn=false;
     });
+     if(this.loggedIn=false){
+          this.users=null
+        }
+
+     Event.$on('userLoaded', ($users)=>{
+      this.users=$users;
+    });
     
        let token = localStorage.getItem('token');
       if(token){
         this.loggedIn=true;
       }
-  }
 
-    // mounted(){
-    //    let token = localStorage.getItem('token');
-    //    axios.get("http://localhost:8000/api/logout?api_token="+token)
-    //    .then(response=>{
-    //      localStorage.removeItem('token');
-    //    })
-     
-      
-    // },
+     axios.get("http://localhost:8000/api/getUser?api_token="+token)
+        .then(response=>{
+          //console.log(response)
+          this.users=response.data.user;
+        })
+
+       
+
+  },
+
 };
 </script>

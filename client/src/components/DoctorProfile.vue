@@ -2,7 +2,8 @@
   <section class="our-webcoderskull padding-lg">
     <div class="container">
       <div class="cnt-block equal-hight">
-        <h1>{{doctors.reg_no}}</h1> 
+        <h1>{{users.reg_no}}</h1> 
+        <h2>{{$route.params.id}}</h2>
       </div>
       <div>
       
@@ -16,11 +17,11 @@
                 />
               </figure>
              
-                <h2>{{doctors.first_name}}</h2>
+                <h2>{{users.first_name}}</h2>
          
            
              
-              <p>{{doctors.specialty}}</p>
+              <p>{{users.specialty}}</p>
             </div>
             <ul class="row">
               <li class="col">
@@ -53,7 +54,7 @@ export default {
     data(){
         return{
          
-           doctors:"",
+           users:"",
             headerLinks: [
                 { text: "Channel", route: "Channel" },
             ]
@@ -66,11 +67,10 @@ export default {
       if(token){
        axios.get("http://localhost:8000/api/showDoctor/"+token)
        .then(response=>{
-        this.doctors=response.data.doctors;
+        this.users=response.data.doctors;
+
+        Event.$emit('userLoaded',this.users);
        })
-      }else{
-        let data=localStorage.getItem('Ddata');
-        this.doctors=data;
       }
        
    
