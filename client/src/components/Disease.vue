@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-parallax src="../assets/image1.jpg" max-height="1000" height="100%">
+    <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
       <v-hover>
         <template v-slot="{ hover }">
           <div class="mx-auto container">
@@ -11,7 +11,7 @@
                 color="indigo lighten-4"
                 style="width: 600px; height: 450px"
               >
-                <v-card-title class="headline blue lighten-3"
+                <v-card-title class="headline indigo lighten-3"
                   >Search for Doctor</v-card-title
                 >
                 <v-card-text>

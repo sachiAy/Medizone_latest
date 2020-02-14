@@ -4,9 +4,14 @@
       <v-app-bar-nav-icon>
         <v-icon @click.stop="drawer = !drawer">mdi-menu</v-icon>
       </v-app-bar-nav-icon>
+       <router-link to="/">
       <v-avatar>
-        <img src="../assets/medizone.png" alt="medizone" />
+       
+           <img src="../assets/medizone.png" alt="medizone" />
+       
+       
       </v-avatar>
+       </router-link>
       <v-toolbar-title>MediZone</v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="text-center">

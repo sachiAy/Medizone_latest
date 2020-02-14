@@ -1,59 +1,94 @@
 <template>
-  <section class="our-webcoderskull padding-lg">
-    <div class="container">
-      <div class="row heading heading-icon">
-        <h2>{{$route.params.id}}</h2>
-        <h1> {{users.first_name}}</h1>
-        <v-btn @click="view()">hello</v-btn>
+<v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
+  <v-card
+    :loading="loading"
+    class="mx-auto my-12 container"
+    max-width="1000"
+  >
+     <v-img
+      height="400"
+      src="https://image.freepik.com/free-psd/close-up-tablet-held-by-doctor_23-2148316916.jpg"
+    ></v-img>
+ 
+    <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
+
+    <v-card-text>
+      <v-row
+        align="center"
+        class="mx-0"
+      >
+        <v-rating
+          :value="3"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
+
+        <div class="grey--text ml-4">4.5 (413)</div>
+      </v-row>
+
+      <div class="my-4 subtitle-1">
+        $ • Italian, Cafe
       </div>
-      <div>
+
+      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
+
+    <v-card-title>Clinic's availability</v-card-title>
+
+    <v-card-text>
+     schedule table
+    </v-card-text>
+
+    <v-card-actions>
+      <v-btn
+        color="deep-purple lighten-2"
+        text
        
-      </div>
-    </div>
-  </section>
+      >
+        Channel
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</v-parallax>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      users:""
+      users:"",
+
+      loading: false,
+      selection: 1,
+    
+        
     };
   },
+  
+  // created(){
+  //   this.view()
+  // },
 
   mounted(){
      axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
       .then(response=> {
-        console.log(response);
+        //console.log(response);
         this.users=response.data.doctors;
       })
 
   },
 
   methods:{
-    view(){
-      axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
-      .then(response=> {
-        
-        this.users=response;
-        console.log(users);
-      })
-    }
-  },
+  
+   },
 
-  created(){
+  
 
-  },
-
-  mounted() {
-    
-    // axios
-    //   .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
-    //   .then(response => {
-    //     console.log(response);
-    //     this.doctors = response.data.doctors;
-    //   });
-  }
 };
 </script>
 

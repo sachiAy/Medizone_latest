@@ -1,4 +1,5 @@
 <template>
+<v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
     <div class="container">
         <v-card
             elevation="24"
@@ -23,6 +24,7 @@
             </v-carousel>
         </v-card>
     </div>
+</v-parallax>
 </template>
 
 
