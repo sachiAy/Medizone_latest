@@ -51,7 +51,7 @@ Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
 Route::get('/showDoctor/{api_token}','DoctorController@showD');
 Route::get('/viewDoctorDetails/{id}','DoctorController@viewDoctorDetails');
 // Route::post('/getDoctors','AuthController@getD');
-Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
+//Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 
 //Patient Api
 Route::get('/showPatient/{api_token}','PatientController@showP');
