@@ -58,7 +58,9 @@ Route::post('/login','AuthController@login')->name('login');
 Route::get('/logout','AuthController@logout');
 Route::get('/getDoctors/{specialty}','DoctorController@getDoctor');
 Route::get('/showDoctor/{api_token}','DoctorController@showD');
+Route::get('/getDoctorID/{api_token}','DoctorController@getID');
 Route::get('/showPatient/{api_token}','PatientController@showP');
+Route::get('/showclinics/{id}','SheduleController@getclinic');
 // Route::post('/getDoctors','AuthController@getD');
 Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
 

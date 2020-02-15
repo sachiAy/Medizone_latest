@@ -76,8 +76,14 @@ class DoctorController extends Controller
          }
       
         return response()->json(['doctors'=>$doctor]);
-        
-        
 
+    }
+
+    public function getID(Request $request){
+
+        $token = $request->api_token;
+        $doctor = DB::table('doctors')->where('api_token', $token)->first();
+
+        return response()->json(['doctors'=>$doctor]);
     }
 }

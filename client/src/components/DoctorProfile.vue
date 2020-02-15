@@ -34,12 +34,19 @@
               :to="link.route"
             >{{link.text}}</v-btn>
               </li>
+              <li>
+                <router-link :to="{name:'shedulenew',params:{id:doctors.dr_id}}">
+                <v-btn rounded color="primary" class="mr-4">
+                  shedule
+                </v-btn>
+                </router-link>
+              </li>
                <v-btn 
                    rounded
                   color="primary"
                   dark
                   >logout</v-btn>
-            
+              
             </ul>
                 
       </div>
@@ -60,7 +67,6 @@ export default {
         }
     },
   
-   
     mounted(){
        let token = localStorage.getItem('token');
        axios.get("http://localhost:8000/api/showDoctor/"+token)
@@ -70,6 +76,17 @@ export default {
    
       
     },
+    methods: {
+    getdrID(){
+       let token = localStorage.getItem('token');
+       axios.get("http://localhost:8000/api/getDoctorID/"+token)
+       .then(response=>{
+        this.doctorsid=response.data.doctors.dr_id;
+        console.log(this.doctorsid)
+       })
+    }
+
+    }, 
     
 
 }

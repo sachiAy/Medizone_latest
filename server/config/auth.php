@@ -68,6 +68,14 @@ return [
             'provider' => 'users',
            
         ],
+        'clinics' => [
+            'driver' => 'session',
+            'provider' => 'clinics',
+        ],
+        'shedules' => [
+            'driver' => 'session',
+            'provider' => 'shedules',
+        ],
     ],
 
     /*
