@@ -45,17 +45,18 @@
                     required
                     ></v-text-field>
 
-                      <v-text-field 
+                      <!-- <v-text-field 
                     v-model="doctor.specialty" 
                     label="Specialty" 
                     required
-                    ></v-text-field> 
-                     <!-- <v-select
+                    ></v-text-field>  -->
+                      <v-select
                     :items="specialty"
                     label="Specialty"
                     name="specialty"
                     v-model="doctor.specialty"
-                    ></v-select>  -->
+                    :key="doctor.dr_id"
+                    ></v-select>  
 
                     <v-text-field 
                     v-model="doctor.contact_no" 
@@ -82,7 +83,7 @@
                             <v-col >
                                 <v-btn 
                                 small 
-                                @click="addDoctor"                               
+                                @click="addDoctor()"                               
                                 >submit</v-btn>
                             </v-col>
                             <v-col>
@@ -158,7 +159,18 @@ export default {
     },
   methods: {
       addDoctor(){
-      axios.post('http://localhost:8000/api/DoctorRegister',this.doctor)
+      axios.post('http://localhost:8000/api/DoctorRegister',{
+         username:"",
+          reg_no: "",
+          first_name: "",
+          last_name:"",
+          NIC:"",
+          birthday:"",
+          specialty:"",
+          contact_no:"",
+          email: "",
+          password: "",
+      })
         .then(response=>{
            console.log(response);
         })

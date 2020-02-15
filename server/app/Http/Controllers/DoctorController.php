@@ -38,7 +38,7 @@ class DoctorController extends Controller
                'last_name' => $request->last_name,
                'NIC' => $request->NIC,
                'birthday' => $request->birthday,
-               'specialty' => $request->specialty,
+               'specialty' => $request->input('specialty'),
                'contact_no' => $request->contact_no,
                'email' => $request->email,
                'password' =>Hash::make($request->password),
