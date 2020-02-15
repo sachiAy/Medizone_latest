@@ -3,7 +3,7 @@
    
 
     <v-card>
-        <v-toolbar-title>Weekly shedule</v-toolbar-title>
+        <v-toolbar-title>Weekly shedule {{items.clinic_id}}</v-toolbar-title>
         
      
       <v-banner single-line>weekly shedule</v-banner>
@@ -170,6 +170,7 @@
           </th>
       
   </tr>
+ 
 </table>
  <v-btn color="primary" class="mr-4" @click="showclinic()">showclinic</v-btn>
            </v-flex>
@@ -183,7 +184,11 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
   export default {
-     data: () => ({
+     data: () => (
+       {
+          items:'',
+       },
+       {
       date1: new Date().toISOString().substr(0, 10),
       menu1: false,
     },
@@ -211,14 +216,17 @@ import Datepicker from 'vuejs-datepicker';
       date7: new Date().toISOString().substr(0, 10),
       menu7: false,
     }
-    ),
+   
+),
 methods: {
    showclinic(){
-        $id = $routes.params.id
-       axios.get("http://localhost:8000/api/showclinics/"+id)
+        // this.$id = this.$route.params.id
+        console.log(this.$route.params.id);
+       axios.get("http://localhost:8000/api/showclinics/"+this.$route.params.id)
        .then(response=>{
-        this.clinics=response.data.value.clinic_id;
-        console.log(this.clinics)
+         console.log(response);
+        this.items=response.data.clinics;
+        //console.log(this.clinics)
 
        })
        }

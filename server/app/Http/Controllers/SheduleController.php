@@ -14,7 +14,7 @@ class SheduleController extends Controller
     public function getclinic(Request $request)
     {   
         
-        $value=DB::table('clinics')->where('dr_id', $request->dr_id)->get();
+        $value=DB::table('clinics')->where('dr_id', $request->id)->get();
         return response()->json(['clinics'=>$value]);
       
 }

@@ -1,6 +1,5 @@
 <template>
-
-  <section class="our-webcoderskull padding-lg">
+  <!-- <section class="our-webcoderskull padding-lg">
     <div class="container">
       <div class="cnt-block equal-hight">
         <h1>{{doctors.reg_no}}</h1> 
@@ -52,7 +51,7 @@
                 
       </div>
     </div>
-  </section>
+  </section> -->
 
   <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
     <v-card :loading="loading" class="mx-auto my-12 container" max-width="1000">
@@ -83,6 +82,13 @@
               <v-btn color="blue lighten-2">Appointment Schedule</v-btn>
               <v-btn color="blue lighten-2">Add Experiments</v-btn>
             </li>
+            <li>
+              <router-link :to="{name:'shedulenew',params:{id:users.dr_id}}">
+                <v-btn rounded color="primary" class="mr-4">
+                  shedule
+                </v-btn>
+                </router-link>
+            </li>
           </ul>
         </v-card-actions>
       </v-card-title>
@@ -95,15 +101,13 @@
 <script>
 export default {
 
-    data(){
-        return{
-         
-           doctors:"",
-            headerLinks: [
-                { text: "Channel", route: "Channel" },
-            ]
-        }
-    },
+  data() {
+    return {
+      users: "",
+      headerLinks: [{ text: "Channel", route: "Channel" }]
+    };
+  },
+
   
     mounted(){
        let token = localStorage.getItem('token');
@@ -127,12 +131,7 @@ export default {
     }, 
     
 
-  data() {
-    return {
-      users: "",
-      headerLinks: [{ text: "Channel", route: "Channel" }]
-    };
-  },
+  
 
 
   mounted() {
