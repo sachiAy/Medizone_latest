@@ -7,7 +7,7 @@
   >
      <v-img
       height="200"
-      src="https://image.shutterstock.com/image-photo/text-sign-showing-my-account-600w-1575879685.jpg"
+      src="https://image.shutterstock.com/image-photo/profile-view-smiling-physicians-sitting-600w-655429528.jpg"
     ></v-img>
  
     <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
@@ -78,9 +78,9 @@ export default {
       this.$router.push("/SignIn");
     } else {
       axios
-        .get("http://localhost:8000/api/showAdmin/" + token)
+        .get("http://localhost:8000/api/showCAdmin/" + token)
         .then(response => {
-          this.users = response.data.admins;
+          this.users = response.data.clinic_admins;
           Event.$emit("userLoaded", this.users);
         });
     }

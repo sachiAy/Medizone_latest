@@ -14,7 +14,7 @@
              <a href="https://www.facebook.com/?stype=lo&jlou=AfetYqvSMxtxtxKlURoUs_LMkkun3wM1xygnc9WjE0outz7tDBMvqTH25cCnGawKZr28cYElOhBsjk4Y26MBibnpwSfIB22qzgLzEnJ6SQ4FDA&smuh=41861&lh=Ac93t4VRhWztIvZE"> <i class="fab fa-facebook white-text mr-lg-4"></i></a>
             </a>
             <a class="tw-ic">
-             <a href="https://twitter.com/login?lang=en" <i class="fab fa-twitter white-text mr-lg-4"></i></a>
+             <a href="https://twitter.com/login?lang=en"> <i class="fab fa-twitter white-text mr-lg-4"></i></a>
             </a>
             <a class="gplus-ic">
               <i class="fab fa-google-plus white-text mr-lg-4"></i>
@@ -75,6 +75,11 @@
           <p><i class="fas fa-envelope mr-3"></i> medizone@gamil.com</p>
           <p><i class="fas fa-phone mr-3"></i> + 01 134 567 88</p>
           <p><i class="fas fa-print mr-3"></i> + 01 134 567 89</p>
+        </mdb-col>
+        <mdb-col>
+            <v-avatar size="250">
+        <img src="../assets/medizone.png" alt="medizone" />
+      </v-avatar>
         </mdb-col>
       </mdb-row>
     </mdb-container>

@@ -45,11 +45,17 @@
                     required
                     ></v-text-field>
 
-                    <v-text-field 
+                      <v-text-field 
                     v-model="doctor.specialty" 
                     label="Specialty" 
                     required
-                    ></v-text-field>
+                    ></v-text-field> 
+                     <!-- <v-select
+                    :items="specialty"
+                    label="Specialty"
+                    name="specialty"
+                    v-model="doctor.specialty"
+                    ></v-select>  -->
 
                     <v-text-field 
                     v-model="doctor.contact_no" 
@@ -76,7 +82,7 @@
                             <v-col >
                                 <v-btn 
                                 small 
-                                @click="addDoctor()"                               
+                                @click="addDoctor"                               
                                 >submit</v-btn>
                             </v-col>
                             <v-col>
@@ -127,6 +133,21 @@ export default {
           password: "",
           
         },
+        specialty:[
+        "Anaesthetists නිර්වින්දන විශේෂඥ",
+        "Arthritis",
+        "Cardiologist හෘද රෝග වෛද්‍ය",
+        "Chest Specialist පපු විශේෂඥ ",
+        "Children Dentist ළමා දන්ත  වෛද්‍ය",
+        "Dental Surgeon දන්ත ශල්‍ය වෛද්‍ය",
+        "ENT and Neck උගුර කන නාසය හිස සහ බෙල්ල පිලිබඳ වෛද්‍ය",
+        "ENT Surgeon උගුර කන නාසය පිලිබඳ ශල්‍ය වෛද්‍ය",
+        "Facial Surgeon රුපලාවන්‍ය චර්ම රෝග",
+        "GENERAL PHYSICIAN",
+        "NEURO PHYSICIAN",
+        "NEURO SURGEON",
+        "PAEDIATRICIAN  ළමා වෛද්‍ය"
+        ],
 
         error: null,
         show1: false,
@@ -137,7 +158,7 @@ export default {
     },
   methods: {
       addDoctor(){
-        axios.post('http://localhost:8000/api/DoctorRegister', this.doctor)
+      axios.post('http://localhost:8000/api/DoctorRegister',this.doctor)
         .then(response=>{
            console.log(response);
         })

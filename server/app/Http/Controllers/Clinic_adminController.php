@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\patients;
+use App\clinic_admins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiTokenController;
 
 
-class PatientController extends Controller
+class Clinic_adminController extends Controller
 {
     protected function guard()
     {
@@ -23,43 +23,26 @@ class PatientController extends Controller
     {
         // $this->middleware('auth');
     }
-  
-
-
-    public function addPatient(Request $request)
+     
+    public function addClinic_admin(Request $request)
     {
-        $value=DB::table('patients')->where('email', $request->email)->get();
+        $value=DB::table('clinic_admins')->where('username', $request->username)->get();
         if($value->count()==0){
-            $patient=patients::create([
+            $clinic_admin=clinic_admins::create([
                'first_name' => $request->first_name,
                'last_name' => $request->last_name,
-               'nic' => $request->nic,
                'mobile_no' => $request->mobile_no,
                'email' => $request->email,
-               'birthday' => $request->birthday,
-               'address' => $request->address,
                'username' => $request->username,
                'password' =>Hash::make($request->password),
-               'customer_type'=>$request->customer_type,
                'api_token' => Str::random(50)
             ]);
-            return response()->json(['status'=>'success','patient'=>$patient],200);
+            return response()->json(['status'=>'success','clinic_admin'=>$clinic_admin],200);
         }else{
-            return response()->json(['status'=>'error','message'=>'Doctor already exists'],400);
+            return response()->json(['status'=>'error','message'=>'user already exists'],400);
         }
    
         
-    }
-
-    public function isPatient(Request $request){
-        $api_token=$request->api_token;
-
-        $patient = DB::table('patients')->where('api_token', $api_token)->first();
-        if($patient){
-            return response()->json(['status'=>'true']);
-        }else{
-            return response()->json(['status'=>'false']);
-        }
     }
 
     public function getDoctor(Request $request){
@@ -74,11 +57,11 @@ class PatientController extends Controller
         return response()->json(['doctors'=>$doctor]);
     }
 
-    public function showP(Request $request){
+    public function showClinic_Admin(Request $request){
 
         $token = $request->api_token;
-        $patient = DB::table('patients')->where('api_token', $token)->first();
-        return response()->json(['patients'=>$patient]);
+        $clinic_admin = DB::table('clinic_admins')->where('api_token', $token)->first();
+        return response()->json(['clinic_admins'=>$clinic_admin]);
            
     }
 }

@@ -11,15 +11,15 @@ class clinic_admins extends Model implements Authenticatable
     protected $guard = 'clinic_admins';
     
     protected $fillable = [
-        'c_admin_no','first_name','last_name','contact_no','username','email','password',
+        'first_name','last_name','mobile_no','email','username','password','api_token'
     ];
 
     protected $hidden = [
         'password'
     ];
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
 }

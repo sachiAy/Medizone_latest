@@ -9,7 +9,7 @@ import logout from "./components/logout";
 import Home from "./components/Home";
 import About from "./views/About";
 import Channel from "./components/Channel";
-import ClinicDashboard from "./components/ClinicDashboard";
+import Clinic_AdminDashboard from "./components/Clinic_AdminDashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import DoctorProfile from "./components/DoctorProfile";
 import PatientProfile from "./components/PatientProfile";
@@ -21,8 +21,12 @@ import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
 import Aboutus from "./components/Aboutus";
+ 
 import shedulenew from "./components/shedulenew";
 
+
+import DocProfile from "./components/DocProfile";
+ 
 
 Vue.use(Router);
 
@@ -75,9 +79,9 @@ export default new Router({
     },
 
     {
-      path: "/ClinicDashboard",
-      name: "ClinicDashboard",
-      component: ClinicDashboard
+      path: "/Clinic_AdminDashboard",
+      name: "Clinic_AdminDashboard",
+      component: Clinic_AdminDashboard
     },
 
     {
@@ -106,6 +110,11 @@ export default new Router({
       path: "/AllDoctorProfile",
       name: "AllDoctorProfile",
       component: AllDoctorProfile
+    },
+    {
+      path: "/doctors/:id",
+      name: "DocProfile",
+      component: DocProfile
     },
     {
       path: "/AllDoctorProfile_Admin",

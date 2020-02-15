@@ -20,7 +20,7 @@
       </ul>
       <div>
         <ul class="row">
-          <li class="col-sm-4" v-for="item in items">
+          <li class="col-sm-4" v-for="item in items" :key="item.dr_id">
             <div class="cnt-block equal-hight" style="height: 349px;">
               <figure>
                 <img
@@ -45,6 +45,32 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  /*data() {
+    return {
+      items: []
+    };
+  }*/
+
+  data() {
+    return {
+      items: []
+    };
+  },
+
+  created() {
+    this.$http
+      .get("http://localhost:8000/api/getDoctors")
+      .then(function(response) {
+        //console.log(response);
+
+        this.items = response.body.alldoctors;
+      });
+  }
+};
+</script>
 
 <style>
 .row.heading h2 {
@@ -204,29 +230,3 @@ body {
   color: #0e031a;
 }
 </style>
-
-<script>
-export default {
-  /*data() {
-    return {
-      items: []
-    };
-  }*/
-
-  data() {
-    return {
-      items: []
-    };
-  },
-
-  created() {
-    this.$http
-      .get("http://localhost:8000/api/getDoctors")
-      .then(function(response) {
-        //console.log(response);
-
-        this.items = response.body.alldoctors;
-      });
-  }
-};
-</script>

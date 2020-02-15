@@ -6,8 +6,8 @@
     max-width="1000"
   >
      <v-img
-      height="200"
-      src="https://image.shutterstock.com/image-photo/text-sign-showing-my-account-600w-1575879685.jpg"
+      height="400"
+      src="https://image.freepik.com/free-psd/close-up-tablet-held-by-doctor_23-2148316916.jpg"
     ></v-img>
  
     <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
@@ -62,29 +62,45 @@ export default {
   data() {
     return {
       users:"",
+      isAdmin:false,
       loading: false,
       selection: 1,
     
         
     };
   },
+  
+   created(){
+     Event.$on("isAdmin", () => {
+      this.isAdmin = true;
+    });
+
+    let token = localStorage.getItem('token');
+    console.log(token)
+     if(token){
+    axios.get("http://localhost:8000/api/isAdmin?api_token="+token)
+     .then(response=> {
+       console.log(response.data.status)
+      if(response.data.status=="true"){
+        console.log("ok")
+         this.isAdmin=true;
+       }
+    })
+   }
+  },
+
+  mounted(){
+     axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
+      .then(response=> {
+        //console.log(response);
+        this.users=response.data.doctors;
+      })
+
+  },
+
   methods:{
   
    },
-
-    mounted() {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      this.$router.push("/SignIn");
-    } else {
-      axios
-        .get("http://localhost:8000/api/showAdmin/" + token)
-        .then(response => {
-          this.users = response.data.admins;
-          Event.$emit("userLoaded", this.users);
-        });
-    }
-  }
 
   
 

@@ -7,7 +7,8 @@
       <div>
         <ul class="row">
           <li class="col-sm-4" v-for="items in doctors" :key="items.dr_id">
-            <div class="cnt-block equal-hight" style="height: 349px;">
+            <router-link :to="{ name: 'DocProfile', params: { id:items.dr_id}}">
+            <div class="cnt-block equal-hight" style="height: 349px;" >
               <figure>
                 <img
                   src="../assets/doctors.jpg"
@@ -22,6 +23,7 @@
                 <router-link to="/DoctorProfile"> View Profile</router-link>
               </button>
             </div>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -34,12 +36,20 @@ export default {
   data() {
     return {
       doctors: {
-        specialty: "NEURO SURGEON"
+        specialty: "GENERAL PHYSICIAN"
       }
     };
   },
 
+  methods:{
+    view(){
+      
+      
+    }
+  },
+
   mounted() {
+    
     axios
       .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
       .then(response => {

@@ -1,43 +1,38 @@
 <template>
   <div>
-    <v-toolbar fixed>
+    <v-toolbar fixed color="indigo lighten-5">
       <v-app-bar-nav-icon>
         <v-icon @click.stop="drawer = !drawer">mdi-menu</v-icon>
       </v-app-bar-nav-icon>
-      <v-avatar>
-        <img src="../assets/medizone.png" alt="medizone" />
-      </v-avatar>
+      <router-link to="/">
+        <v-avatar>
+          <img src="../assets/medizone.png" alt="medizone" />
+        </v-avatar>
+      </router-link>
       <v-toolbar-title>MediZone</v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="text-center">
-        <v-btn
-          class="ma-2" tile outlined color="success"
-          v-for="link in headerLinks"
-          :key="link.text"
-          router
-          :to="link.route"
-          >{{ link.text }}</v-btn>
-          <v-btn  
-            rounded
-            class="ma-2" tile outlined color="success"
-            v-if="!loggedIn"
-            >
-            <router-link to="SignIn">
-          SignIn
-        </router-link>
-           </v-btn>
-              <v-btn  v-if="loggedIn"
-             class="ma-2" tile outlined color="success"
-                  @click="logout()"
-                  >logout</v-btn>
+        <v-btn rounded class="ma-2" tile outlined color="blue darken-4" :disabled="isDisabled">
+          <router-link to="/appoinmentH">MY BOOKINGS</router-link>
+        </v-btn>
+        <v-btn rounded class="ma-2" tile outlined color="blue darken-4" :disabled="isDisabled">
+          <router-link to="/history">MEDICAL HISTORY</router-link>
+        </v-btn>
+        <v-btn rounded class="ma-2" tile outlined color="blue darken-4" v-if="!loggedIn">
+          <router-link to="/SignIn">SIGNIN</router-link>
+        </v-btn>
+        <v-btn v-if="loggedIn" class="ma-2" tile outlined color="blue darken-4">
+          <router-link to="/logout">LOGOUT</router-link>
+        </v-btn>
       </div>
       <v-spacer></v-spacer>
-    
-      <v-btn icon>
-        <router-link to="PatientProfile">
-          <v-icon>mdi-account</v-icon>
-        </router-link>
+      <!-- <v-btn v-if="loggedIn">{{users.first_name}}</v-btn> -->
+
+      <v-btn text>
         
+         <v-textfield v-if="loggedIn">Hi! {{users.first_name}}</v-textfield>
+          <v-icon v-if="!loggedIn">mdi-account</v-icon>
+       
       </v-btn>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -47,21 +42,20 @@
       <v-divider></v-divider>
       <v-list>
         <v-tile>
-          <v-list-item
-            v-for="link in links"
-            :key="link.text"
-            router
-            :to="link.route"
-          >
+          <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
             <v-list-tile-action>
-              <v-icon class="black--text" align="center">{{
+              <v-icon class="black--text" align="center">
+                {{
                 link.icon
-              }}</v-icon>
+                }}
+              </v-icon>
             </v-list-tile-action>
             <v-list-title-content>
-              <v-list-tile-title class="black--text">{{
+              <v-list-tile-title class="black--text">
+                {{
                 link.text
-              }}</v-list-tile-title>
+                }}
+              </v-list-tile-title>
             </v-list-title-content>
           </v-list-item>
         </v-tile>
@@ -78,62 +72,74 @@ export default {
       bg: true,
       drawer: null,
       model: null,
-      loggedIn:false,
+      loggedIn: false,
+      isPatient:false,
+      users: "",
 
       links: [
         { icon: "mdi-home", text: "HOME", route: "/" },
-        {
-          icon: "mdi-account-multiple",
-          text: "DOCTOR",
-          route: "AllDoctorProfile"
-        },
-        { icon: "mdi-account-multiple", text: "CLINICS", route: "Clinic" },
-        { icon: "mdi-account-search", text: "ABOUTUS", route: "AboutUs" },
-        { icon: "mdi-help-circle-outline", text: "HELP", route: "Doctor" },
-        { icon: "mdi-key", text: "TERMS & CONDITIONS", route: "Terms" }
+        { icon: "mdi-account-multiple", text: "DOCTOR", route: "/AllDoctorProfile"},
+        { icon: "mdi-account-multiple", text: "CLINICS", route: "/Clinic" },
+        { icon: "mdi-account-search", text: "ABOUTUS", route: "/AboutUs" },
+        { icon: "mdi-help-circle-outline", text: "HELP", route: "/Doctor" },
+        { icon: "mdi-key", text: "TERMS & CONDITIONS", route: "/Terms" }
       ],
-      headerLinks: [
-        { text: "My bookings", route: "appoinmentH" },
-        { text: "Medical history", route: "history" },
-     
-      ]
     };
   },
 
-  // mounted:{
-  //   logout(){
-  //      let token = localStorage.getItem('token');
-  //       axios.get("http://localhost:8000/api/logout?api_token="+token)
-  //       .then(response=>{
-  //         localStorage.removeItem('token');
-  //      })
-  //   }
-  // },
-
-  created(){
-
-    Event.$on('login', ()=>{
-      this.loggedIn=true;
+  created() {
+    Event.$on("login", () => {
+      this.loggedIn = true;
     });
 
-     Event.$on('logout', ()=>{
-      this.loggedIn=false;
+    Event.$on("logout", () => {
+      this.loggedIn = false;
     });
+
+    Event.$on("userLoaded", $users => {
+      this.users = $users;
+    });
+
+     Event.$on("isPatient", () => {
+      this.isPatient = true;
+    });
+
+     Event.$on("logout", () => {
+      this.isPatient = false;
+    });
+
+    let token = localStorage.getItem("token");
     
-       let token = localStorage.getItem('token');
-      if(token){
-        this.loggedIn=true;
-      }
-  }
+    if (token) {
+      this.loggedIn = true;
+    }
 
-    // mounted(){
-    //    let token = localStorage.getItem('token');
-    //    axios.get("http://localhost:8000/api/logout?api_token="+token)
-    //    .then(response=>{
-    //      localStorage.removeItem('token');
-    //    })
-     
-      
-    // },
+    axios
+      .get("http://localhost:8000/api/getUser?api_token=" + token)
+      .then(response => {
+        //console.log(response)
+        this.users = response.data.user;
+      });
+
+  
+   if(token){
+    axios.get("http://localhost:8000/api/isPatient?api_token="+token)
+     .then(response=> {
+       console.log(response.data.status)
+      if(response.data.status=="true"){
+        console.log("ok")
+         this.isPatient=true;
+       }
+    })
+   }
+
+   
+  },
+
+  computed:{
+    isDisabled(){
+      return !this.isPatient;
+    }
+  }
 };
 </script>
