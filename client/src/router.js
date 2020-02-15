@@ -21,12 +21,10 @@ import history from "./components/history";
 import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
 import Aboutus from "./components/Aboutus";
- 
+import select from "./components/select";
 import shedulenew from "./components/shedulenew";
-
-
 import DocProfile from "./components/DocProfile";
- 
+import scheduleProfile from "./components/scheduleProfile";
 
 Vue.use(Router);
 
@@ -38,6 +36,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/select",
+      name: "select",
+      component: select
     },
     {
       path: "/about",
@@ -157,6 +160,11 @@ export default new Router({
       path: "/shedulenew/:id",
       name: "shedulenew",
       component: shedulenew
+    },
+    {
+      path: "/scheduleProfile/:id",
+      name: "scheduleProfile",
+      component: scheduleProfile
     }
   ]
 });
