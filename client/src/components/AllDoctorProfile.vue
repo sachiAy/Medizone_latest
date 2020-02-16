@@ -36,9 +36,10 @@ export default {
   data() {
     return {
       doctors:{
-        specialty:""
+        specialty:"",
+        doctors:""
       },
-       result:""
+       result:{}
     };
 
    
@@ -55,21 +56,21 @@ export default {
 
     let specialty = localStorage.getItem("Specialty");
     this.doctors.specialty=specialty;
-    console.log(this.doctors.specialty);
 
     axios
         .post("http://localhost:8000/api/SubmitDetails",this.doctors)
         .then(response => {
           this.result = response.data.doctors;
-          console.log(this.result);
 
         });
     
+    //align according to the ratings
     //  axios
-    //    .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
-    //    .then(response => {
-    //      //console.log(response);
-    //      this.doctors = response.data.doctors;
+    //     .post("http://localhost:8000/api/getRatings" , this.result.dr_id) 
+    //     console.log("result:"+this.result)
+    //     .then(response => {
+    //       //console.log(response);
+    //       //this.doctors = response.data.doctors;
     //    });
   }
 };

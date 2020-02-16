@@ -45,6 +45,8 @@ Route::post('/login','AuthController@login')->name('login');
 Route::get('/getUser','AuthController@getUser');
 Route::get('/logout','AuthController@logout');
 Route::post('/SubmitDetails','AuthController@SubmitDetails');
+Route::post('/getRatings','AuthController@getRatings');
+
 
 //Doctor
 Route::post('/DoctorRegister','DoctorController@addDoctor');
@@ -53,7 +55,7 @@ Route::get('/showDoctor/{api_token}','DoctorController@showD');
 
 Route::get('/getDoctorID/{api_token}','DoctorController@getID');
 Route::get('/showPatient/{api_token}','PatientController@showP');
-Route::get('/showclinics/{id}','SheduleController@getclinic');
+Route::get('/showclinics/{id}','ScheduleController@getclinic');
 
 Route::get('/viewDoctorDetails/{id}','DoctorController@viewDoctorDetails');
 
@@ -66,6 +68,9 @@ Route::post('/PatientRegister','PatientController@addPatient');
 Route::get('/isPatient','PatientController@isPatient');
 
 Route::post('/add','DoctorController@add');
+
+//shedule Api
+Route::post('/postshedule','ScheduleController@addshedule');
 
 
 

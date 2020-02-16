@@ -8,11 +8,11 @@ use Illuminate\Notifications\Notifiable;
 
 
 
-class shedules extends Model implements Authenticatable
+class schedules extends Model implements Authenticatable
 {
     use \Illuminate\Auth\Authenticatable;
 
-    protected $guard = 'shedules';
+    protected $guard = 'schedules';
     
     protected $fillable = [
         'dr_id','clinic_id','date','time'

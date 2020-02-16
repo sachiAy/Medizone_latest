@@ -2,8 +2,7 @@
 <div class="shedule">
    
 
-    <v-card>
-        <v-toolbar-title>Weekly shedule</v-toolbar-title>
+    <v-card> <v-toolbar-title>Weekly shedule</v-toolbar-title>
         
      
       <v-banner single-line>weekly shedule</v-banner>
@@ -170,7 +169,6 @@
           </th>
       
   </tr>
- 
 </table>
 
 
@@ -204,8 +202,8 @@
 import Datepicker from 'vuejs-datepicker';
   export default {
      data: () => (
-      
        {
+
       date1: new Date().toISOString().substr(0, 10),
       menu1: false,
     },
@@ -256,7 +254,7 @@ mounted(){
 
    axios.get("http://localhost:8000/api/showclinics/"+this.$route.params.id)
        .then(response=>{
-         console.log(response);
+         console.log(response.data.clinics);
         this.items=response.data.clinics;
         //console.log(this.items)
 

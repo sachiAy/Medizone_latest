@@ -142,11 +142,9 @@ export default {
           console.log(response);
         });
     },
-
     reset() {
       this.$refs.form.reset();
     },
-
     save(date) {
       this.$refs.menu.save(date);
     }

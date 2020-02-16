@@ -106,6 +106,11 @@ export default {
         //Event.$emit("dr_id")
       })
 
+      axios.get("http://localhost:8000/api/scheduleDetails/",this.$route.params.id)
+      .then(response=>{
+        console.log(response);
+      })
+
   },
 
   methods:{

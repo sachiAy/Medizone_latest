@@ -166,7 +166,9 @@ export default {
           //console.log(searchResult);
 
         });
-    }
+    },
+
+    
   },
 
   mounted() {}

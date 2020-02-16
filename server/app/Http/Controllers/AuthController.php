@@ -35,9 +35,12 @@ class AuthController extends Controller
 
         return response()->json(["doctors"=>$result],200);
         }
-      
-        
-    
+
+    }
+    public function getRatings(Request $request){
+        $dr_id=$request->dr_id;
+        $rating=DB::select('select * from rates where dr_id=:id order by rate_no',['dr_id'=>$request->dr_id]);
+        return response()->json(["doctors"=>$rating],200);
     }
 
 

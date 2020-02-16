@@ -31,7 +31,7 @@
             <li>
               <router-link :to="{name:'shedulenew',params:{id:users.dr_id}}">
                 <v-btn rounded color="primary" class="mr-4">
-                  shedule
+                  schedule
                 </v-btn>
                 </router-link>
             </li>
