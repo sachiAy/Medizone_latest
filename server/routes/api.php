@@ -44,6 +44,7 @@ Route::post('/addAppointment','AppointmentController@addAppointment');
 Route::post('/login','AuthController@login')->name('login');
 Route::get('/getUser','AuthController@getUser');
 Route::get('/logout','AuthController@logout');
+Route::post('/SubmitDetails','AuthController@SubmitDetails');
 
 //Doctor
 Route::post('/DoctorRegister','DoctorController@addDoctor');
@@ -64,7 +65,7 @@ Route::get('/showPatient/{api_token}','PatientController@showP');
 Route::post('/PatientRegister','PatientController@addPatient');
 Route::get('/isPatient','PatientController@isPatient');
 
-
+Route::post('/add','DoctorController@add');
 
 
 

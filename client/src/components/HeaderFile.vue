@@ -115,7 +115,7 @@ export default {
     }
 
     axios
-      .get("http://localhost:8000/api/getUser?api_token=" + token)
+      .get("http://localhost:8000/api/getUser?api_token=" + token)  //display username
       .then(response => {
         //console.log(response)
         this.users = response.data.user;
@@ -123,15 +123,19 @@ export default {
 
   
    if(token){
-    axios.get("http://localhost:8000/api/isPatient?api_token="+token)
+    axios.get("http://localhost:8000/api/isPatient?api_token="+token) //check isPatient
      .then(response=> {
-       console.log(response.data.status)
-      if(response.data.status=="true"){
-        console.log("ok")
+       let pStatus=response.data.status;
+          localStorage.setItem('Pstatus',pStatus);
+          console.log(pStatus)
+        Event.$emit('Patient');
+      if(pStatus=="true"){
          this.isPatient=true;
        }
     })
    }
+
+let isPatient = localStorage.getItem()
 
    
   },

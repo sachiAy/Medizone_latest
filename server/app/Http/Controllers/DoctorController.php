@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\doctors;
+use App\selectviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -23,9 +24,9 @@ class DoctorController extends Controller
     {
         // $this->middleware('auth');
     }
-  
 
-
+   
+ 
     public function addDoctor(Request $request)
     {
         $value=DB::table('doctors')->where('reg_no', $request->reg_no)->get();
@@ -51,6 +52,17 @@ class DoctorController extends Controller
    
         
     }
+
+    // public function add(Request $request){
+    //     $selectview=selectviews::create([
+    //         //'user_type'=>$request->user_type,
+    //         'name' => $request->name,
+    //     ]);
+    //     return response()->json(['message'=>$selectview],201);
+
+   
+
+    // }
 
     public function getDoctor(Request $request){
 
@@ -96,4 +108,5 @@ class DoctorController extends Controller
     
 
     }
+  
 }

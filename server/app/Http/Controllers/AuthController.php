@@ -23,6 +23,24 @@ class AuthController extends Controller
        // $this->middleware('auth',['only'=>'getD']);
     }
 
+    public function SubmitDetails(Request $request){
+        $doctor=  DB::table('doctors')->where('username', $request->doctor)->first(); 
+    
+        if($doctor){
+            $result=DB::select('select * from doctors where username=:username',['username'=>$request->doctor]);
+        return response()->json(['message'=>$result],200);
+
+        }else{
+            $result=DB::select('select * from doctors where specialty=:specialty order by dr_id',['specialty'=>$request->specialty]);             
+
+        return response()->json(["doctors"=>$result],200);
+        }
+      
+        
+    
+    }
+
+
     public function login(Request $request)
     {
         $doctor=  DB::table('doctors')->where('reg_no', $request->reg_no)->first(); 
@@ -142,4 +160,5 @@ class AuthController extends Controller
 
     }
 
+    
 }

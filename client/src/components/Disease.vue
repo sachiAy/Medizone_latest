@@ -5,6 +5,7 @@
         <template v-slot="{ hover }">
           <div class="mx-auto container">
             <div class="mx-auto bg-info" style="width: 600px; height: 450px">
+              <v-form v-model="valid" ref="form" @submit.prevent="SubmitDetails">
               <v-card
                 :elevation="hover ? 24 : 6"
                 class="container"
@@ -18,11 +19,17 @@
                   <v-expand-transition>
                     <v-row>
                       <v-col cols="12">
-                        <v-combobox
+                         <v-select
+                            :items="specialty"
+                            label="Specialized Field For Your Health Problem"
+                            name="specialty"
+                            v-model="item.specialty"
+                          ></v-select>
+                        <!-- <v-combobox
                           v-model="model"
                           :items="search"
                           label="Specialized Field For Your Health Problem"
-                        ></v-combobox>
+                        ></v-combobox> -->
                       </v-col>
                     </v-row>
                   </v-expand-transition>
@@ -33,49 +40,62 @@
                     <v-auto>
                       <v-row>
                         <v-col cols="12">
-                          <v-combobox
+                          <v-select
+                            :items="doctors"
+                            label="Doctor"
+                            name="doctor"
+                            v-model="item.doctor"
+                  
+                          ></v-select>
+                          <!-- <v-combobox
                             v-model="model1"
                             :items="doctor"
                             label="Doctor"
-                          ></v-combobox>
+                          ></v-combobox> -->
                         </v-col>
                       </v-row>
                     </v-auto>
                   </v-expand-transition>
                 </v-card-text>
 
-                <v-card-text>
+                <!-- <v-card-text>
                   <v-expand-transition>
                     <v-auto>
                       <v-row>
                         <v-col cols="12">
-                          <v-combobox
+                          <v-select
+                            :items="clinic"
+                            label="Clinic"
+                            name="clinic"
+                            v-model="item.clinic"
+                          
+                          ></v-select>
+                           <v-combobox
                             v-model="model2"
                             :items="clinic"
                             label="Clinic"
-                          ></v-combobox>
+                          ></v-combobox> 
                         </v-col>
                       </v-row>
                     </v-auto>
                   </v-expand-transition>
-                </v-card-text>
+                </v-card-text> -->
 
                 <v-card-actions>
                   <v-btn
-                    :disabled="!model"
-                    color="grey darken-3"
-                    @click="model = null"
+                    @click="reset"
                   >
                     Clear
                     <v-icon right>mdi-close-circle</v-icon>
                   </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn :disabled="!model">
-                    <router-link to="/AllDoctorProfile">Search</router-link>
+                  <v-btn type="submit" >
+                   Search
                     <v-icon right>mdi-magnify</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-card>
+              </v-form>
             </div>
           </div>
         </template>
@@ -85,6 +105,8 @@
 </template>
 
 <script>
+import Axios from 'axios';
+import SearchResultVue from './SearchResult.vue';
 //import axios from 'axios';
 
 export default {
@@ -93,11 +115,19 @@ export default {
       //searchSet:[],
       descriptionLimit: 60,
       entries: [],
+      item:{
+        specialty:"",
+        doctor:"",
+        //clinic:"",
+
+      },
+
+      result:{},
 
       model: null,
       search: null,
 
-      search: [
+      specialty: [
         //"Allergy Specialist ඇලර්ජි (අසාත්මිකතා ) විශේෂඥ",
         "Anaesthetists නිර්වින්දන විශේෂඥ",
         "Arthritis",
@@ -112,8 +142,31 @@ export default {
         "NEURO PHYSICIAN",
         "NEURO SURGEON",
         "PAEDIATRICIAN  ළමා වෛද්‍ය"
-      ]
+      ],
+      doctors:["doc01","doc02","doc03"],
+      //clinic:[],
     };
+  },
+
+  methods:{
+
+    reset() {
+      this.$refs.form.reset();
+    },
+
+    SubmitDetails(){
+      let specialty=this.item.specialty;
+      localStorage.setItem("Specialty",specialty);
+      axios
+        .post("http://localhost:8000/api/SubmitDetails", this.item)
+        .then(response => {
+          let result=response.data;
+          localStorage.setItem("searchResult",result);
+         this.$router.push('/AllDoctorProfile')
+          //console.log(searchResult);
+
+        });
+    }
   },
 
   mounted() {}

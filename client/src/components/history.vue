@@ -38,7 +38,37 @@
 <script>
 export default {
   name: "app",
-  components: {}
+  components: {},
+  data(){
+    return{
+     isPatient:false
+     
+    }
+
+  },
+
+  created(){
+    Event.$on("isPatient", () => {
+      this.isPatient = true;
+    });
+
+let token = localStorage.getItem('token');
+if(token){
+    axios.get("http://localhost:8000/api/isPatient?api_token="+token) //check isPatient
+     .then(response=> {
+       let pStatus=response.data.status;
+          localStorage.setItem('Pstatus',pStatus);
+          console.log(pStatus)
+        Event.$emit('Patient');
+      if(pStatus=="true"){
+         this.isPatient=true;
+       }
+    })
+   }
+  },
+
+  
+
 };
 </script>
 <style>

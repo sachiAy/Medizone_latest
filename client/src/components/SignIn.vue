@@ -7,7 +7,7 @@
             <v-card class="container" max-width="600" outlined>
                 <v-card-title>Login</v-card-title>
 
-                  <v-form v-model="valid">
+                  <v-form v-model="valid" ref="form" @submit.prevent="logItIn">
                    
                      <v-autocomplete
                      v-model="user.type"
@@ -88,13 +88,13 @@
                             <v-col >
                                 <v-btn 
                                 small 
-                                @click="logItIn()"
+                               type="submit"
                                 >Login</v-btn>
                             </v-col>
                             <v-col>
                                 <v-btn 
                                 small 
-                                @click="clear"
+                                @click="reset"
                                 >clear</v-btn>
                             </v-col>
                         </v-row>
@@ -192,12 +192,12 @@ export default {
 				});
         }
 			
-			}
+      },
+      
+      reset() {
+      this.$refs.form.reset();
+    },
    },
-
-    clear(event){
-      console.log(this.user.type)
-    }
 
 }
 

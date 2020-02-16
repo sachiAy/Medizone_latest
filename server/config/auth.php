@@ -64,6 +64,11 @@ return [
             'driver' => 'session',
             'provider' => 'appointments',
         ],
+        'selectviews' => [
+            'driver' => 'session',
+            'provider' => 'selectviews',
+        ],
+
 
         'api' => [
             'driver' => 'token',
@@ -121,6 +126,10 @@ return [
         'appointments' => [
             'driver' => 'eloquent',
             'model' => App\appointments::class,  
+        ],
+        'selectviews' => [
+            'driver' => 'eloquent',
+            'model' => App\selectviews::class,  
         ],
          
 

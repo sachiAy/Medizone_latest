@@ -1,80 +1,76 @@
 <template>
-<v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
-  <v-card
-    :loading="loading"
-    class="mx-auto my-12 container"
-    max-width="1000"
-  >
-     <v-img
-      height="200"
-      src="https://image.shutterstock.com/image-photo/text-sign-showing-my-account-600w-1575879685.jpg"
-    ></v-img>
- 
-    <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
+  <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
+    <v-card :loading="loading" class="mx-auto my-12 container" max-width="1000">
+      <v-img
+        height="200"
+        src="https://image.shutterstock.com/image-photo/text-sign-showing-my-account-600w-1575879685.jpg"
+      ></v-img>
 
-    <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :value="3"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
+      <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
 
-        <div class="grey--text ml-4">4.5 (413)</div>
-      </v-row>
+      <v-card-text>
+        <v-row align="center" class="mx-0">
+          <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
 
-      <div class="my-4 subtitle-1">
-        $ • Italian, Cafe
-      </div>
+          <div class="grey--text ml-4">4.5 (413)</div>
+        </v-row>
 
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>
+        <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
 
-    <v-divider class="mx-4"></v-divider>
+        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+      </v-card-text>
 
-    <v-card-title>Clinic's availability</v-card-title>
-    <v-btn v-if="isAdmin">Admin</v-btn>
+      <v-divider class="mx-4"></v-divider>
 
-    <v-card-text>
-     schedule table
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="deep-purple lighten-2"
-        text
-      >
-        Channel
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-</v-parallax>
+      <v-card-title>Admin Functions</v-card-title>
+      <v-card-text>
+        <v-row class="mx-0">
+          <v-col class="my-0">
+            <v-btn color="deep-purple lighten-2" text>Add Clinics</v-btn>
+            <v-btn color="deep-purple lighten-2" text>Delete Clinics</v-btn>
+            <v-btn color="deep-purple lighten-2" text>Update Clinic Details</v-btn>
+            <v-btn color="deep-purple lighten-2" text>View Clinic Details</v-btn>
+          </v-col>
+          <v-col>
+            <v-btn color="deep-purple lighten-2" text>Add Doctors</v-btn>
+            <v-btn color="deep-purple lighten-2" text>Delete Doctors</v-btn>
+            <v-btn color="deep-purple lighten-2" text>Update Doctor Details</v-btn>
+            <v-btn color="deep-purple lighten-2" text>View Doctor Details</v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="deep-purple lighten-2" text>Channel</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-parallax>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      users:"",
+      users: "",
       loading: false,
       selection: 1,
-    
-        
+      isAdmin:"",
     };
   },
-  methods:{
-  
-   },
+  methods: {},
 
-    mounted() {
+  created(){
+ Event.$on("isAdmin", () => {
+      this.isAdmin = true;
+    });
+
+      Event.$on("logout", () => {
+      this.isAdmin = false;
+    });
+},
+
+  mounted() {
     let token = localStorage.getItem("token");
-    if (!token) {
+    if (this.isAdmin=false) {
       this.$router.push("/SignIn");
     } else {
       axios
@@ -85,9 +81,6 @@ export default {
         });
     }
   }
-
-  
-
 };
 </script>
 

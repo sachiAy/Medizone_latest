@@ -50,7 +50,10 @@
         color="deep-purple lighten-2"
         text
       >
-        Channel
+       <router-link :to="{ name: 'Channel', params: { id:users.dr_id}}">
+          Channel
+      </router-link>
+      
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -75,14 +78,16 @@ export default {
       this.isAdmin = true;
     });
 
+    
+
     let token = localStorage.getItem('token');
-    console.log(token)
+    //console.log(token)
      if(token){
     axios.get("http://localhost:8000/api/isAdmin?api_token="+token)
      .then(response=> {
-       console.log(response.data.status)
+      // console.log(response.data.status)
       if(response.data.status=="true"){
-        console.log("ok")
+       // console.log("ok")
          this.isAdmin=true;
        }
     })
@@ -94,6 +99,11 @@ export default {
       .then(response=> {
         //console.log(response);
         this.users=response.data.doctors;
+        let dr_id=this.$route.params.id;
+          localStorage.setItem('dr_id',dr_id);
+          console.log(dr_id);
+         // Event.$emit("saveid"); 
+        //Event.$emit("dr_id")
       })
 
   },

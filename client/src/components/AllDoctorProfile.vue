@@ -6,7 +6,7 @@
       </div>
       <div>
         <ul class="row">
-          <li class="col-sm-4" v-for="items in doctors" :key="items.dr_id">
+          <li class="col-sm-4" v-for="items in result" :key="items.dr_id">
             <router-link :to="{ name: 'DocProfile', params: { id:items.dr_id}}">
             <div class="cnt-block equal-hight" style="height: 349px;" >
               <figure>
@@ -35,10 +35,13 @@
 export default {
   data() {
     return {
-      doctors: {
-        specialty: "GENERAL PHYSICIAN"
-      }
+      doctors:{
+        specialty:""
+      },
+       result:""
     };
+
+   
   },
 
   methods:{
@@ -49,13 +52,25 @@ export default {
   },
 
   mounted() {
-    
+
+    let specialty = localStorage.getItem("Specialty");
+    this.doctors.specialty=specialty;
+    console.log(this.doctors.specialty);
+
     axios
-      .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
-      .then(response => {
-        console.log(response);
-        this.doctors = response.data.doctors;
-      });
+        .post("http://localhost:8000/api/SubmitDetails",this.doctors)
+        .then(response => {
+          this.result = response.data.doctors;
+          console.log(this.result);
+
+        });
+    
+    //  axios
+    //    .get("http://localhost:8000/api/getDoctors/" + this.doctors.specialty)
+    //    .then(response => {
+    //      //console.log(response);
+    //      this.doctors = response.data.doctors;
+    //    });
   }
 };
 </script>
