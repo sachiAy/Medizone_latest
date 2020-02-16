@@ -14,6 +14,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import DoctorProfile from "./components/DoctorProfile";
 import PatientProfile from "./components/PatientProfile";
 import Appoinment from "./components/Appoinment";
+import SignAppoinment from "./components/SignAppoinment";
 import AllDoctorProfile from "./components/AllDoctorProfile";
 import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
@@ -24,6 +25,8 @@ import select from "./components/select";
 import shedulenew from "./components/shedulenew";
 import DocProfile from "./components/DocProfile";
 import scheduleProfile from "./components/scheduleProfile";
+import retrivePatients from "./components/retrivePatients";
+
 
 Vue.use(Router);
 
@@ -75,11 +78,11 @@ export default new Router({
     },
   
     {
-      path: "/Channel/:id",
+      path: "/Channel/:sid",
       name: "Channel",
       component: Channel
     },
-
+   
     {
       path: "/Clinic_AdminDashboard",
       name: "Clinic_AdminDashboard",
@@ -104,9 +107,14 @@ export default new Router({
     },
 
     {
-      path: "/Appoinment",
+      path: "/Appoinment/:sid",
       name: "Appoinment",
       component: Appoinment
+    },
+    {
+      path: "/SignAppoinment/:sid",
+      name: "SignAppoinment",
+      component: SignAppoinment
     },
     {
       path: "/AllDoctorProfile",
@@ -160,6 +168,11 @@ export default new Router({
       path: "/scheduleProfile/:id",
       name: "scheduleProfile",
       component: scheduleProfile
+    },
+    {
+      path: "/retrivePatients",
+      name: "retrivePatients",
+      component: retrivePatients
     }
   ]
 });

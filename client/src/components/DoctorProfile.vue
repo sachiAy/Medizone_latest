@@ -27,6 +27,10 @@
               <v-btn color="blue lighten-2">Update Details</v-btn>
               <v-btn color="blue lighten-2">Appointment Schedule</v-btn>
               <v-btn color="blue lighten-2">Add Experiments</v-btn>
+              <v-btn color="blue lighten-2">
+                <router-link to="/retrivePatients">Patient Details</router-link>
+              </v-btn>
+
             </li>
             <li>
               <router-link :to="{name:'shedulenew',params:{id:users.dr_id}}">

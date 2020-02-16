@@ -5,12 +5,12 @@
         <ul class="row">
           <li class="col">
             <v-btn rounded primary>
-              <router-link to="SignIn">SIGN IN</router-link>
+              <router-link to="/SignIn">SIGN IN</router-link>
             </v-btn>
           </li>
           <li class="col">
             <v-btn rounded primary>
-              <router-link to="Appoinment">GUEST</router-link>
+              <router-link :to="{ name: 'Appoinment', params: {sid:this.$route.params}}">GUEST</router-link>
             </v-btn>
           </li>
         </ul>
@@ -44,6 +44,7 @@ export default {
         { text: "SignIn", route: "SignIn" },
         { text: "Guest", route: "Appoinment" }
       ],
+      loggedIn:false
 
       //dr_id:false,
     };
@@ -53,6 +54,19 @@ export default {
     // Event.$on("dr_id", () => {
     //   this.dr_id = true;
     // });
+
+     Event.$on("login", () => {
+      this.loggedIn = true;
+    });
+
+    Event.$on("logout", () => {
+      this.loggedIn = false;
+    });
+     let token = localStorage.getItem("token");
+      if (token) {
+      this.loggedIn = true;
+    }
+
   },
 
     mounted(){

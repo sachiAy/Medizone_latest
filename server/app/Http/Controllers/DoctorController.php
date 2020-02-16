@@ -53,6 +53,17 @@ class DoctorController extends Controller
         
     }
 
+    public function isDoctor(Request $request){
+        $api_token=$request->api_token;
+
+        $doctor = DB::table('doctors')->where('api_token', $api_token)->first();
+        if($doctor){
+            return response()->json(['status'=>'true','doctor'=>$doctor]);
+        }else{
+            return response()->json(['status'=>'false']);
+        }
+    }
+
     // public function add(Request $request){
     //     $selectview=selectviews::create([
     //         //'user_type'=>$request->user_type,

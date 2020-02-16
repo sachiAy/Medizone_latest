@@ -83,6 +83,10 @@ return [
             'driver' => 'session',
             'provider' => 'shedules',
         ],
+        'ratedetails' => [
+            'driver' => 'session',
+            'provider' => 'ratedetails',
+        ],
     ],
 
     /*
@@ -130,6 +134,10 @@ return [
         'selectviews' => [
             'driver' => 'eloquent',
             'model' => App\selectviews::class,  
+        ],
+        'ratedetails' => [
+            'driver' => 'eloquent',
+            'model' => App\ratedetails::class,  
         ],
          
 

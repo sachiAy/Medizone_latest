@@ -19,46 +19,50 @@
            
       <v-form ref="form" v-model="valid" lazy-validation v-on:submit:prevent="submitAppointment" @change="validate">
         <v-select
-          v-model="select"
+          v-model="guest.title"
           :items="items"
           :rules="[v => !!v || 'Item is required']"
           label="Title"
           required
         ></v-select>
 
-        <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+        <v-text-field v-model="guest.name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
         <v-text-field
-          v-model="tel"
+          v-model="guest.tel"
           :counter="10"
           :rules="telRules"
           label="Mobile/Tele Number"
           required
         ></v-text-field>
-      <v-radio-group row>
+      <!-- <v-radio-group row>
       <v-spacer></v-spacer>
       <v-radio label="NIC"></v-radio>
       <v-radio label="Passport"></v-radio>
-      </v-radio-group>
+      </v-radio-group> -->
             
         <v-text-field
-          v-model="nicValue"
+          v-model="guest.nicValue"
           :counter="10"
           :rules="nicRules"
           label="NIC/Passport Number"
           required
         ></v-text-field>
 
-        <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+        <v-text-field v-model="guest.email" :rules="emailRules" label="E-mail" required></v-text-field>
 
         <v-checkbox
-          v-model="checkbox"
+          v-model="guest.checkbox"
           :rules="[v => !!v || 'You must agree to continue!']"
           label="Do you agree?"
           required
         ></v-checkbox>
 
-        <v-btn :disabled="!valid" color="primary" class="mr-4" @click="submitAppointment()">Submit</v-btn>
+
+
+        <v-btn :disabled="!valid" v-if="loggedIn" color="primary" class="mr-4" @click="submitAppointment()">Submit</v-btn>
+        <v-btn :disabled="!valid" v-if="!loggedIn" color="primary" class="mr-4" @click="submitGuest()">Submit</v-btn>
+
 
         <v-btn color="secondary" class="mr-4" @click="reset">Reset Form</v-btn>
       </v-form>
@@ -75,16 +79,28 @@
 <script>
 
 
-export default {
-  data: () => ({
-    valid: true,
-    tel: "",
-    nicRadio: "",
-    nicValue: "",
 
-    select: null,
+
+export default {
+   name: "app",
+  components: {
+    
+  },
+  data(){
+    return {
+         valid: true,
+
+         guest:{
+           title: "",
+           name:"",
+            tel: "",
+            nicValue: "",
+            email:"",
+         },
+   
+
+    
     items: ["Mr.", "Mrs.", "Miss.", "Rev."],
-    name: "",
     nameRules: [
       v => !!v || "Name is required",
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
@@ -99,16 +115,15 @@ export default {
       v => !!v || "NIC/Passport Number is required",
       v => (v && v.length == 10) || "Number must have 10 characters"
     ],
-
-    email: "",
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ],
 
-    checkbox: false
-    
-  }),
+    checkbox: false,
+    loggedIn:false,
+    }
+  },
 
   methods: {
     validate() {
@@ -127,16 +142,36 @@ export default {
        console.log( this.email);
 
       
-         this.$http.post("http://localhost:8000/api/getAppointment",{name:this.name,telephone:this.tel,nic:this.nicValue,email:this.email})
+         axios.post("http://localhost:8000/api/getAppointment",this.guest)
           .then(function (response){
             console.log(response)
             
           })
+    },
+
+    submitGuest(){
+
+      axios.post("http://localhost:8000/api/submitGuest",this.guest)
+      .then()
+
     }
+
   },
-  name: "app",
-  components: {
-    
-  }
+
+  created() {
+     Event.$on("login", () => {
+      this.loggedIn = true;
+    });
+
+    Event.$on("logout", () => {
+      this.loggedIn = false;
+    });
+     let token = localStorage.getItem("token");
+      if (token) {
+      this.loggedIn = true;
+    }
+
+  },
+ 
 };
 </script>

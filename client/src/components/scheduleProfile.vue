@@ -1,7 +1,7 @@
 
 <template>
   
-   <div>schedule profile
+   <div v-if="isDoctor">schedule profile
 
      <v-card> <v-toolbar-title>Weekly shedule</v-toolbar-title>
         
@@ -43,7 +43,7 @@
     <v-text-field :value="time" v-model="schedule.time" label="Appointment time"></v-text-field>
    </v-col>
     <v-col cols="12" sm="4" md="4">
-   <v-btn  type="submit" color="primary" class="mr-4">Submit</v-btn>
+   <v-btn  type="submit" color="primary" class="mr-4" v-if="isDoctor">Submit</v-btn>
     </v-col>
      </v-row>
       </v-form>
@@ -69,16 +69,39 @@
             date: new Date().toISOString().substr(0, 10),
             time:""
         },
+         isDoctor: false,
    
       }
+    },
+    created(){
+
+       Event.$on("isDoctor", () => {
+      this.isDoctor = true;
+    });
+
+       Event.$on("logout", () => {
+       this.isDoctor = false;
+     });
+
+    let token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:8000/api/isDoctor?api_token=" + token)
+        .then(response => {
+          if (response.data.status == "true") {
+            this.isDoctor = true;
+            Event.$emit('isDoctor');
+          }
+        });
+    }
     },
    
 mounted(){
        let token = localStorage.getItem('token');
        axios.get("http://localhost:8000/api/showDoctor/"+token)
        .then(response=>{
-        let dr_id=response.data.doctors.dr_id;
-        localStorage.setItem('dr_id',dr_id);
+        // let dr_id=response.data.doctors.dr_id;
+        // localStorage.setItem('dr_id',dr_id);
          //console.log(dr_id);
        })
    

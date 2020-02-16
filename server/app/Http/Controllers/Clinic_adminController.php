@@ -23,6 +23,17 @@ class Clinic_adminController extends Controller
     {
         // $this->middleware('auth');
     }
+
+    public function isClinic_admin(Request $request){
+        $api_token=$request->api_token;
+
+        $clinic_admin = DB::table('clinic_admins')->where('api_token', $api_token)->first();
+        if($clinic_admin){
+            return response()->json(['status'=>'true','clinic_admin'=>$clinic_admin]);
+        }else{
+            return response()->json(['status'=>'false']);
+        }
+    }
      
     public function addClinic_admin(Request $request)
     {

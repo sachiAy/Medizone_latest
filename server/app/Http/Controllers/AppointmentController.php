@@ -40,6 +40,30 @@ class AppointmentController extends Controller
         
        
         return response()->json(['status'=>'success','appointment'=>$appointment],200);
+        $rate=DB::table('appointments')->where('appointment_id', $request->appointment_id)->get();
+        $ratedetails=ratedetails::create([
+            'appointment_id'=>$rate->appointment_id,
+            'dr_id'=> $request->dr_id,
+            'patient_id' => $request->patient_id,
+            'clinic_id' => $request->clinic_id
+            
+        ]);
+
+        return response()->json(['status'=>'success','ratedetails'=>$ratedetails],200);
+
         }
-}
     }
+
+    public function getAppDetails(Request $request){
+        $id=$request->sid;
+        $details=DB::table('schedules')->where('she_id',$request->sid)->first();
+        if($details){
+            return response()->json(['status'=>'success','details'=>$details],200);
+        }
+       
+    }
+
+    
+
+
+}

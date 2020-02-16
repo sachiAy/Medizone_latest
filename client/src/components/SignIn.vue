@@ -157,7 +157,6 @@ export default {
 				.then(response => {
           let Token=response.data.doctor.api_token;
           localStorage.setItem('token',Token);
-          //console.log(Token)
           Event.$emit("login"); 
            //Event.$emit("isDoctor");
           this.$router.push('/DoctorProfile');

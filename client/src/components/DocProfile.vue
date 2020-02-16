@@ -1,124 +1,119 @@
 <template>
-<v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
-  <v-card
-    :loading="loading"
-    class="mx-auto my-12 container"
-    max-width="1000"
-  >
-     <v-img
-      height="400"
-      src="https://image.freepik.com/free-psd/close-up-tablet-held-by-doctor_23-2148316916.jpg"
-    ></v-img>
- 
-    <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
+  <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
+    <v-card :loading="loading" class="mx-auto my-12 container" max-width="1000">
+      <v-img
+        height="400"
+        src="https://image.freepik.com/free-psd/close-up-tablet-held-by-doctor_23-2148316916.jpg"
+      ></v-img>
 
-    <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :value="3"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
+      <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
 
-        <div class="grey--text ml-4">4.5 (413)</div>
-      </v-row>
+      <v-card-text>
+        <v-row align="center" class="mx-0">
+          <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
 
-      <div class="my-4 subtitle-1">
-        $ • Italian, Cafe
-      </div>
+          <div class="grey--text ml-4">4.5 (413)</div>
+        </v-row>
 
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>
+        <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
 
-    <v-divider class="mx-4"></v-divider>
+        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+      </v-card-text>
 
-    <v-card-title>Clinic's availability</v-card-title>
-    <v-btn v-if="isAdmin">Admin</v-btn>
+      <v-divider class="mx-4"></v-divider>
 
-    <v-card-text>
-     schedule table
-    </v-card-text>
+      <v-card-title>Clinic's availability</v-card-title>
+      <v-btn v-if="isAdmin">Admin</v-btn>
 
-    <v-card-actions>
-      <v-btn
-        color="deep-purple lighten-2"
-        text
-      >
-       <router-link :to="{ name: 'Channel', params: { id:users.dr_id}}">
-          Channel
-      </router-link>
-      
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-</v-parallax>
+      <v-simple-table height="300px">
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">Clinic Name</th>
+              <th class="text-left">Available Date</th>
+              <th class="text-left">Available Time</th>
+              <th class="text-left">Channel</th>
+            </tr>
+          </thead>
+          <tbody >
+           
+            <tr v-for="item in details" :key="item.she_id"> 
+              <td>{{ item.clinic_id }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.time }}</td>
+              <td>
+                <v-btn  color="deep-purple lighten-2" text>
+                  <router-link :to="{ name: 'Channel', params: {sid:item.she_id}}">Channel</router-link>
+                </v-btn>
+                 <v-btn color="deep-purple lighten-2" text>
+                  <router-link :to="{ name: 'SignAppoinment', params: {sid:item.she_id}}">login</router-link>
+                </v-btn>
+              </td>
+            </tr>
+          
+          </tbody>
+        </template>
+      </v-simple-table>
+    </v-card>
+  </v-parallax>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      users:"",
-      isAdmin:false,
+      users: "",
+      isAdmin: false,
       loading: false,
       selection: 1,
-    
-        
+      details: "",
     };
   },
-  
-   created(){
-     Event.$on("isAdmin", () => {
+
+  created() {
+    Event.$on("isAdmin", () => {
       this.isAdmin = true;
     });
 
-    
+    let token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:8000/api/isAdmin?api_token=" + token)
+        .then(response => {
+          if (response.data.status == "true") {
+            this.isAdmin = true;
+            Event.$emit('isAdmin');
+          }
+        });
+    }
+  
 
-    let token = localStorage.getItem('token');
-    //console.log(token)
-     if(token){
-    axios.get("http://localhost:8000/api/isAdmin?api_token="+token)
-     .then(response=> {
-      // console.log(response.data.status)
-      if(response.data.status=="true"){
-       // console.log("ok")
-         this.isAdmin=true;
-       }
-    })
-   }
   },
 
-  mounted(){
-     axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
-      .then(response=> {
+  mounted() {
+    axios
+      .get(
+        "http://localhost:8000/api/viewDoctorDetails/" + this.$route.params.id
+      )
+      .then(response => {
         //console.log(response);
-        this.users=response.data.doctors;
-        let dr_id=this.$route.params.id;
-          localStorage.setItem('dr_id',dr_id);
-          console.log(dr_id);
-         // Event.$emit("saveid"); 
+        this.users = response.data.doctors;
+        // let dr_id = this.$route.params.id;
+        // localStorage.setItem("dr_id", dr_id);
+        //console.log(dr_id);
+        // Event.$emit("saveid");
         //Event.$emit("dr_id")
-      })
+        
+      });
 
-      axios.get("http://localhost:8000/api/scheduleDetails/",this.$route.params.id)
-      .then(response=>{
-        console.log(response);
-      })
-
+    axios
+      .get("http://localhost:8000/api/scheduleDetails/" + this.$route.params.id)
+      .then(response => {
+        this.details = response.data.details;
+      });
   },
 
-  methods:{
-  
-   },
-
-  
-
+  methods: {}
 };
 </script>
 

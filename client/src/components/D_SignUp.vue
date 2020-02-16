@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isClinic_admin">
     <NavBar />
     <v-parallax src="../assets/image1.jpg" max-height="1000" height="100%">
       <v-container>
@@ -63,7 +63,7 @@
             <div class="error" v-html="error" />
             <v-row>
               <v-col>
-                <v-btn small type="submit">submit</v-btn>
+                <v-btn small v-if="isClinic_admin" type="submit">submit</v-btn>
               </v-col>
               <v-col>
                 <v-btn small @click="reset">
@@ -92,6 +92,8 @@ export default {
   },
   data() {
     return {
+
+       isClinic_admin:false,
       valid: true,
       model: null,
       doctor: {
@@ -106,6 +108,7 @@ export default {
         email: "",
         password: ""
       },
+     
       specialty: [
         "Anaesthetists නිර්වින්දන විශේෂඥ",
         "Arthritis",
@@ -133,6 +136,28 @@ export default {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     }
   },
+    created(){
+
+       Event.$on("isClinic_admin", () => {
+      this.isClinic_admin = true;
+    });
+
+       Event.$on("logout", () => {
+       this.isClinic_admin = false;
+     });
+
+    let token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:8000/api/isClinic_admin?api_token=" + token)
+        .then(response => {
+          if (response.data.status == "true") {
+            this.isClinic_admin = true;
+            Event.$emit('isClinic_admin');
+          }
+        });
+    }
+    },
 
   methods: {
     addDoctor() {

@@ -29,6 +29,32 @@
   </section>
 </template>
 
+<script>
+export default {
+  /*data() {
+    return {
+      items: []
+    };
+  }*/
+
+  data() {
+    return {
+      items: []
+    };
+  },
+
+  created() {
+    this.$http
+      .get("http://localhost:8000/api/getPatients")
+      .then(function(response) {
+        //console.log(response);
+
+        this.items = response.body.allpatients;
+      });
+  }
+};
+</script>
+
 <style>
 .row.heading h2 {
   color: #000;
@@ -188,28 +214,4 @@ body {
 }
 </style>
 
-<script>
-export default {
-  /*data() {
-    return {
-      items: []
-    };
-  }*/
 
-  data() {
-    return {
-      items: []
-    };
-  },
-
-  created() {
-    this.$http
-      .get("http://localhost:8000/api/getPatients")
-      .then(function(response) {
-        //console.log(response);
-
-        this.items = response.body.allpatients;
-      });
-  }
-};
-</script>

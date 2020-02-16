@@ -32,9 +32,11 @@ public function addshedule(Request $request)
     
 }
     
-    public function update(Request $request, $id)
+    public function scheduleDetails(Request $request)
     {
-       
+       $id=$request->id;
+       $details=DB::table('schedules')->where('dr_id',$request->id)->get();
+       return response()->json(['status'=>'success','details'=>$details],200);
     }
 
    

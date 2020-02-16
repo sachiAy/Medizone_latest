@@ -1,97 +1,78 @@
 <template>
-  <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%" v-if="isAdmin">
-    <v-card :loading="loading" class="mx-auto my-12 container" max-width="1000">
-      <v-img
-        height="200"
-        src="https://image.shutterstock.com/image-photo/text-sign-showing-my-account-600w-1575879685.jpg"
-      ></v-img>
-
-      <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
-
-      <v-card-text>
-        <v-row align="center" class="mx-0">
-          <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
-
-          <div class="grey--text ml-4">4.5 (413)</div>
-        </v-row>
-
-        <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
-
-        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-      </v-card-text>
-
-      <v-divider class="mx-4"></v-divider>
-
-      <v-card-title>Admin Functions</v-card-title>
-      <v-card-text>
-        <v-row class="mx-0">
-          <v-col class="my-0">
-            <v-btn color="deep-purple lighten-2" text>Add Clinics</v-btn>
-            <v-btn color="deep-purple lighten-2" text>Delete Clinics</v-btn>
-            <v-btn color="deep-purple lighten-2" text>Update Clinic Details</v-btn>
-            <v-btn color="deep-purple lighten-2" text>View Clinic Details</v-btn>
-          </v-col>
-          <v-col>
-            <v-btn color="deep-purple lighten-2" text>Add Doctors</v-btn>
-            <v-btn color="deep-purple lighten-2" text>Delete Doctors</v-btn>
-            <v-btn color="deep-purple lighten-2" text>Update Doctor Details</v-btn>
-            <v-btn color="deep-purple lighten-2" text>View Doctor Details</v-btn>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text>Channel</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-parallax>
+  <section class="our-webcoderskull padding-lg">
+    <div class="container">
+      <div class="row heading heading-icon">
+        <h2>Doctors</h2>
+      </div>
+      <div>
+        <ul class="row">
+          <li class="col-sm-4" v-for="items in result" :key="items.dr_id">
+            <router-link :to="{ name: 'DocProfile', params: { id:items.dr_id}}">
+            <div class="cnt-block equal-hight" style="height: 349px;" >
+              <figure>
+                <img
+                  src="../assets/doctors.jpg"
+                  class="img-responsive"
+                  alt=""
+                />
+              </figure>
+              <h3>{{ items.first_name }} {{ items.last_name }}</h3>
+              <p>{{ items.username }}</p>
+              <ul class="follow-us clearfix"></ul>
+              <button class="ma-2" outlined color="indigo">
+                <router-link to="/DoctorProfile"> View Profile</router-link>
+              </button>
+            </div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      users: "",
-      loading: false,
-      selection: 1,
-      isAdmin:"",
+      doctors:{
+        specialty:"",
+        doctors:""
+      },
+      patient:"",
+       result:{}
     };
+
+   
   },
-  methods: {},
 
-  created(){
- Event.$on("isAdmin", () => {
-      this.isAdmin = true;
-    });
-
-      Event.$on("logout", () => {
-      this.isAdmin = false;
-    });
-
-    let token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:8000/api/isAdmin?api_token=" + token)
-        .then(response => {
-          if (response.data.status == "true") {
-            this.isAdmin = true;
-            Event.$emit('isAdmin');
-          }
-        });
+  methods:{
+    view(){
+      
+      
     }
-},
+  },
 
   mounted() {
-    let token = localStorage.getItem("token");
-    if (this.isAdmin=false) {
-      this.$router.push("/SignIn");
-    } else {
-      axios
-        .get("http://localhost:8000/api/showAdmin/" + token)
+
+    let specialty = localStorage.getItem("Specialty");
+    this.doctors.specialty=specialty;
+
+    axios
+        .post("http://localhost:8000/api/SubmitDetails",this.doctors)
         .then(response => {
-          this.users = response.data.admins;
-          Event.$emit("userLoaded", this.users);
+          this.result = response.data.doctors;
+
         });
-    }
+    
+    //align according to the ratings
+    //  axios
+    //     .post("http://localhost:8000/api/getRatings" , this.result.dr_id) 
+    //     console.log("result:"+this.result)
+    //     .then(response => {
+    //       //console.log(response);
+    //       //this.doctors = response.data.doctors;
+    //    });
   }
 };
 </script>

@@ -34,11 +34,15 @@ Route::get('/showAdmin/{api_token}','Main_AdminController@showAdmin');
 //Clinic Admin Api
 Route::get('/showCAdmin/{api_token}','Clinic_adminController@showClinic_Admin');
 Route::post('/Clinic_adminRegister','Clinic_adminController@addClinic_Admin');
+Route::get('/isClinic_admin','Clinic_adminController@isClinic_admin');
+
 
 
 //Appointment Api
 Route::post('/getAppointment','Api\AuthController@postAppointments');
 Route::post('/addAppointment','AppointmentController@addAppointment');
+Route::get('/getAppDetails/{sid}','AppointmentController@getAppDetails');
+
 
 //Auth controller
 Route::post('/login','AuthController@login')->name('login');
@@ -58,6 +62,8 @@ Route::get('/showPatient/{api_token}','PatientController@showP');
 Route::get('/showclinics/{id}','ScheduleController@getclinic');
 
 Route::get('/viewDoctorDetails/{id}','DoctorController@viewDoctorDetails');
+Route::get('/isDoctor','DoctorController@isDoctor');
+
 
 // Route::post('/getDoctors','AuthController@getD');
 //Route::middleware('auth:doctors')->get('/getDoctors',['DoctorController@getDoctor']);
@@ -71,6 +77,9 @@ Route::post('/add','DoctorController@add');
 
 //shedule Api
 Route::post('/postshedule','ScheduleController@addshedule');
+Route::get('/scheduleDetails/{id}','ScheduleController@scheduleDetails');
+
+
 
 
 
