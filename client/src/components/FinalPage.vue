@@ -6,11 +6,11 @@
                     <tbody>
                       <tr>
                         <th class="text-center">Doctor Name</th>
-                        <th class="text-center">{{guest.dr_name}}</th>
+                        <th class="text-center">{{name.dr_name}}</th>
                       </tr>
                       <tr>
                         <th class="text-center">Clinic Name</th>
-                        <th class="text-center">{{guest.clinic_name}}</th>
+                        <th class="text-center">{{name.clinic_name}}</th>
                       </tr>
                       <tr>
                         <th class="text-center">Appointment Date</th>
@@ -52,27 +52,25 @@ export default {
   data(){
     return{
       guest:{
-        clinic_name:"",
+       
+
+      },
+      name:{
         dr_name:"",
+        clinic_name:"",
 
       }
     }
   },
 
   mounted(){
-     axios
-      .get("http://localhost:8000/api/viewAppointmentDetails/"+this.$route.params.a_id)  //display dr_name
-      .then(response => {
-        this.guest=response.data.A_details;
-        console.log(response)
-
-      });
+   
 
        let id=localStorage.getItem("d_id");
      axios
       .get("http://localhost:8000/api/viewDoctorDetails/"+id)  //display dr_name
       .then(response => {
-        this.guest.dr_name=response.data.doctors.first_name;
+        this.name.dr_name=response.data.doctors.first_name;
         console.log(response)
 
       });
@@ -80,7 +78,15 @@ export default {
       axios
       .get("http://localhost:8000/api/getClinicDetails/"+c_id)  //display dr_name
       .then(response => {
-        this.guest.clinic_name=response.data.clinic.name;
+        this.name.clinic_name=response.data.clinic.name;
+        console.log(response)
+
+      });
+
+        axios
+      .get("http://localhost:8000/api/viewAppointmentDetails/"+this.$route.params.a_id)  //display dr_name
+      .then(response => {
+        this.guest=response.data.A_details;
         console.log(response)
 
       });

@@ -72,6 +72,15 @@ class AppointmentController extends Controller
        
     }
 
+    public function viewDoctorAppointmentDetails(Request $request){
+        // $id=$request->a_id;
+        $details=DB::table('appointments')->where('dr_id',$request->dr_id)->get();
+        if($details){
+            return response()->json(['status'=>'success','dr_details'=>$details],200);
+        }
+       
+    }
+
     
 
 

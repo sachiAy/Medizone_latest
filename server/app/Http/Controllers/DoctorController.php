@@ -119,5 +119,28 @@ class DoctorController extends Controller
     
 
     }
+    // public function deletedoctor(Request $request){
+    //     $id =$request->id;
+    //     $doctor = DB::table('doctors')->where('dr_id',$id);
+    //     if(!$doctor){
+    //      return response()->json(['msg'=>"Doctorr is not found"],404);
+    //  }
+    //   $doctor->delete();
+    //  return response()->json(['msg'=>"Doctor is deleted successfully"],201);
+    // }
+
+    public function deletedoctor($id){
+        $Delete = doctors::find($id);
+        if($Delete)
+            $Delete->delete();
+        else
+            return response()->json($Delete);
+        return response()->json($Delete);
+    }
+
+    public function getallDoc(){
+        $alldoctors =doctors::all();
+        return response()->json(['alldoctors'=>$alldoctors],200);
+    }
   
 }

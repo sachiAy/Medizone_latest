@@ -40,6 +40,13 @@ public function addshedule(Request $request)
        return response()->json(['status'=>'success','details'=>$details],200);
     }
 
+    public function ratings(Request $request){
+        $rating=DB::table('rates')->where('dr_id',$request->id)
+        ->avg('rate_no')
+        ->get();
+        return response()->json(['rating'=>$rating]);
+    }
+
    
 
    

@@ -14,7 +14,7 @@
             </v-btn>
           </li>
         </ul>
-        <ul class="row">
+        <!-- <ul class="row"> -->
           <v-card class="container">
             <v-card-title>Why should you Register?</v-card-title>
             <v-card-text>
@@ -28,7 +28,7 @@
               </p>
             </v-card-text>
           </v-card>
-        </ul>
+        <!-- </ul> -->
       </v-parallax>
     </v-card>
   </div>

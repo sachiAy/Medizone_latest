@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\clinic_admins;
+use App\clinics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -85,5 +86,19 @@ class Clinic_adminController extends Controller
         $clinic_admin = DB::table('clinic_admins')->where('api_token', $token)->first();
         return response()->json(['clinic_admins'=>$clinic_admin]);
            
+    }
+    public function getallclinics(){
+        $allclinics =clinics::all();
+        return response()->json(['allclinics'=>$allclinics],200);
+    }
+
+    public function deleteclinic(Request $request){
+        $id =$request->id;
+        $clinic = DB::table('clinics')->where('clinic_id',$id);
+        if(!$clinic){
+         return response()->json(['msg'=>"Clinic is not found"],404);
+     }
+      $clinic->delete();
+     return response()->json(['msg'=>"Clinic is deleted successfully"],201);
     }
 }

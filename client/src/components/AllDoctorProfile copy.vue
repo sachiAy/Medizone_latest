@@ -17,7 +17,8 @@
                 />
               </figure>
               <h3>{{ items.first_name }} {{ items.last_name }}</h3>
-              <p>{{ items.username }}</p>
+               <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
+              <!-- <p>{{ items.username }}</p> -->
               <ul class="follow-us clearfix"></ul>
               <button class="ma-2" outlined color="indigo">
                 <router-link to="/DoctorProfile"> View Profile</router-link>

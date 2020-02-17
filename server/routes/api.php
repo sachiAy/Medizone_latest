@@ -44,6 +44,8 @@ Route::post('/getAppointment','Api\AuthController@postAppointments');
 Route::post('/addAppointment','AppointmentController@addAppointment');
 Route::get('/getAppDetails/{sid}','AppointmentController@getAppDetails');
 Route::get('/viewAppointmentDetails/{a_id}','AppointmentController@viewAppointmentDetails');
+Route::get('/viewDoctorAppointmentDetails/{dr_id}','AppointmentController@viewDoctorAppointmentDetails');
+
 
 //Auth controller
 Route::post('/login','AuthController@login')->name('login');
@@ -79,7 +81,14 @@ Route::post('/add','DoctorController@add');
 //shedule Api
 Route::post('/postshedule','ScheduleController@addshedule');
 Route::get('/scheduleDetails/{id}','ScheduleController@scheduleDetails');
+Route::get('/ratings/{id}','ScheduleController@ratings');
 
+Route::get('/getallclinics','Clinic_adminController@getallclinics');
+Route::delete('/deleteclinic/{id}','Clinic_adminController@deleteclinic');
+
+Route::get('/getallDoc','DoctorController@getallDoc');
+Route::delete('/deletedoctor/{id}','DoctorController@deletedoctor');
+Route::put('/editdoctor/{id}','DoctorController@editdoctor');
 
 
 

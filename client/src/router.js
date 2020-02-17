@@ -27,6 +27,9 @@ import DocProfile from "./components/DocProfile";
 import scheduleProfile from "./components/scheduleProfile";
 import retrivePatients from "./components/retrivePatients";
 import FinalPage from "./components/FinalPage";
+import AppointmentSchedule from "./components/AppointmentSchedule";
+import AdminViewOfDoctors from "./components/AdminViewOfDoctors";
+import AdminViewOfClinics from "./components/AdminViewOfClinics";
 
 
 Vue.use(Router);
@@ -40,6 +43,7 @@ export default new Router({
       name: "home",
       component: Home
     },
+ 
     {
       path: "/select",
       name: "select",
@@ -55,6 +59,11 @@ export default new Router({
       path: "/D_SignUp",
       name: "D_SignUp",
       component: D_SignUp
+    },
+    {
+      path: "/AdminDashboard",
+      name: "AdminDashboard",
+      component: AdminDashboard
     },
     {
       path: "/P_SignUp",
@@ -89,13 +98,6 @@ export default new Router({
       name: "Clinic_AdminDashboard",
       component: Clinic_AdminDashboard
     },
-
-    {
-      path: "/AdminDashboard",
-      name: "AdminDashboard",
-      component: AdminDashboard
-    },
-
     {
       path: "/DoctorProfile",
       name: "DoctorProfile",
@@ -179,6 +181,21 @@ export default new Router({
       path: "/FinalPage/:a_id",
       name: "FinalPage",
       component: FinalPage
+    },
+    {
+      path: "/AppointmentSchedule",
+      name: "AppointmentSchedule",
+      component: AppointmentSchedule
+    },
+    {
+      path: "/AdminViewOfDoctors",
+      name: "AdminViewOfDoctors",
+      component: AdminViewOfDoctors
+    },
+    {
+      path: "/AdminViewOfClinics",
+      name: "AdminViewOfClinics",
+      component: AdminViewOfClinics
     }
   ]
 });

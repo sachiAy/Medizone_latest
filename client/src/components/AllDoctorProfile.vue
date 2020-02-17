@@ -17,11 +17,9 @@
                 />
               </figure>
               <h3>{{ items.first_name }} {{ items.last_name }}</h3>
-              <p>{{ items.username }}</p>
+              <v-rating :value=3 color="amber" dense half-increments readonly size="14"></v-rating>
+              <!-- <p>{{ items.username }}</p> -->
               <ul class="follow-us clearfix"></ul>
-              <button class="ma-2" outlined color="indigo">
-                <router-link to="/DoctorProfile"> View Profile</router-link>
-              </button>
             </div>
             </router-link>
           </li>
@@ -61,6 +59,13 @@ export default {
         .post("http://localhost:8000/api/SubmitDetails",this.doctors)
         .then(response => {
           this.result = response.data.doctors;
+
+        });
+
+         axios
+        .get("http://localhost:8000/api/ratings/"+this.result.dr_id)
+        .then(response => {
+         console.log(response)
 
         });
     

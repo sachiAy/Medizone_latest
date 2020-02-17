@@ -7,7 +7,7 @@
             <v-card class="container" max-width="600" outlined>
                 <v-card-title>Patient Register</v-card-title>
 
-                  <v-form v-model="valid">
+                  <v-form v-model="valid" @submit.prevent="patientRegister">
                     <!-- <v-select
                     :items="patient.customer_type"
                     label="Customer Type"
@@ -31,7 +31,7 @@
                       ></v-text-field>
 
                       <v-text-field
-                      v-model="patient.NIC"
+                      v-model="patient.nic"
                       label="NIC"
                       required
                       ></v-text-field>
@@ -46,11 +46,11 @@
                     :items="patient.blood_group"
                     label="Blood group"
                     ></v-select> -->
-                       <v-text-field
+                       <!-- <v-text-field
                       v-model="patient.blood_group"
                       label="blood"
                       required
-                      ></v-text-field>
+                      ></v-text-field> -->
 
                       <v-text-field
                       v-model="patient.address"
@@ -59,7 +59,7 @@
                       ></v-text-field>
 
                       <v-text-field
-                      v-model="patient.contact_no"
+                      v-model="patient.mobile_no"
                       label="Contact Number"
                       required
                       ></v-text-field>
@@ -88,7 +88,7 @@
                             <v-col >
                                 <v-btn 
                                 small 
-                                @click="patientRegister"                               
+                               type="submit"                             
                                 >submit</v-btn>
                                
                             </v-col>
@@ -127,11 +127,10 @@ export default {
           customer_type:"",
           first_name:"",
           last_name:"",
-          NIC:"",
-          birthday:"",
-          blood_group:"",
+          nic:"",
+         birthday:"",
           address:"",
-          contact_no:"",
+         mobile_no:"",
           username:"",
           email:"",
           password:""
@@ -144,9 +143,10 @@ export default {
 
   methods: {
     patientRegister(){
-      this.$http.post("http://localhost:8000/api/patientRegister",this.patient)
+     axios.post("http://localhost:8000/api/PatientRegister",this.patient)
         .then(function(response) {
-          this.$router.push('SignIn')
+          console.log(response)
+          this.$router.push('/SignIn')
           
         })
     },

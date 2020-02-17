@@ -9,15 +9,6 @@
       <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
 
       <v-card-text>
-        <v-row align="center" class="mx-0">
-          <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
-
-          <div class="grey--text ml-4">4.5 (413)</div>
-        </v-row>
-
-        <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
-
-        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
       </v-card-text>
 
       <v-divider class="mx-4"></v-divider>
@@ -25,23 +16,26 @@
       <v-card-title>Admin Functions</v-card-title>
       <v-card-text>
         <v-row class="mx-0">
-          <v-col class="my-0">
+         
             <v-btn color="deep-purple lighten-2" text>Add Clinics</v-btn>
             <v-btn color="deep-purple lighten-2" text>Delete Clinics</v-btn>
             <v-btn color="deep-purple lighten-2" text>Update Clinic Details</v-btn>
+              <router-link to="/AdminViewOfClinics">
             <v-btn color="deep-purple lighten-2" text>View Clinic Details</v-btn>
-          </v-col>
-          <v-col>
+             </router-link>
+          </v-row>
+               <v-row class="mx-0">
+
             <v-btn color="deep-purple lighten-2" text>Add Doctors</v-btn>
             <v-btn color="deep-purple lighten-2" text>Delete Doctors</v-btn>
             <v-btn color="deep-purple lighten-2" text>Update Doctor Details</v-btn>
-            <v-btn color="deep-purple lighten-2" text>View Doctor Details</v-btn>
-          </v-col>
-        </v-row>
+            <router-link to="/AdminViewOfDoctors">
+                <v-btn color="deep-purple lighten-2" text>View Doctor Details</v-btn>
+            </router-link>
+               </v-row>
+        
+       
       </v-card-text>
-      <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text>Channel</v-btn>
-      </v-card-actions>
     </v-card>
   </v-parallax>
 </template>

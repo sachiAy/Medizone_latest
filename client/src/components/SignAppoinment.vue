@@ -25,14 +25,7 @@
                 <v-simple-table>
                   <template v-slot:default>
                     <tbody>
-                       <!-- <tr>
-                        <th class="text-center">Doctor Name</th>
-                        <th class="text-center">{{guest.dr_id}}</th>
-                      </tr>
-                      <tr>
-                        <th class="text-center">Clinic Name</th>
-                        <th class="text-center">{{guest.clinic_id}}</th>
-                      </tr> -->
+            
                       <tr>
                         <th class="text-center">Doctor Name</th>
                         <th class="text-center">{{guest.dr_name}}</th>
@@ -74,14 +67,14 @@
                         
                              <v-btn color="primary" type="submit">submit</v-btn>
 
-                               <router-link :to="{ name: 'FinalPage', params:{a_id:guest.a_id}}">{{guest.a_id}}
+                               <router-link :to="{ name: 'FinalPage', params:{a_id:guest.a_id}}">View appointment
                                 </router-link>
                         
                          
                         </th>
-                        <th class="text-center">
+                        <!-- <th class="text-center">
                           <v-btn color="secondary" @click="reset">Update</v-btn>
-                        </th>
+                        </th> -->
                       </tr>
                     </tbody>
                   </template>

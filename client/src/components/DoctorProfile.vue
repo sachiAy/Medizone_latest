@@ -25,7 +25,10 @@
           <ul>
             <li>
               <v-btn color="blue lighten-2">Update Details</v-btn>
-              <v-btn color="blue lighten-2">Appointment Schedule</v-btn>
+              <router-link to="/AppointmentSchedule">
+                <v-btn color="blue lighten-2">Appointment Schedule</v-btn>
+              </router-link>
+            
               <v-btn color="blue lighten-2">Add Experiments</v-btn>
               <v-btn color="blue lighten-2">
                 <router-link to="/retrivePatients">Patient Details</router-link>

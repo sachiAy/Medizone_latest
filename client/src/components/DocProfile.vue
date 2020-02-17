@@ -42,11 +42,11 @@
               <td>{{ item.date }}</td>
               <td>{{ item.time }}</td>
               <td>
-                <v-btn  color="deep-purple lighten-2" text>
+                <v-btn v-if="!loggedIn"  color="deep-purple lighten-2" text>
                   <router-link :to="{ name: 'Channel', params: {sid:item.she_id}}">Channel</router-link>
                 </v-btn>
-                 <v-btn color="deep-purple lighten-2" text>
-                  <router-link :to="{ name: 'SignAppoinment', params: {sid:item.she_id}}">login</router-link>
+                 <v-btn v-if="loggedIn" color="deep-purple lighten-2" text>
+                  <router-link :to="{ name: 'SignAppoinment', params: {sid:item.she_id}}">Channel</router-link>
                 </v-btn>
               </td>
             </tr>
@@ -67,15 +67,29 @@ export default {
       loading: false,
       selection: 1,
       details: {},
+      loggedIn:false,
     };
   },
 
   created() {
+
+     Event.$on("login", () => {
+      this.loggedIn = true;
+    });
+
+    Event.$on("logout", () => {
+      this.loggedIn = false;
+    });
+ let token = localStorage.getItem("token");
+    
+    if (token) {
+      this.loggedIn = true;
+    }
     Event.$on("isAdmin", () => {
       this.isAdmin = true;
     });
 
-    let token = localStorage.getItem("token");
+    
     if (token) {
       axios
         .get("http://localhost:8000/api/isAdmin?api_token=" + token)
@@ -93,8 +107,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8000/api/viewDoctorDetails/" + this.$route.params.id
-      )
+        "http://localhost:8000/api/viewDoctorDetails/" + this.$route.params.id)
       .then(response => {
         //console.log(response);
         this.users = response.data.doctors;
