@@ -12,12 +12,12 @@
         <v-row align="center" class="mx-0">
           <v-rating :value="3" color="amber" dense half-increments readonly size="14"></v-rating>
 
-          <div class="grey--text ml-4">4.5 (413)</div>
+          <div class="grey--text ml-4"></div>
         </v-row>
 
-        <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
+        <div class="my-4 subtitle-1"></div>
 
-        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+        <div></div>
       </v-card-text>
 
       <v-divider class="mx-4"></v-divider>
@@ -38,7 +38,7 @@
           <tbody >
            
             <tr v-for="item in details" :key="item.she_id"> 
-              <td>{{ item.clinic_id }}</td>
+              <td>{{ item.clinic_name }}</td>
               <td>{{ item.date }}</td>
               <td>{{ item.time }}</td>
               <td>
@@ -66,7 +66,7 @@ export default {
       isAdmin: false,
       loading: false,
       selection: 1,
-      details: "",
+      details: {},
     };
   },
 
@@ -106,11 +106,23 @@ export default {
         
       });
 
+
     axios
       .get("http://localhost:8000/api/scheduleDetails/" + this.$route.params.id)
       .then(response => {
         this.details = response.data.details;
+       
       });
+
+       axios
+      .get("http://localhost:8000/api/getClinicDetails/" + this.details.clinic_id)
+      .then(response => {
+        console.log(response)
+        this.details.name = response.data.clinic.name;
+
+      });
+
+
   },
 
   methods: {}

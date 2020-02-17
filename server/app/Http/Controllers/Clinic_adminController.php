@@ -68,6 +68,17 @@ class Clinic_adminController extends Controller
         return response()->json(['doctors'=>$doctor]);
     }
 
+    public function getClinicDetails(Request $request){
+
+        $id=$request->clinic_id;
+        $clinic=DB::table('clinics')->where('clinic_id',$request->clinic_id)->first();
+        if($clinic){
+            return response()->json(['status'=>'success','clinic'=>$clinic],200);
+        }
+     
+    }
+
+
     public function showClinic_Admin(Request $request){
 
         $token = $request->api_token;

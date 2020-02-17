@@ -25,6 +25,7 @@ public function addshedule(Request $request)
     $shedule=schedules::create([
     'dr_id'=> $request->dr_id,
     'clinic_id' => $request->clinic_id,
+    'clinic_name'=>$request->clinic_name,
     'date' => $request->date,
     'time'=> $request->time
     ]);
@@ -38,6 +39,8 @@ public function addshedule(Request $request)
        $details=DB::table('schedules')->where('dr_id',$request->id)->get();
        return response()->json(['status'=>'success','details'=>$details],200);
     }
+
+   
 
    
     

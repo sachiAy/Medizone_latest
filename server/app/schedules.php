@@ -15,7 +15,7 @@ class schedules extends Model implements Authenticatable
     protected $guard = 'schedules';
     
     protected $fillable = [
-        'dr_id','clinic_id','date','time'
+        'dr_id','clinic_id','clinic_name','date','time'
     ];
 
    

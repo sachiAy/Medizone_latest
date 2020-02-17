@@ -26,6 +26,7 @@ import shedulenew from "./components/shedulenew";
 import DocProfile from "./components/DocProfile";
 import scheduleProfile from "./components/scheduleProfile";
 import retrivePatients from "./components/retrivePatients";
+import FinalPage from "./components/FinalPage";
 
 
 Vue.use(Router);
@@ -173,6 +174,11 @@ export default new Router({
       path: "/retrivePatients",
       name: "retrivePatients",
       component: retrivePatients
+    },
+    {
+      path: "/FinalPage/:a_id",
+      name: "FinalPage",
+      component: FinalPage
     }
   ]
 });

@@ -60,6 +60,7 @@ import Datepicker from 'vuejs-datepicker';
 
 mounted(){
 
+ 
    axios.get("http://localhost:8000/api/showclinics/"+this.$route.params.id)
        .then(response=>{
          console.log(response.data.clinics);
@@ -68,11 +69,17 @@ mounted(){
 
        })
 
+
+
          axios.get("http://localhost:8000/api/viewDoctorDetails/"+this.$route.params.id)
       .then(response=> {
         //console.log(response);
         this.users=response.data.doctors;
       })
+
+     
+
+
 
 }
   }

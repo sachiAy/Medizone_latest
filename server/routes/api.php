@@ -35,6 +35,7 @@ Route::get('/showAdmin/{api_token}','Main_AdminController@showAdmin');
 Route::get('/showCAdmin/{api_token}','Clinic_adminController@showClinic_Admin');
 Route::post('/Clinic_adminRegister','Clinic_adminController@addClinic_Admin');
 Route::get('/isClinic_admin','Clinic_adminController@isClinic_admin');
+Route::get('/getClinicDetails/{clinic_id}','Clinic_adminController@getClinicDetails');
 
 
 
@@ -42,7 +43,7 @@ Route::get('/isClinic_admin','Clinic_adminController@isClinic_admin');
 Route::post('/getAppointment','Api\AuthController@postAppointments');
 Route::post('/addAppointment','AppointmentController@addAppointment');
 Route::get('/getAppDetails/{sid}','AppointmentController@getAppDetails');
-
+Route::get('/viewAppointmentDetails/{a_id}','AppointmentController@viewAppointmentDetails');
 
 //Auth controller
 Route::post('/login','AuthController@login')->name('login');

@@ -31,6 +31,7 @@ class AppointmentController extends Controller
         'patient_id' => $request->patient_id,
         'clinic_id' => $request->clinic_id,
         'appointment_date'=> $request->appointment_date,
+        'appointment_time'=> $request->appointment_time,
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
         'mobile_no' => $request->mobile_no,
@@ -59,6 +60,14 @@ class AppointmentController extends Controller
         $details=DB::table('schedules')->where('she_id',$request->sid)->first();
         if($details){
             return response()->json(['status'=>'success','details'=>$details],200);
+        }
+       
+    }
+    public function viewAppointmentDetails(Request $request){
+        // $id=$request->a_id;
+        $details=DB::table('appointments')->where('appointment_id',$request->a_id)->first();
+        if($details){
+            return response()->json(['status'=>'success','A_details'=>$details],200);
         }
        
     }

@@ -18,6 +18,7 @@
 
          <v-form  class="my-2 mx-5" ref="form" @submit.prevent="submitForm">
      <v-row>
+       <v-col>{{schedule.clinic_name}}</v-col>
     <v-col cols="12" sm="4" md="4">
         <v-menu
         v-model="menu2"
@@ -66,6 +67,7 @@
         schedule:{
             dr_id:"",
             clinic_id:"",
+            clinic_name:"",
             date: new Date().toISOString().substr(0, 10),
             time:""
         },
@@ -100,11 +102,17 @@ mounted(){
        let token = localStorage.getItem('token');
        axios.get("http://localhost:8000/api/showDoctor/"+token)
        .then(response=>{
-        // let dr_id=response.data.doctors.dr_id;
-        // localStorage.setItem('dr_id',dr_id);
-         //console.log(dr_id);
+         let dr_id=response.data.doctors.dr_id;
+         localStorage.setItem('dr_id',dr_id);
+        //this.schedule.dr_id=response.data.doctors.dr_id;
+         //console.log(response.data.doctors.dr_id);
        })
-   
+
+        axios.get("http://localhost:8000/api/getClinicDetails/"+this.$route.params.id)
+      .then(response=> {
+        console.log(response.data.clinic.name);
+        this.schedule.clinic_name=response.data.clinic.name;
+      })
       
     },
    methods:{
@@ -118,10 +126,12 @@ mounted(){
                 this.schedule.dr_id=dr_id;
                 this.schedule.clinic_id=this.$route.params.id;
 
-                //  console.log(this.schedule.dr_id);
+                 console.log(this.schedule.dr_id);
                 //  console.log(this.schedule.clinic_id);
                 //   console.log(this.schedule.date);
                 // console.log(this.schedule.time);
+                 //console.log("hi"+this.schedule.clinic_name);
+
                axios.post("http://localhost:8000/api/postshedule",this.schedule)
                   .then(response=>{
                       console.log(response);
