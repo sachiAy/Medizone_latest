@@ -62,12 +62,12 @@ export default {
 
         });
 
-         axios
-        .get("http://localhost:8000/api/ratings/"+this.result.dr_id)
-        .then(response => {
-         console.log(response)
+        //  axios
+        // .get("http://localhost:8000/api/ratings/"+this.result.dr_id)
+        // .then(response => {
+        //  console.log(response)
 
-        });
+        // });
     
     //align according to the ratings
     //  axios

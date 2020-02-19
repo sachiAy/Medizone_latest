@@ -69,8 +69,6 @@
 
                                <router-link :to="{ name: 'FinalPage', params:{a_id:guest.a_id}}">View appointment
                                 </router-link>
-                        
-                         
                         </th>
                         <!-- <th class="text-center">
                           <v-btn color="secondary" @click="reset">Update</v-btn>

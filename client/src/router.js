@@ -18,7 +18,6 @@ import SignAppoinment from "./components/SignAppoinment";
 import AllDoctorProfile from "./components/AllDoctorProfile";
 import appoinmentH from "./components/appoinmentH";
 import history from "./components/history";
-import AllPatientProfile from "./components/AllPatientProfile";
 import Terms from "./components/Terms";
 import Aboutus from "./components/Aboutus";
 import select from "./components/select";
@@ -30,6 +29,9 @@ import FinalPage from "./components/FinalPage";
 import AppointmentSchedule from "./components/AppointmentSchedule";
 import AdminViewOfDoctors from "./components/AdminViewOfDoctors";
 import AdminViewOfClinics from "./components/AdminViewOfClinics";
+import viewPatients from "./components/viewPatients";
+import Contactus from "./components/Contactus";
+import Clinic from "./components/Clinic";
 
 
 Vue.use(Router);
@@ -48,6 +50,11 @@ export default new Router({
       path: "/select",
       name: "select",
       component: select
+    },
+    {
+      path: "/Clinic",
+      name: "Clinic",
+      component: Clinic
     },
     {
       path: "/about",
@@ -157,11 +164,7 @@ export default new Router({
       name: "logout",
       component: logout
     },
-    {
-      path: "/AllPatientProfile",
-      name: "AllPatientProfile",
-      component: AllPatientProfile
-    },
+    
     {
       path: "/shedulenew/:id",
       name: "shedulenew",
@@ -196,6 +199,16 @@ export default new Router({
       path: "/AdminViewOfClinics",
       name: "AdminViewOfClinics",
       component: AdminViewOfClinics
+    },
+    {
+      path: "/viewPatients",
+      name: "viewPatients",
+      component: viewPatients
+    },
+    {
+      path: "/Contactus",
+      name: "Contactus",
+      component: Contactus
     }
   ]
 });

@@ -1,5 +1,5 @@
 <template>
-     <div class="container" width="500">
+     <div class="container" width="500" v-if="isAdmin">
             <center><h2>Clnics Table</h2></center>
             <div class="row">
               <div class="col-12">
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       clinics: [],
+      isAdmin:false,
      
 
      
@@ -61,9 +62,27 @@ export default {
   
   },
 
-  created() {
-   
-  },
+   created(){
+ Event.$on("isAdmin", () => {
+      this.isAdmin = true;
+    });
+
+      Event.$on("logout", () => {
+      this.isAdmin = false;
+    });
+
+    let token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:8000/api/isAdmin?api_token=" + token)
+        .then(response => {
+          if (response.data.status == "true") {
+            this.isAdmin = true;
+            Event.$emit('isAdmin');
+          }
+        });
+    }
+},
   mounted(){
        axios.get("http://localhost:8000/api/getallclinics")
     .then(response => {

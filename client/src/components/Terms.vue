@@ -1,6 +1,9 @@
 <template>
   <div>
+
+    <v-card class="container">
     <div>
+      
       <br/>
       <b
         ><center><h2>Terms & Condition</h2></center></b
@@ -48,7 +51,7 @@
     <li>MediZone shall not, under any circumstances, be responsible for, inter alia, the quality, accuracy, completeness, value and integrity of the advice provided by the Doctor shall not, under any circumstances, be responsible for, inter alia, the quality, accuracy, completeness, value and integrity of the advice provided by the Doctor or the Rating reviews.</li>
     <li>MediZone reserves the right to revise these Terms and Conditions at any time, at its discretion.</li>
 <li>Nothing herein expressed or implied is intended to or shall be construed to confer upon or give any person other than the Customer any rights or remedies against MediZone.</li>
-</ol></li>
+</ol>
     </div>
 
   <h6 class="detail-header"><b>Registered Customers </b></h6>
@@ -60,6 +63,6 @@ All Customers who have not completed the MediZone Sign Up Process will be consid
 
 <h6 class="detail-header"><b>Registered Clinics </b></h6>
 All clinics who complete the MediZone Sign Up Process shall be considered as registered clinics of MediZone.
-
+</v-card>
   </div>
 </template>

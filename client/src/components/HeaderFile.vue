@@ -81,7 +81,6 @@ export default {
         { icon: "mdi-account-multiple", text: "DOCTOR", route: "/AllDoctorProfile"},
         { icon: "mdi-account-multiple", text: "CLINICS", route: "/Clinic" },
         { icon: "mdi-account-search", text: "ABOUTUS", route: "/AboutUs" },
-        { icon: "mdi-help-circle-outline", text: "HELP", route: "/Doctor" },
         { icon: "mdi-key", text: "TERMS & CONDITIONS", route: "/Terms" }
       ],
     };

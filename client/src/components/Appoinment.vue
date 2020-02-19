@@ -15,11 +15,11 @@
               ref="form"
               v-model="valid"
               lazy-validation
-              v-on:submit:prevent="submitAppointment"
+             @submit.prevent="submitAppointment"
               @change="validate"
             >
               <v-select
-                v-model="guest.title"
+                v-model="title"
                 :items="items"
                 :rules="[v => !!v || 'Item is required']"
                 label="Title"
@@ -27,33 +27,42 @@
               ></v-select>
 
               <v-text-field
-                v-model="guest.name"
+                v-model="guest.first_name"
                 :counter="50"
                 :rules="nameRules"
-                label="Name"
+                label="First Name"
                 required
               ></v-text-field>
 
               <v-text-field
-                v-model="guest.tel"
+                v-model="guest.last_name"
+                :counter="50"
+                :rules="nameRules"
+                label="Last Name"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="guest.patient_id"
+                :counter="3"
+                :rules="pRules"
+                label="patient number"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="guest.mobile_no"
                 :counter="10"
                 :rules="telRules"
                 label="Mobile/Tele Number"
                 required
               ></v-text-field>
 
-              <v-text-field
-                v-model="guest.nicValue"
-                :counter="10"
-                :rules="nicRules"
-                label="NIC/Passport Number"
-                required
-              ></v-text-field>
-
               <v-text-field v-model="guest.email" :rules="emailRules" label="E-mail" required></v-text-field>
+              <v-text-field v-model="guest.NIC" :rules="nicRules" label="NIC" required></v-text-field>
 
               <v-checkbox
-                v-model="guest.checkbox"
+                v-model="checkbox"
                 :rules="[v => !!v || 'You must agree to continue!']"
                 label="Do you agree?"
                 required
@@ -64,8 +73,9 @@
                 v-if="!loggedIn"
                 color="primary"
                 class="mr-4"
-                @click="submitGuest()"
+                type="submit"
               >Submit</v-btn>
+              <v-alert v-if="status==true" type="success">Appointment submitted!</v-alert>
               <v-btn color="secondary" class="mr-4" @click="reset">Reset Form</v-btn>
             </v-form>
             <v-card>
@@ -74,21 +84,21 @@
                   <tbody>
                     <tr>
                       <th class="text-center">Doctor Name</th>
-                      <th class="text-center">{{save.dr_name}}</th>
+                      <th class="text-center">{{guest.dr_name}}</th>
                     </tr>
                     <tr>
                       <th class="text-center">Clinic Name</th>
-                      <th class="text-center">{{save.clinic_name}}</th>
+                      <th class="text-center">{{guest.clinic_name}}</th>
                     </tr>
                     <tr>
                       <th class="text-center">Appointment Date</th>
-                      <th class="text-center">{{save.appointment_date}}</th>
+                      <th class="text-center">{{guest.appointment_date}}</th>
                     </tr>
                     <tr>
                       <th class="text-center">Appointment time</th>
-                      <th class="text-center">{{save.appointment_time}}</th>
+                      <th class="text-center">{{guest.appointment_time}}</th>
                     </tr>
-                    <tr>
+                    <!-- <tr> 
                       <th class="text-center">Patient's First Name</th>
                       <th class="text-center">{{save.first_name}}</th>
                     </tr>
@@ -115,7 +125,7 @@
                       <th class="text-center">
                         <v-btn color="secondary" @click="reset">Update</v-btn>
                       </th>
-                    </tr>
+                    </tr>-->
                   </tbody>
                 </template>
               </v-simple-table>
@@ -137,15 +147,19 @@ export default {
       valid: true,
 
       guest: {
-        title: "",
-        name: "",
-        tel: "",
-        nicValue: "",
-        email: "",
-         dr_name:"",
-        clinic_name:"",
-        appointment_date:"",
-        appointment_time:"",
+       a_id:"",
+      dr_id:"",
+      clinic_id:"",
+      dr_name: "",
+      clinic_name: "",
+      appointment_date: "",
+      appoinment_time:"",
+      patient_id: "",
+      first_name: "",
+      last_name: "",
+      mobile_no: "",
+      email: "",
+      NIC: ""
       },
 
       save: {
@@ -153,13 +167,22 @@ export default {
         clinic_name:"",
         appointment_date:"",
         appointment_time:"",
+        name:"",
+       tel:"",
+        email:"",
+       nicValue:"",
       
       },
+      status: false,
 
       items: ["Mr.", "Mrs.", "Miss.", "Rev."],
       nameRules: [
         v => !!v || "Name is required",
         v => (v && v.length <= 50) || "Name must be less than 50 characters"
+      ],
+       pRules: [
+        v => !!v || "Name is required",
+        v => (v && v.length <= 3) || "patient_id must be less than 3 characters"
       ],
 
       telRules: [
@@ -186,17 +209,21 @@ export default {
      axios
       .get("http://localhost:8000/api/getAppDetails/" + this.$route.params.sid)
       .then(response => {
-        this.save.dr_id = response.data.details.dr_id;
-        this.save.clinic_id = response.data.details.clinic_id;
-        this.save.appointment_date = response.data.details.date;
-        this.save.appointment_time = response.data.details.time;
+        //this.guest.dr_id = response.data.details.dr_id;
+        //this.guest.clinic_id = response.data.details.clinic_id;
+        this.guest.appointment_date = response.data.details.date;
+        this.guest.appointment_time = response.data.details.time;
         
+
+        console.log(this.guest.appointment_date)
+
         let d_id=response.data.details.dr_id;
         localStorage.setItem("d_id",d_id);
-        let c_id=this.response.data.details.clinic_id;
+        let c_id=response.data.details.clinic_id;
         localStorage.setItem("c_id",c_id);
     
-    
+        console.log(d_id);
+        
       });
   },
 
@@ -210,11 +237,17 @@ export default {
       this.$refs.form.reset();
     },
 
-    submitAppointment() {
-      console.log(this.name);
-      console.log(this.tel);
-      console.log(this.nicValue);
-      console.log(this.email);
+     submitAppointment() {
+      axios
+        .post("http://localhost:8000/api/addAppointment", this.guest)
+        .then(response => {
+          console.log(response)
+          if (response) {
+            this.status = true;
+          }
+          this.guest.a_id=response.data.appointment.id;
+         console.log(this.guest.a_id)
+        });
     },
     getAppointmentDetails(){
       axios
@@ -230,7 +263,7 @@ export default {
         let c_id=this.response.data.details.clinic_id;
         localStorage.setItem("c_id",c_id);
     
-      
+        console.log(do_id);
       });
       
       },
@@ -260,7 +293,7 @@ export default {
      axios
       .get("http://localhost:8000/api/viewDoctorDetails/"+id)  //display dr_name
       .then(response => {
-        this.save.dr_name=response.data.doctors.first_name;
+        this.guest.dr_name=response.data.doctors.first_name;
         console.log(response)
 
       });
@@ -268,7 +301,7 @@ export default {
       axios
       .get("http://localhost:8000/api/getClinicDetails/"+c_id)  //display dr_name
       .then(response => {
-        this.save.clinic_name=response.data.clinic.name;
+        this.guest.clinic_name=response.data.clinic.name;
         console.log(response)
 
       });

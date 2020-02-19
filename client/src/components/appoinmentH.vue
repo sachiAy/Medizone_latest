@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loggedIn">
     <v-parallax src="../assets/backgroundA.jpg" max-height="1500" height="100%">
       <v-card class="container" elevation="12" max-width="100%" max-height="100%" outlined>
         <h1>Appoinment History</h1>
@@ -16,6 +16,7 @@ export default {
 
   data() {
     return {
+      loggedIn:false,
       fields: [
         "appointment_date",
         "doctor_name",
@@ -67,6 +68,20 @@ export default {
         }
       ]
     };
+  },
+
+  created(){
+      Event.$on("login", () => {
+      this.loggedIn = true;
+    });
+
+    Event.$on("logout", () => {
+      this.loggedIn = false;
+    });
+    let token = localStorage.getItem("token");
+    if (token) {
+      this.loggedIn = true;
+    }
   }
 };
 </script>

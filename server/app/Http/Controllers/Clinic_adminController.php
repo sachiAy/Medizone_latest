@@ -79,6 +79,15 @@ class Clinic_adminController extends Controller
      
     }
 
+    public function getCl_Details(Request $request){
+
+        $id=$request->ca_id;
+        $clinic=DB::table('clinics')->where('ca_id',$id)->get();
+        if($clinic){
+            return response()->json(['status'=>'success','clinic'=>$clinic],200);
+        }
+     
+    }
 
     public function showClinic_Admin(Request $request){
 
@@ -88,7 +97,7 @@ class Clinic_adminController extends Controller
            
     }
     public function getallclinics(){
-        $allclinics =clinics::all();
+        $allclinics =DB::table('clinics')->get();
         return response()->json(['allclinics'=>$allclinics],200);
     }
 
@@ -100,5 +109,11 @@ class Clinic_adminController extends Controller
      }
       $clinic->delete();
      return response()->json(['msg'=>"Clinic is deleted successfully"],201);
+    }
+
+    public function getAllPatients(Request $request){
+        $id=$request->ca_id;
+        $query=DB::table('clinics')->where('ca_id',ca_id)->get();
+        return response()->json(["clinic"=>$query]);
     }
 }

@@ -123,17 +123,11 @@ export default {
   data() {
     return {
       others: [
-        { text:  "About Us", route: "/Doctor" },
-        { text: "Contact Us", route: "/Terms" },
-        { text:"Terms & Conditions", route: "/Doctor" },
-        { text: "FAQ", route: "/Doctor" }
+        { text:  "About Us", route: "/Aboutus" },
+        { text: "Contact Us", route: "/Contactus" },
+        { text:"Terms & Conditions", route: "/Terms" },
       ],
-      abouts: [
-        { text: "About Us", route: "./AboutUs" },
-        { text:  "Contact Us", route: "./ContactUs" },
-        { text: "Terms & Conditions", route: "./Terms" },
-        { text: "FAQ", route: "./FAQ" }
-      ]
+    
     };
   }
 };

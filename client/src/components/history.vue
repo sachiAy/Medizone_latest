@@ -1,5 +1,5 @@
 <template>
-  <div class="history">
+  <div v-if="loggedIn" class="history" >
     <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
       <v-container>
         <v-spacer></v-spacer>
@@ -41,7 +41,8 @@ export default {
   components: {},
   data(){
     return{
-     isPatient:false
+     isPatient:false,
+     loggedIn:false
      
     }
 
@@ -52,7 +53,18 @@ export default {
       this.isPatient = true;
     });
 
-let token = localStorage.getItem('token');
+      Event.$on("login", () => {
+      this.loggedIn = true;
+    });
+
+    Event.$on("logout", () => {
+      this.loggedIn = false;
+    });
+    let token = localStorage.getItem("token");
+    if (token) {
+      this.loggedIn = true;
+    }
+
 if(token){
     axios.get("http://localhost:8000/api/isPatient?api_token="+token) //check isPatient
      .then(response=> {

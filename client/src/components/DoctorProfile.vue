@@ -62,15 +62,15 @@ export default {
   },
 
   
-    mounted(){
-       let token = localStorage.getItem('token');
-       axios.get("http://localhost:8000/api/showDoctor/"+token)
-       .then(response=>{
-        this.doctors=response.data.doctors;
-       })
+    // mounted(){
+    //    let token = localStorage.getItem('token');
+    //    axios.get("http://localhost:8000/api/showDoctor/"+token)
+    //    .then(response=>{
+    //     this.doctors=response.data.doctors;
+    //    })
    
       
-    },
+    // },
     methods: {
     getdrID(){
        let token = localStorage.getItem('token');
