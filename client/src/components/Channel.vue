@@ -10,7 +10,7 @@
           </li>
           <li class="col">
             <v-btn rounded primary>
-              <router-link :to="{ name: 'Appoinment', params: {sid:this.$route.params}}">GUEST</router-link>
+              <router-link :to="{ name: 'Appoinment', params: {sid:this.$route.params.sid}}">GUEST</router-link>
             </v-btn>
           </li>
         </ul>
@@ -72,6 +72,9 @@ export default {
     mounted(){
         let dr_id=localStorage.getItem('dr_id');
       console.log(dr_id);
+
+      let sch_id=this.$route.params
+      console.log(sch_id)
 
   },
 };

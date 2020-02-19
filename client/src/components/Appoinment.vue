@@ -68,7 +68,7 @@
               >Submit</v-btn>
               <v-btn color="secondary" class="mr-4" @click="reset">Reset Form</v-btn>
             </v-form>
-            <!-- <v-card>
+            <v-card>
               <v-simple-table>
                 <template v-slot:default>
                   <tbody>
@@ -119,7 +119,7 @@
                   </tbody>
                 </template>
               </v-simple-table>
-            </v-card> -->
+            </v-card>
           </v-flex>
         </v-card>
       </v-container>
@@ -141,7 +141,11 @@ export default {
         name: "",
         tel: "",
         nicValue: "",
-        email: ""
+        email: "",
+         dr_name:"",
+        clinic_name:"",
+        appointment_date:"",
+        appointment_time:"",
       },
 
       save: {
@@ -181,6 +185,27 @@ export default {
     };
   },
 
+  mounted(){
+
+     axios
+      .get("http://localhost:8000/api/getAppDetails/" + this.$route.params.sid)
+      .then(response => {
+        this.save.dr_id = response.data.details.dr_id;
+        this.save.clinic_id = response.data.details.clinic_id;
+        this.save.appointment_date = response.data.details.date;
+        this.save.appointment_time = response.data.details.time;
+
+        console.log(this.guest.appointment_date)
+
+        let d_id=response.data.details.dr_id;
+        localStorage.setItem("d_id",d_id);
+        let c_id=this.response.data.details.clinic_id;
+        localStorage.setItem("c_id",c_id);
+    
+        console.log(d_id);
+      });
+  },
+
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
@@ -199,12 +224,12 @@ export default {
     },
     getAppointmentDetails(){
       axios
-      .get("http://localhost:8000/api/getAppDetails/" + this.$route.params.sid.sid)
+      .get("http://localhost:8000/api/getAppDetails/" + this.$route.params.sid)
       .then(response => {
         this.guest.dr_id = response.data.details.dr_id;
         this.guest.clinic_id = response.data.details.clinic_id;
-        this.name.appointment_date = response.data.details.date;
-        this.name.appointment_time = response.data.details.time;
+        this.save.appointment_date = response.data.details.date;
+        this.save.appointment_time = response.data.details.time;
 
         let d_id=response.data.details.dr_id;
         localStorage.setItem("d_id",d_id);

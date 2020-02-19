@@ -20,7 +20,7 @@ class AuthController extends Controller
    
     public function __construct()
     {
-       // $this->middleware('auth',['only'=>'getD']);
+       
     }
 
     public function SubmitDetails(Request $request){
