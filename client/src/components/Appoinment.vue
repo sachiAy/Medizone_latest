@@ -153,10 +153,6 @@ export default {
         clinic_name:"",
         appointment_date:"",
         appointment_time:"",
-        name:"",
-       tel:"",
-        email:"",
-       nicValue:"",
       
       },
 
@@ -194,15 +190,13 @@ export default {
         this.save.clinic_id = response.data.details.clinic_id;
         this.save.appointment_date = response.data.details.date;
         this.save.appointment_time = response.data.details.time;
-
-        console.log(this.guest.appointment_date)
-
+        
         let d_id=response.data.details.dr_id;
         localStorage.setItem("d_id",d_id);
         let c_id=this.response.data.details.clinic_id;
         localStorage.setItem("c_id",c_id);
     
-        console.log(d_id);
+    
       });
   },
 
@@ -236,7 +230,7 @@ export default {
         let c_id=this.response.data.details.clinic_id;
         localStorage.setItem("c_id",c_id);
     
-        console.log(do_id);
+      
       });
       
       },

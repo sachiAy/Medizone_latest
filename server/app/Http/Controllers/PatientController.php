@@ -31,6 +31,7 @@ class PatientController extends Controller
         $value=DB::table('patients')->where('email', $request->email)->get();
         if($value->count()==0){
             $patient=patients::create([
+                
                'first_name' => $request->first_name,
                'last_name' => $request->last_name,
                'nic' => $request->nic,
@@ -40,7 +41,6 @@ class PatientController extends Controller
                'address' => $request->address,
                'username' => $request->username,
                'password' =>Hash::make($request->password),
-               'customer_type'=>$request->customer_type,
                'api_token' => Str::random(50)
             ]);
             return response()->json(['status'=>'success','patient'=>$patient],200);

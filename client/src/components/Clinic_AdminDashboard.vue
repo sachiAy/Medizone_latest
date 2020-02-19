@@ -1,82 +1,81 @@
 <template>
-<v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
-  <v-card
-    :loading="loading"
-    class="mx-auto my-12 container"
-    max-width="1000"
-  >
-     <v-img
-      height="200"
-      src="https://image.shutterstock.com/image-photo/profile-view-smiling-physicians-sitting-600w-655429528.jpg"
-    ></v-img>
- 
-    <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
+  <v-parallax src="../assets/backgroundA.jpg" max-height="1000" height="100%">
+    <v-card :loading="loading" class="mx-auto my-12 container" max-width="1000">
+      <v-img
+        height="200"
+        src="https://image.shutterstock.com/image-photo/profile-view-smiling-physicians-sitting-600w-655429528.jpg"
+      ></v-img>
 
-    <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :value="3"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
+      <v-card-title>{{users.first_name}} {{users.last_name}}</v-card-title>
 
-        <div class="grey--text ml-4">4.5 (413)</div>
-      </v-row>
+      <v-divider class="mx-4"></v-divider>
 
-      <div class="my-4 subtitle-1">
-        $ • Italian, Cafe
-      </div>
+      <v-card-title>Clinic Functionalities</v-card-title>
 
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>
-
-    <v-divider class="mx-4"></v-divider>
-
-    <v-card-title>Clinic's availability</v-card-title>
-    <v-btn v-if="isAdmin">Admin</v-btn>
-
-
-    <v-card-text>
-     schedule table
-    </v-card-text>
-
-    <v-card-actions>
-      <router-link to="/D_SignUp">
-         <v-btn
-        color="deep-purple lighten-2"
-        text
-      >
-       Doctor Register
-      </v-btn>
-      </router-link>
-     
-    </v-card-actions>
-  </v-card>
-</v-parallax>
+      <v-card-actions>
+        <v-simple-table>
+          <tr>
+            <td>
+              <router-link to="/D_SignUp">
+                <v-btn color="deep-purple lighten-2" text>Add Doctor</v-btn>
+              </router-link>
+            </td>
+             <td>
+              <router-link to="/D_SignUp">
+                <v-btn color="deep-purple lighten-2" text>View Doctor</v-btn>
+              </router-link>
+            </td>
+             <td>
+              <router-link to="/D_SignUp">
+                <v-btn color="deep-purple lighten-2" text>Update Doctor</v-btn>
+              </router-link>
+            </td>
+            <td>
+              <router-link to="/D_SignUp">
+                <v-btn color="deep-purple lighten-2" text>Delete Doctor</v-btn>
+              </router-link>
+            </td>
+          </tr>
+           <tr>
+            <td>
+              <router-link to="/P_SignUp">
+                <v-btn color="deep-purple lighten-2" text>Add Patient</v-btn>
+              </router-link>
+            </td>
+             <td>
+              <router-link to="/viewPatients">
+                <v-btn color="deep-purple lighten-2" text>View Patient</v-btn>
+              </router-link>
+            </td>
+             <td>
+              <router-link to="/updatePatients">
+                <v-btn color="deep-purple lighten-2" text>Update Patient</v-btn>
+              </router-link>
+            </td>
+            <td>
+              <router-link to="/deletePatients">
+                <v-btn color="deep-purple lighten-2" text>Delete Patient</v-btn>
+              </router-link>
+            </td>
+          </tr>
+        </v-simple-table>
+      </v-card-actions>
+    </v-card>
+  </v-parallax>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      users:"",
+      users: "",
       loading: false,
-      selection: 1,
-    
-        
+      selection: 1
     };
   },
-  methods:{
-  
-   },
+  methods: {},
 
-    mounted() {
+  mounted() {
     let token = localStorage.getItem("token");
     if (!token) {
       this.$router.push("/SignIn");
@@ -89,9 +88,6 @@ export default {
         });
     }
   }
-
-  
-
 };
 </script>
 

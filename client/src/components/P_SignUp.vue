@@ -8,15 +8,6 @@
                 <v-card-title>Patient Register</v-card-title>
 
                   <v-form v-model="valid" @submit.prevent="patientRegister">
-                    <!-- <v-select
-                    :items="patient.customer_type"
-                    label="Customer Type"
-                    ></v-select> -->
-                       <v-text-field
-                      v-model="patient.customer_type"
-                      label="Are you a Guest/Registered patient?"
-                      required
-                      ></v-text-field>
 
                        <v-text-field
                       v-model="patient.first_name"
@@ -124,7 +115,7 @@ export default {
         valid: true,
        
         patient: {
-          customer_type:"",
+          
           first_name:"",
           last_name:"",
           nic:"",
