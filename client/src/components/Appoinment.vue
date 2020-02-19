@@ -68,7 +68,7 @@
               >Submit</v-btn>
               <v-btn color="secondary" class="mr-4" @click="reset">Reset Form</v-btn>
             </v-form>
-            <v-card>
+            <!-- <v-card>
               <v-simple-table>
                 <template v-slot:default>
                   <tbody>
@@ -119,7 +119,7 @@
                   </tbody>
                 </template>
               </v-simple-table>
-            </v-card>
+            </v-card> -->
           </v-flex>
         </v-card>
       </v-container>

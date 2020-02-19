@@ -34,7 +34,7 @@
       </v-table>
          </v-card>
         
-      <!-- <section class="our-webcoderskull padding-lg">
+      <section class="our-webcoderskull padding-lg">
           <div>
         <ul class="row">
           <li class="col-sm-4" v-for="item in items" :key="item.clinic_id">
@@ -49,7 +49,7 @@
           </li>
         </ul>
       </div>
-    </section> -->
+    </section>
   </v-parallax>
         
     

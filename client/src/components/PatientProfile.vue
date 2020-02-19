@@ -17,8 +17,10 @@
       </v-card-text>
 
       <v-divider class="mx-4"></v-divider>
-
-      <v-card-title>Appoitnment History</v-card-title>
+  <router-link to="/appoinmentH">
+    <v-card-title>Appoitnment History</v-card-title>
+  </router-link>
+      
       <v-card-actions>
         <v-btn color="deep-purple lighten-2" text>Medical History</v-btn>
       </v-card-actions>

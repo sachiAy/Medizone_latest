@@ -4,13 +4,13 @@
       <v-hover>
         <template v-slot="{ hover }">
           <div class="mx-auto container">
-            <div class="mx-auto bg-info" style="width: 600px; height: 450px">
+            <div class="mx-auto bg-info" style="width: 600px; height: 300px">
               <v-form v-model="valid" ref="form" @submit.prevent="SubmitDetails">
               <v-card
                 :elevation="hover ? 24 : 6"
                 class="container"
                 color="indigo lighten-4"
-                style="width: 600px; height: 450px"
+                style="width: 600px; height: 300px"
               >
                 <v-card-title class="headline indigo lighten-3"
                   >Search for Doctor</v-card-title
@@ -40,13 +40,13 @@
                     <v-auto>
                       <v-row>
                         <v-col cols="12">
-                          <v-select
+                          <!-- <v-select
                             :items="doctors"
                             label="Doctor"
                             name="doctor"
                             v-model="item.doctor"
                   
-                          ></v-select>
+                          ></v-select> -->
                           <!-- <v-combobox
                             v-model="model1"
                             :items="doctor"

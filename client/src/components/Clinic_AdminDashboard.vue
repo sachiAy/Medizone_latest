@@ -41,17 +41,21 @@
     <v-card-title>Clinic's availability</v-card-title>
     <v-btn v-if="isAdmin">Admin</v-btn>
 
+
     <v-card-text>
      schedule table
     </v-card-text>
 
     <v-card-actions>
-      <v-btn
+      <router-link to="/D_SignUp">
+         <v-btn
         color="deep-purple lighten-2"
         text
       >
-        Channel
+       Doctor Register
       </v-btn>
+      </router-link>
+     
     </v-card-actions>
   </v-card>
 </v-parallax>

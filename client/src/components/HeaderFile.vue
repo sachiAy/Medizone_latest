@@ -30,7 +30,7 @@
 
       <v-btn text>
         
-         <v-textfield v-if="loggedIn">Hi! {{users.first_name}}</v-textfield>
+         <v-textfield v-if="loggedIn">{{users.first_name}}</v-textfield>
           <v-icon v-if="!loggedIn">mdi-account</v-icon>
        
       </v-btn>
