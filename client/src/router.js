@@ -32,6 +32,8 @@ import AdminViewOfClinics from "./components/AdminViewOfClinics";
 import viewPatients from "./components/viewPatients";
 import Contactus from "./components/Contactus";
 import Clinic from "./components/Clinic";
+import clireg from "./components/clireg";
+
 
 
 Vue.use(Router);
@@ -55,6 +57,11 @@ export default new Router({
       path: "/Clinic",
       name: "Clinic",
       component: Clinic
+    },
+    {
+      path: "/clireg",
+      name: "clireg",
+      component: clireg
     },
     {
       path: "/about",

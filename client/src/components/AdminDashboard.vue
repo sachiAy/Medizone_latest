@@ -16,8 +16,9 @@
       <v-card-title>Admin Functions</v-card-title>
       <v-card-text>
         <v-row class="mx-0">
-         
+          <router-link to="/clireg">
             <v-btn color="deep-purple lighten-2" text>Add Clinics</v-btn>
+          </router-link>
             <v-btn color="deep-purple lighten-2" text>Delete Clinics</v-btn>
             <v-btn color="deep-purple lighten-2" text>Update Clinic Details</v-btn>
               <router-link to="/AdminViewOfClinics">

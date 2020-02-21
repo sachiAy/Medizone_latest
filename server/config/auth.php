@@ -79,6 +79,10 @@ return [
             'driver' => 'session',
             'provider' => 'clinics',
         ],
+        'cliregs' => [
+            'driver' => 'session',
+            'provider' => 'clinics',
+        ],
         'shedules' => [
             'driver' => 'session',
             'provider' => 'shedules',
@@ -138,6 +142,10 @@ return [
         'ratedetails' => [
             'driver' => 'eloquent',
             'model' => App\ratedetails::class,  
+        ],
+        'clinics' => [
+            'driver' => 'eloquent',
+            'model' => App\cliregs::class,  
         ],
          
 

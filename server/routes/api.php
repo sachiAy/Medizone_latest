@@ -91,7 +91,8 @@ Route::get('/getallDoc','DoctorController@getallDoc');
 Route::delete('/deletedoctor/{id}','DoctorController@deletedoctor');
 Route::put('/editdoctor/{id}','DoctorController@editdoctor');
 
-
+//clireg
+Route::post('/addNewclireg','cliregController@addNewclireg');
 
 
 
